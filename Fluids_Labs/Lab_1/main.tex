@@ -41,10 +41,11 @@
 
         The configuration of the problem is as follows:
         \begin{itemize}
-                \item Length \( L,\, L_p \) to be defined,
-                \item Half-channel height \(\delta = 5 \; mm\),
-                \item Bulk velocity \( U_b = 5 \; mm/s \),
-                \item Fluid: Water at \( 20^{\circ}C \;\; ( \rho = 998.23 \; kg/m^3\), \\ Kinematic Viscosity \( \nu = 1.006E-6 \; m^2/s ) \).
+                \item Length \( L = 10 \: cm \),
+                \item Length \( L_p = 9 \: cm \),
+                \item Half-channel height \(\delta = 5 \: mm\),
+                \item Bulk velocity \( U_b = 5 \: mm/s \),
+                \item Fluid: Water at \( 20^{\circ}C \; ( \rho = 998.23 \: kg/m^3\), \\ Kinematic Viscosity \( \nu = 1.006E-6 \: m^2/s ) \).
         \end{itemize}
 
         \begin{figure}[!ht]
@@ -55,11 +56,42 @@
         \end{figure}
 
         \paragraph{Outline}
-        The remainder of the report is organizedas follows: Section~\ref{sec:developed_flow} provides some gross estimate of the required \( L_p \) to achieve a fully-developed flow in terms of channel height; Section~\ref{sec:independence} shows how a suitable configuration of the cartesian computational mesh was found; Section~\ref{sec:CFD_validation} compares the simulated solution with the analytical model both graphically and numerically; Finally, Section~\ref{sec:vorticity} provides some analysis regarding the vorticity profile on both the developing and fully-developed region.
+        The remainder of the report is organizedas follows: Section~\ref{sec:developed_flow} provides some gross estimate of the required \( L_p \) to achieve a fully-developed flow in terms of channel height; Section~\ref{sec:independence} shows how a suitable configuration of the cartesian computational mesh was found; Section~\ref{sec:CFD_validation} compares the simulated solution with the analytical model both graphically and numerically; Finally, Section~\ref{sec:vorticity} provides some analysis regarding the vorticity profile on both the developing and fully-developed region. It is worth noting that all simulations had a relative convergence tolerance of $ 1E-3 $ for all variables taken into consideration.
 
 \section{Fully-developed flow conditions} \label{sec:developed_flow}
 
+        The following profiles were taken from a simulation with a 40-by-40 mesh.
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Fully_Developed_Analysis.png}
+                \centering
+                \caption{X-velocity Y-profile per delta-step}
+                \label{fig:delta-steps}
+        \end{figure}
+
+        As we can see in Figure~\ref{fig:delta-steps}, the X-velocity Y-Profile stabilizes after roughly 4 deltas ($ 2 \: cm $), making our choice of an 18-delta channel with a 2-delta margin at the beginning ($ 10 \: cm $ total) more than enough for the case of study. From now on, unless said otherwise, all X-specific data was taken after 12 deltas into the actual channel ($ 7 \: cm $ from the origin of the X-axis).
+
 \section{Grid independence study} \label{sec:independence}
+
+        The following Grid-Independence study was performed by fixing 40 cells either along the X or Y axis, and then progressively increasing the amount of cells on the other axis until both X-velocity profile and Pressure-gradient convergence was observed.
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Grid_Ind_U_Profiles.png}
+                \centering
+                \caption{X-velocity Y-profile per cell amount}
+                \label{fig:grid_ind_u}
+        \end{figure}
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Grid_Ind_P_Gradient.png}
+                \centering
+                \caption{P-gradient vs cell amount}
+                \label{fig:grid_ind_p}
+        \end{figure}
+
+        As we can see in Figure~\ref{fig:grid_ind_u}, X-refinement is pretty much irrelevant for the X-velocity derivative profile; nevertheless, such is not the case for the Pressure-gradient which, as we can see in Figure~\ref{fig:grid_ind_p}, did not stabilize after at least 35 cells across the X-axis.
+
+        In the case of Y-refinement, 25 cells were enough to stabilize both the X-velocity derivative profile and average Pressure-gradient. Therefore, a 40-by-40 mesh kept being used for the remainder of the laboratory, since simulation times were low enough for a wide Y-refinement margin to not be a problem.
 
 \section{CFD solution validation} \label{sec:CFD_validation}
 
