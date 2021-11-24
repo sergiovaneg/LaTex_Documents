@@ -64,6 +64,38 @@
 
         All simulations were ran setting up a minimum of 1000 iterations and a maximum of 10000, with a whole-field residual convergence criterion of 0.0001\%. The probe was set in the middle of the channel with respect to the start of the lower boundary plate. Additionally, regarding the grid-independence study, the near-wall cell width was reduced as much as possible while maintaining a \( y^+ \) value higher than 30, which turned out to be \( \SI{2e-3}{\metre} = \frac{\delta}{25} \).
 
+        Then, we had to modify the channel length until it achieved a fully-developed flow; this was evaluated by observing the x-derivative of the horizontal velocity and the vertical velocity profile, and then extending the channel until both of them became persistantly (near) 0. The results of this process can be seen in Figure~\ref{fig:DUDX_Profile} and Figure~\ref{fig:V_Profile}, by which we can determine that $ L = 150 \delta =  \SI{7.5E0}{\metre}$ is a sufficient channel length for our case of study.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{DUDX_Profile.png}
+                \caption{Horizontal velocity X-Derivative Profile}
+                \label{fig:DUDX_Profile}
+        \end{figure}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{V_Profile.png}
+                \caption{Vertical velocity Profile}
+                \label{fig:V_Profile}
+        \end{figure}
+
+        Since the \( y^+ \) constraint had already been verified for all of our grid configurations, we then proceeded to study their grid-independence based on the horizontal velocity Y-Profile (inside the fully-developed region) and the Pressure profile across the channel length; these can be seen in Figure~\ref{fig:U_Ind} and Figure~\ref{fig:P_Ind}.respectively. Visually, we can conclude that the variables of interest do converge to a single solution, so that we can state grid-independenceis achieved.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{U_Independence.png}
+                \caption{Horizontal velocity Y-Profile}
+                \label{fig:U_Ind}
+        \end{figure}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{P_Independence.png}
+                \caption{Pressure X-Profile}
+                \label{fig:P_Ind}
+        \end{figure}
+
 \section{Qualitative assessment of the physical consistency of the CFD solution} \label{sec:qualitative}
 
         
