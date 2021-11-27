@@ -146,6 +146,79 @@
 
     Our work mainly aims at implementing this method in the LIFEX environment, highlighting its advantages and drawbacks with respect to the already implemented solution of the Eikonal Model which relies on FEM.
 
+    The report will be organized as follows: a first part will be devoted to a theoretical introduction to heart electrophisiological dynamics together with its reduced mathematical representation, the eikonal model, then we will present the FMM, sketching a complete (condensed) version of the algorithm and its main numerical features; the second part will present the key steps of our implementation, and the results obtained compared to FEM performances.
+
+    \section{Cardiac Electrophisiology and Eikonal Model} \label{sec:Eikonal}
+
+    To give a framework to what is discussed here it, is convenient to illustrate the main processes involved in the cardiac electrophisiology in a nutshell.
+
+    In a heartbeat, a group of cardiac cells, called pace-maker, produce a periodic signal. There are different clusters of these cells and the one that in normal condition (i.e. non pathological) starts it is the senoatrial node placed in the right atrium. The potential wave is first transmitted through the whole atrium and then it reaches the ventricles through the Purkinje fibers. This electric signal originates from the change of membrane potential due to ions entering and living heart's cells . This event, the action potential, has the same waveform for each cell which let to derive some simplification in the model. This peculiar response is because trans-membrane channels are voltage dependent and have different time responses.
+
+    Hodgkin and Huxley had the idea of modeling this behaviour with a circuital representation who take as main element a capacitor to represent the membrane and some voltage depending resistances to represent the channels. This leads to the so called Bidomain Model. Despite of its completeness, this model has some drawbacks in terms of computational complexity. For this reason two reduced models are preferred: the Monodomain and the Eikonal. While the former still describes the entire potential through time with the reducing assumption that membrane external potential is proportional to the internal potential, the latter exploit the property of constant waveform taking into account just the peak isocontour.
+
+    It can be said, with a naive approach, that the Monodomain model should be preferred when we need more precision and is actually mandatory in order to have knowledge of the entire potential distribution ; the Eikonal one instead shines for its computational timing performance. 
+
+    This work involves just the Eikonal model and consequently a deeper description of it is required.
+
+    Starting from the bidomain model, in addition with some simplifications related to the signal's features underlined above it is possible to derive, negletting the diffusivity term, the following eikonal equation:
+
+    \begin{equation}
+        \begin{cases}
+            F\sqrt{\nabla T D \nabla T }=1 &\mbox{in } \Omega \\
+            (D \nabla T) \cdot \textbf{n} = 0 & \mbox{on } \partial\Omega
+        \end{cases}
+    \end{equation}
+
+    Where $\Omega$ is the domain, which is in this case study the \emph{myocardium}; T is the arrival time , i.e. the time at which in the position \textbf{x} the potential reaches is peak; F is the velocity of the depolarization wave along the fiber direction for a planar wavefront ; D is the diffusivity tensor, which dercribes the anisotrophies in the model and \textbf{n} is the normal to the domain boundary $\partial \Omega$.
+
+    Starting from this formulation many resolution methods arise. Here we analyze the FMM.
+
+\section{Algorithm FMM main features} \label{sec:FMM}
+
+    The idea behind the Fast Marching Method is to exploit, in its recursive structure,the physical propagation properties of the electric signal. Starting from the source of the impulse (received as datum), it applies a front tracking approximation of the signal and follows the characteristic lines of its propagation.
+
+    In particular as we have previously seen $T(X)$ represents the peak value isocontour of the electric signal, and it's exactly the propagation of this wave to be under investigation.
+    
+    This way, $T(x)$ will not be computed "all at once" but each iteration physically represents an instant, when some points have already be striked by the impulse while other have not.
+    
+    As a consequence it is necessary, at each stage, to rely on the situation in the previous step and approximate the process evolution for a new time step, expanding in space the front of the wave.
+
+    It's straightforward then, that value of $T(X)$ computed at new points are only determined by a subset of its neighboring points since the expansion of the wave over the domain is continuous.
+    
+    To be coherent to what we just sad, the algorithm will have to obey to one central constraint: points with larger value of $T(X)$ cannot affect points with a smaller one.
+
+    Physically speaking this decision can be agreed observing that the direction of the signal cannot be affected by points where it has not arrived yet, while points where signal has already arrived can modify it. This logical imposition, as we'll see, will be of huge importance in the construction of algorithm.
+
+    Finally,to conclude this introduction it is important to stress that we are dealing with a specific version of the FMM: the anisotropic FMM; it means that the information spread does not follow the gradient direction, but the characteristic lines of propagation are imposed through a tensor D.
+
+    This issue is physically explained by the presence of fibers inside myocardium and its numerical implications will cause some modification to the algorithm, detaching the proposed version from the standard FMM.
+
+
+    Before presenting a detailed description of the algorithm, a broad-term explanation of its main passages is offered. Suppose we are at iteration k. Firstly we have to consider a source node $X$ for which we know the solution. Then we take the set of all its neighbours $N(X)$ and for any element inside $N(X)$ compute $T$. If any of them have been solved in previous iterations the lower value of $T$ is confirmed, while the bigger is discarded.
+    The reason of this recursive correction relies inside anisotropy, which causes characteristic lines of propagation not to follow the gradient direction. If in isotropy conditions it's enough to follow the characteristic direction of the PDE contained in the immediate neigbourhood, in anisotropic condition this idea is no more true. We must be sure to approximate correctly the wave motion, and to do it we must account for all possible directions of propagation.
+
+    Any point can be part of many $N(X)$, i.e. can be reached from different directions, and the right one will be that associated to the smallest $T(X)$. At this step we points can be divided in three categories: some still have not been reached by the signal and have no solution, others have mantained the previous one, and others more have changed their status, or because firstly reached by the impulse in the current iteration or because their $T$ have been now corrected.
+    
+    In next iterations it is important to consider the corrected nodes as new sources,  because the new value of $T$ will affect the whole dynamic around. 
+    
+    Once selected the new source node $X$ it is possible to repeat the same passages as before. We can keep repeating this loop till all the nodes inside the domain have been solved and FMM provided the desired solution.
+
+
+    Now the formal description of the Recursive Anisotropic FMM follows:
+
+    \begin{enumerate}
+        \item Define four empty vectors: $CHANGED$, $KNOWN$, $FAR$, $TRIAL$.
+
+            \begin{itemize}
+                \item \textit{FAR} will contain points not still handled.
+                \item \textit{TRIAL} will contain points whose $T$ have been computed, still never considered as sources.
+                \item \textit{KNOWN} will contain points whose $T$ has been computed, still considered as sources.
+                \item \textit{CHANGED} will contain points whose $T$ has been computed but then modified, and so must be considered as new sources.
+            \end{itemize}
+
+        \item 
+    \end{enumerate}
+
 %-----------------------------------------------------------------------------
 % EQUATIONS
 %-----------------------------------------------------------------------------

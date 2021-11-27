@@ -58,7 +58,7 @@
         
         \subsection{Report Structure}
 
-                The remainder of the report is organized as follows: Section~\ref{sec:convergence} addresses the issue of Whole-Field residual convergence, Flow Full-Development and Grid Independence; Section~\ref{sec:qualitative} presents the relevant profiles and simulated scalars for the qualitative assesment of the model physical consistency; Section~\ref{sec:literature} compares the results of the simulation with the theoretical model studied during the lessons; finally, Section~\ref{sec:unstability} studies the behaviour of the CFD simulations when stability conditions (Extremely high Reynolds number/Over-refined wall mesh) are not met.
+                The remainder of the report is organized as follows: Section~\ref{sec:convergence} addresses the issue of Whole-Field residual convergence, Flow Full-Development and Grid Independence; Section~\ref{sec:qualitative} presents the relevant profiles and simulated scalars for the qualitative assesment of the model physical consistency; finally, Section~\ref{sec:literature} compares the results of the simulation with the theoretical model studied during the lessons.
 
 \section{Convergence of the CFD Solution} \label{sec:convergence}
 
@@ -98,15 +98,66 @@
 
 \section{Qualitative assessment of the physical consistency of the CFD solution} \label{sec:qualitative}
 
-        
+        We then proceeded to study the Y-distributions of the stresses; these profiles, as well as the \( \tau_{\text{wall}} \) coefficient, were extracted at \(x \approx 160 \delta\). The viscous shear stress was calculated as in Equation~\ref{eq:visc}, whereas the total shear stress was extracted from the distribution law in Equation~\ref{eq:stress}. The turbulent shear stress was then approximated from the difference between the other two profiles. The resulting plots can be observed in Figure~\ref{fig:stress}
+
+        \begin{equation} \label{eq:visc}
+                \tau_{\text{visc}} = \rho \nu \frac{dU}{dy}
+        \end{equation}
+
+        \begin{equation} \label{eq:stress}
+                \tau = (1 - \frac{y}{\delta}) \tau_{\text{wall}}
+        \end{equation}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{stress.png}
+                \caption{Stress Y-Profiles}
+                \label{fig:stress}
+        \end{figure}
+
+        Finally, we plotted the normalized Axial (Horizontal) Velocity profile (w.r.t. the centerline velocity) as a function of the normalized channel height against the analytic normalized laminar axial velocity profile w.r.t. the same independent variable; the resulting curves are presented in Figure~\ref{fig:axialV}. As we can observe, the vertical development of the horizontal speed in a turbulent flow is significantly faster close to the wall, and the normalized speed is consistently higher throught the channel section (with the obvious exception of the walls and the channel center).
+
+        \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{Axial_Velocities.png}
+                \caption{Axial velocity profile comparison}
+                \label{fig:axialV}
+        \end{figure}
 
 \section{Comparison with literature models} \label{sec:literature}
 
-        
+        Since we kept \( y^+ \) above 30 for all simulations, we were able to use the Log-Law model (described in Equation~\ref{eq:log_law}) to predict the \( u^+ \) profile; the resulting curves plus a vertical line showing the model's limit of operation can be seen in Figure~\ref{fig:u_plus} in a semilogarithmic scale. As one would expect, the simulated curve diverges significantly after this theoretical barrier, but it provides a good first estimate of the profile close to the wall.
 
-\section{Optional questions for further individual study} \label{sec:unstability}
-
+        \begin{equation} \label{eq:log_law}
+                u^+ = \frac{1}{\kappa} \ln(E y^+) \approx \frac{1}{0.41} \ln(8.6y^+)
+        \end{equation}
         
+        \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{Up_Profile.png}
+                \caption{\( u^+ \) profiles in function of \( y^+ \)}
+                \label{fig:u_plus}
+        \end{figure}
+
+        We then calculated the skin friction coefficient based on the expression given in Equation~\ref{eq:friction} and plotted both sides of the relation in Equation~\ref{eq:friction_rel} w.r.t. a range of logarithmically spaced values around the previously calculated value, which was in turn drawn as a marker along the aforementioned curves; the result can be observed in Figure~\ref{fig:friction}. Even if not exact, the calculated coefficient from the simulated data provides a fairly accurate estimate of the expected theoretical value.
+
+        \begin{equation} \label{eq:friction}
+                c_f = \frac{\tau_w}{\frac{1}{2} \rho U_0^2}
+        \end{equation}
+
+        \begin{equation} \label{eq:friction_rel}
+                \begin{split}
+                        \sqrt{\frac{2}{c_f}} & = \frac{1}{\kappa} \ln \left[ R\!e \left( \sqrt{\frac{8}{c_f}} \right)^{-1} \right] + B + B_1 \\
+                        & \approx \frac{1}{0.41} \ln \left[ \num{1E5} \left( \sqrt{\frac{8}{c_f}} \right)^{-1} \right] + 5.2 + 0.5
+                \end{split}
+        \end{equation}
+
+        \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{friction.png}
+                \caption{Friction coefficient relations}
+                \label{fig:friction}
+        \end{figure}
 
 \bibliographystyle{abbrv}
 \bibliography{main}
