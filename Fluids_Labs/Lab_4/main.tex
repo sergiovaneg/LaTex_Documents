@@ -126,7 +126,129 @@
 
 \section{Comparison against the Blasius solution} \label{sec:comparison}
 
+        Before comparing the results to the theoretical model, we first verified that the CFD solution was self-similar; i.e., that the vertical profiles of the normalized horizontal velocity $ \frac{u(x,y)}{U_\infty} $ and the normalized vertical velocity $ \frac{v(x,y)}{U_\infty} \sqrt{\frac{U_\infty x}{\nu}} $ collapsed over each other throughout the channel (i.e., for different values of \( x \)) when expressed as a function of $ \eta = y \sqrt{\frac{U_\infty}{\nu x}} $. Once this property was verified, we added to each set of curves the theoretical solution for the normalized velocity profiles as functions of $ \eta $, given by the expressions in Equation~\ref{eq:blasius_u} and \ref{eq:blasius_v}, based on the value for \( f(\eta) \) and \( f'(\eta) \) found in Table~\ref{tab:eta}. The results of this procedure can be observed in Figure~\ref{fig:u_similarity} and Figure~\ref{fig:v_similarity} respectively.
+
+        \begin{align}
+                \label{eq:blasius_u}
+                \frac{u}{U_\infty} & = f'(\eta) \\
+                \label{eq:blasius_v}
+                \frac{v}{U_\infty} \sqrt{\frac{U_\infty x}{\nu}} & = \frac{1}{2} [\eta f'(\eta) - f(\eta)]
+        \end{align}
+
+        \begin{table}[ht!]
+                \centering
+                \begin{tabular}{lll}
+                        \hline
+                        $ \eta $ & \( f(\eta) \) & \( f'(\eta) \) \\ \hline
+                        0       & 0             & 0             \\
+                        0.4     & 0.026         & 0.133         \\
+                        1       & 0.1655        & 0.3298        \\
+                        1.4     & 0.323         & 0.4563        \\
+                        2       & 0.65          & 0.63          \\
+                        2.4     & 0.992         & 0.7289        \\
+                        3       & 1.397         & 0.846         \\
+                        3.4     & 1.7469        & 0.9017        \\
+                        4       & 2.305         & 0.956         \\
+                        4.4     & 2.692         & 0.8758        \\
+                        5       & 3.283         & 0.992         \\
+                        6       & 4.279         & 0.998         \\
+                        7       & 5.279         & 0.999         \\ \hline
+                \end{tabular}
+                \caption{Blasius solution reference function}
+                \label{tab:eta}
+        \end{table}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{u_collapsed.png}
+                \caption{Normalized X-velocity profile self-similarity}
+                \label{fig:u_similarity}
+        \end{figure}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{v_collapsed.png}
+                \caption{Normalized Y-velocity profile self-similarity}
+                \label{fig:v_similarity}
+        \end{figure}
+
+        In order to analyze the Skin-friction coefficient profile, we extracted the simulated valuue of this variable as a function of the vertical derivative of the horizontal velocity, making use of the expression in Equation~\ref{eq:friction_sim}. Then, we calculated the model's value as a function of the normalized Reynolds-normalized horizontal axis \( \text{Re}_x = \frac{x U_\infty}{\nu} \) using Equation~\ref{eq:friction_calc}.
         
+        Using \( \text{Re}_x \) as independent variable, we plotted both curves in Figure~\ref{fig:skin_friction}; as we can observe, both profiles are identical to a point where the differences can be atributed to numerical error. This trend was sustained throughout the analysis of the subsequent 3 profiles.
+
+        \begin{equation} \label{eq:friction_sim}
+                C_f = \frac{\mu}{\frac{1}{2} \rho U_\infty^2} \frac{\partial u}{\partial y}
+        \end{equation}
+
+        \begin{equation} \label{eq:friction_calc}
+                C_f = 0.664 \sqrt{\text{Re}_x} 
+        \end{equation}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{Skin_Friction.png}
+                \caption{Skin-friction coefficient profiles}
+                \label{fig:skin_friction}
+        \end{figure}
+
+        \subsection{Boundary Layer Thickness}
+
+                The CFD value for the Boundary Layer Thickness was obtained by looking up, for every value of $ x $ inside the channel, the smallest value of \( y \) s.t. \( u(x,y) \ge 0.99 U_{\infty} \) and then divided said value by $ x $. We then calculated the Blasius solution as indicated by Equation~\ref{eq:BLT_Blasius}.
+
+                The resulting profiles were then plotted against the independent variable $ \text{Re}_x $, as it can be observed in Figure~\ref{fig:thickness}.
+
+                \begin{equation} \label{eq:BLT_Blasius}
+                        \frac{\delta(x)}{x} = 5 \text{Re}_x^{-\frac{1}{2}}
+                \end{equation}
+
+                \begin{figure}[ht!]
+                        \centering
+                        \includegraphics[width=\textwidth]{thickness.png}
+                        \caption{Boundary Layer Thickness profiles}
+                        \label{fig:thickness}
+                \end{figure}
+
+        \subsection{Boundary Layer Thickness}
+
+                The CFD value for the Displacement Thickness was obtained by integrating the remainder of the ratio between the instantaneous horizontal velocity and the uniform velocity through each section of the channel, and then normalizing by $ x $ (as in Equation \ref{eq:DT_CFD}). We then calculated the Blasius solution as indicated by Equation~\ref{eq:DT_Blasius}.
+
+                The resulting profiles were then plotted against the independent variable $ \text{Re}_x $, as it can be observed in Figure~\ref{fig:DT}.
+
+                \begin{equation} \label{eq:DT_CFD}
+                        \frac{\delta^*(x)}{x} = \frac{\int_0^\infty (1 - \frac{u}{U_\infty}) dy}{x}
+                \end{equation}
+
+                \begin{equation} \label{eq:DT_Blasius}
+                        \frac{\delta^*(x)}{x} = 1.7208 \text{Re}_x^{-\frac{1}{2}}
+                \end{equation}
+
+                \begin{figure}[ht!]
+                        \centering
+                        \includegraphics[width=\textwidth]{DT.png}
+                        \caption{Displacement Thickness profiles}
+                        \label{fig:DT}
+                \end{figure}
+
+        \subsection{Boundary Layer Thickness}
+
+                The CFD value for the Momentum Thickness was obtained by integrating the remainder of the ratio between the instantaneous horizontal velocity and the uniform velocity multiplied by said ratio through each section of the channel, and then normalizing by $ x $ (as in Equation \ref{eq:Momentum_CFD}). We then calculated the Blasius solution as indicated by Equation~\ref{eq:Momentum_Blasius}.
+
+                The resulting profiles were then plotted against the independent variable $ \text{Re}_x $, as it can be observed in Figure~\ref{fig:DT}.
+
+                \begin{equation} \label{eq:Momentum_CFD}
+                        \frac{\Theta(x)}{x} = \frac{\int_0^\infty \frac{u}{U_\infty} (1 - \frac{u}{U_\infty}) dy}{x}
+                \end{equation}
+
+                \begin{equation} \label{eq:Momentum_Blasius}
+                        \frac{\Theta(x)}{x} = 0.664 \text{Re}_x^{-\frac{1}{2}}
+                \end{equation}
+
+                \begin{figure}[ht!]
+                        \centering
+                        \includegraphics[width=\textwidth]{Momentum.png}
+                        \caption{Momentum Thickness profiles}
+                        \label{fig:Momentum}
+                \end{figure}
 
 \bibliographystyle{abbrv}
 \bibliography{main}
