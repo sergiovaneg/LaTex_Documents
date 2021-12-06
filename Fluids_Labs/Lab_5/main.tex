@@ -82,7 +82,7 @@
         \begin{figure}[ht!]
                 \centering
                 \includegraphics[width=\textwidth]{Reference.png}
-                \caption{Small preview of the reference image}
+                \caption{Reference image}
                 \label{fig:reference}
         \end{figure}
 
@@ -92,13 +92,61 @@
 
 \section{Bulk Velocity Approximation} \label{sec:bulk_velocity}
 
+        Since the experiments involve a water flow in a finite size channel, $ U_b \neq U_\infty $; nevertheless, it is a reasonable first approximation for our case of study. We approximate the channel bulk velocity through the expression in Equation~\ref{eq:Ub}. Then, we use this value to approximate the Reynolds number as in Equation~\ref{eq:Re}.
+
+        \begin{equation} \label{eq:Ub}
+                U_b = \frac{Q}{B h} = \SI{1.667E-1}{\metre \per \second}
+        \end{equation}
+
+        \begin{equation} \label{eq:Re}
+                \text{Re} = \frac{D U_\infty}{\nu} \approx \frac{D U_b}{\nu} = \num{9.980E3}
+        \end{equation}
+
 \section{Data dimensional treatment} \label{sec:dimensional}
+
+        In order to apply the necessary transformations, we performed a pixel-count on the reference image (Figure~\ref{fig:reference}) using GIMP. We first located the domain half-point by measuring the cylinder height and cutting it in half, just like in Figure~\ref{fig:half_point}. Then, we measured the distance from the image origin to the physical origin (right side of the ruler, cylinder half-point) to get the pixel value of the new origin, as it is shown in Figure~\ref{fig:origin}.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{Half_Point_Finder.png}
+                \caption{Location of the new vertical origin}
+                \label{fig:half_point}
+        \end{figure}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{New_Reference.png}
+                \caption{Location of the new physical origin}
+                \label{fig:origin}
+        \end{figure}
+
+        Using these values, we proceeded to transform and normalize our grid and displacement data. As a result, we got the variables \textit{Grid\_x0\_D}, \textit{Grid\_y0\_D}, \textit{u0\_Ub} and \textit{v0\_Ub}.
 
 \section{Reynolds-average velocity} \label{sec:RANS}
 
+        Once the whole dataset had been processed for analysis, we proceeded to time-average the pointwise instantaneous velocity (both horizontal and vertical). With this, we plotted both the vector field and the interpolated streamlines in Figure~\ref{fig:vf} and Figure~\ref{fig:streamlines}; a circle representing the cylinder disturbing the flow was drawn in red on both figures for reference. We can see how part of the flow overlaps because of the camera perspective; nevertheless, the flow recirculation is coherent with the expected behaviour.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{Vector_Field.png}
+                \caption{Velocity vector field}
+                \label{fig:vf}
+        \end{figure}
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{Streamlines.png}
+                \caption{Flow streamlines}
+                \label{fig:streamlines}
+        \end{figure}
+
 \section{Flow Dynamic Evolution} \label{sec:dynamics}
 
+        a
+
 \section{Frequency Spectra Analysis} \label{sec:spectra}
+
+        a
 
 \bibliographystyle{abbrv}
 \bibliography{main}
