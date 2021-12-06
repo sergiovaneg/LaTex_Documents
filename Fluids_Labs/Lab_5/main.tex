@@ -145,24 +145,53 @@
         \begin{figure}[ht!]
                 \centering
                 \includegraphics[width=\textwidth]{Centerline_Profile.png}
-                \caption{Centerline X-velocity field}
+                \caption{Horizontal velocity centerline profile}
                 \label{fig:centerline_average}
         \end{figure}
 
         \begin{figure}[ht!]
                 \centering
                 \includegraphics[width=\textwidth]{Vertical_Profiles.png}
-                \caption{Vertical X-velocity fields}
+                \caption{Horizontal velocity vertical profiles}
                 \label{fig:vertical_profiles}
         \end{figure}
 
 \section{Flow Dynamic Evolution} \label{sec:dynamics}
 
-        In order to investigate the Flow's dynamic evolution, we 
+        In order to investigate the Flow's dynamic evolution, we performed a pointwise moving average over the instantaneous velocity data as a pre-processing procedure to remove high-frequency signal error.
+
+        We then plotted the time history of the normalized vertical velocity in the closest (positive) point to the origin (w.r.t. the processed cartesian coordinates) available in the data array, which can be observed in Figure~\ref{fig:origin_history}.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{history.png}
+                \caption{Approximate history of the normalized vertical velocity at the origin}
+                \label{fig:origin_history}
+        \end{figure}
+
+        Since not a lot of information can be extracted from the time profile, we then calculated the FFT of the aforementioned signal in order to extract the vortex shedding frequency $ f $ of the velocity field. As it can be observed in Figure~\ref{fig:fft_single}, $ f \approx \SI{5.67423E-1}{\hertz} $.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{FFT_single.png}
+                \caption{Approximate frequency spectrum of the normalized vertical velocity at the origin}
+                \label{fig:fft_single}
+        \end{figure}
+
+        In order to corroborate this result, we calculated the Strouhal number $ \text{SR} = \frac{f U_b}{D} = 0.2043 $ and tested this value against the expected Reynolds number presented in Figure~\ref{fig:strouhal}, which is approximately ten thousand. As a consequence, we can validate the frequency analysis of the experiment.
+
+        \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=\textwidth]{Strouhal.png}
+                \caption{Strouhal number versus Reynolds number for unbounded flow over a circular cylinder \cite{doi:10.1063/1.869675}}
+                \label{fig:strouhal}
+        \end{figure}
 
 \section{Frequency Spectra Analysis} \label{sec:spectra}
 
-        a
+        Finally, we overlapped all pointwise frequency spectrum of the normalized vertical velocity. Even if these profiles changed consistently from point to point, the fundamental frequency and overall shape of the magnitude of the each spectrum remained unchanged throughout the data array, proving that the shedding frequency characterizes not only a coordinate of the domain, but the flow itself.
+
+\newpage
 
 \bibliographystyle{abbrv}
 \bibliography{main}
