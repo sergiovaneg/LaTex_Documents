@@ -22,7 +22,7 @@
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{Sketch.png}
+                \includegraphics[width=0.9\textwidth]{Sketch.png}
                 \caption{Sketch of the test case}
                 \label{fig:sketch}
         \end{figure}
@@ -36,7 +36,7 @@
 
                 \begin{figure}[ht!]
                         \centering
-                        \includegraphics[width=\textwidth]{Domain.png}
+                        \includegraphics[width=0.9\textwidth]{Domain.png}
                         \caption{Computational domain and boundary conditions}
                         \label{fig:domain}
                 \end{figure}
@@ -65,18 +65,18 @@
 
         All simulations were ran setting up a minimum of 1000 iterations and a maximum of 10000, with a whole-field residual convergence criterion of 0.0001\%. The probe was set in the middle of the channel with respect to the start of the lower boundary plate. Additionally, regarding the grid-independence study, the near-wall cell width was reduced as much as possible while maintaining a \( y^+ \) value higher than 30, which turned out to be \( \SI{2e-3}{\metre} = \frac{\delta}{25} \).
 
-        Then, we had to modify the channel length until it achieved a fully-developed flow; this was evaluated by observing the x-derivative of the horizontal velocity and the vertical velocity profile, and then extending the channel until both of them became persistantly (near) 0. The results of this process can be seen in Figure~\ref{fig:DUDX_Profile} and Figure~\ref{fig:V_Profile}, by which we can determine that $ L = 150 \delta =  \SI{7.5E0}{\metre}$ is a sufficient channel length for our case of study.
+        Then, we had to modify the channel length until it achieved a fully-developed flow; this was evaluated by observing the x-derivative of the horizontal velocity and the vertical velocity profiles at $y=\frac{\delta}{2}$, and then extending the channel until both of them became persistantly (near) 0. The results of this process can be seen in Figure~\ref{fig:DUDX_Profile} and Figure~\ref{fig:V_Profile}, by which we can determine that $ L = 150 \delta =  \SI{7.5E0}{\metre}$ is a sufficient channel length for our case of study.
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{DUDX_Profile.png}
+                \includegraphics[width=0.9\textwidth]{DUDX_Profile.png}
                 \caption{Horizontal velocity X-Derivative profile}
                 \label{fig:DUDX_Profile}
         \end{figure}
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{V_Profile.png}
+                \includegraphics[width=0.9\textwidth]{V_Profile.png}
                 \caption{Vertical velocity profile}
                 \label{fig:V_Profile}
         \end{figure}
@@ -85,21 +85,21 @@
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{U_Independence.png}
+                \includegraphics[width=0.9\textwidth]{U_Independence.png}
                 \caption{Horizontal velocity Y-profiles}
                 \label{fig:U_Ind}
         \end{figure}
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{V_Independence.png}
+                \includegraphics[width=0.9\textwidth]{V_Independence.png}
                 \caption{Vertical velocity Y-profiles}
                 \label{fig:V_Ind}
         \end{figure}
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{P_Independence.png}
+                \includegraphics[width=0.9\textwidth]{P_Independence.png}
                 \caption{Pressure X-profiles}
                 \label{fig:P_Ind}
         \end{figure}
@@ -118,7 +118,7 @@
 
         \begin{figure}[ht!]
                 \centering
-                \includegraphics[width=\textwidth]{stress.png}
+                \includegraphics[width=0.9\textwidth]{stress.png}
                 \caption{Stress Y-profiles}
                 \label{fig:stress}
         \end{figure}
@@ -127,7 +127,7 @@
 
         \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{Axial_Velocities.png}
+                \includegraphics[width=0.9\textwidth]{Axial_Velocities.png}
                 \caption{Axial velocity profile comparison}
                 \label{fig:axialV}
         \end{figure}
@@ -142,7 +142,7 @@
         
         \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{Up_Profile.png}
+                \includegraphics[width=0.9\textwidth]{Up_Profile.png}
                 \caption{\( u^+ \) profiles in function of \( y^+ \)}
                 \label{fig:u_plus}
         \end{figure}
@@ -162,7 +162,7 @@
 
         \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{friction.png}
+                \includegraphics[width=0.9\textwidth]{friction.png}
                 \caption{Friction coefficient relations}
                 \label{fig:friction}
         \end{figure}
