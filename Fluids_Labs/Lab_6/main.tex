@@ -17,50 +17,60 @@
 \maketitle
 
 \begin{abstract} 
-        The first test case is the steady-state development of incompressible flow between two parallel plates in the laminar regime (Figure~\\\ref{fig:sketch}). The plates are considered infinite in the direction transversal to the flow. The flow develops from a condition of uniform velocity (rectangular profile) imposed at the inlet boundary, reaching a fully-developed state at a certain distance downstream of it. \cite{FL:01}
+ The fourth test case is the flow around a circular cylinder in the sub-critical regime. The cylinder is considered with infinite height to avoid side effects. The flow develops from the free-stream profile \mathcal {U} _ \infty in the form of a laminar boundary layer that, after separation at about 82° from the leading edge, generates a turbulent wake with some periodic behavior. The phenomenon is inherently unsteady even at the macro-scale and therefore it requires solving the U-RANS, which might be computationally demanding even for a 2D problem. As a consequence it is here performed the grid independence study for a steady state (RANS) model, and then use the same grid settings for the subsequent U-RANS simulation.\cite{FL:01}
 \end{abstract}
 
 \section{Introduction}
-        The fully developed laminar flow between two parallel plates admits an analytical solution (plane Poiseuille flow):
 
-        \begin{equation} \label{eq:system}
-                \begin{cases}
-                        u(x,y,z) = u(y) = - \frac{\delta ^ 2}{2 \mu} \frac{dp_e}{dx} \frac{y}{\delta} (2 - \frac{y}{\delta}) \; v(x,y,z) = 0 \; w(x,y,z) = 0 \\
-                        \frac{dp_e}{dx} = const < 0 \\
-                        \tau_{yx}(x,y,z) = - 2 \mu \frac{1}{2} \left( \frac{\partial u}{\partial y} + \frac{\partial v}{\partial x} \right) = - \mu \frac{du}{dy} = \frac{dp_e}{dx} (\delta - y) = \tau_{yx}(y)
-                \end{cases}
-        \end{equation}
+In the sub-critical regime, the laminar boundary layer developing over the walls of the cylinder separates at about 82° from the front stagnation point, and a large, turbulent wake generates downstream. The pressure distribution over the walls of the cylinder, shown in Figure 2 (ADD FIGURE), agrees with the potential flow solution only in the front part of the body. The separation point is just at the beginning of the region of adverse pressure gradient, and it can be easily recognized in the figure since the wall pressure in the wake region is broadly uniform. Additionally, the wall shear stress is zero at the point of separation.
+The drag coefficient of a circular cylinder with infinite length is defined as: ADD FORMULA and it is a function of 𝑅𝑒𝐷 and the relative roughness 𝑠/𝐷𝐶. In the sub-critical regime, 𝐶𝐷 is nearly constant with 𝑅𝑒𝐷, and it is not much affected by the roughness. Such constant value is around 1.2, as is it evident from the plot below (Figure 3 ADD FIGURE 3).
+Finally, the dimensionless Strouhal number quantifies the characteristic frequency of the turbulent wake, 𝑓,and it is defined as 𝑆𝑡 = 𝑓𝐷𝐶/𝑈∞. The paper by Fey et al. (1998) provides a correlation to estimate 𝑆𝑡 as a function of 𝑅𝑒𝐷, according to which, in the sub-critical regime, 𝑆𝑡 varies between 0.185 and 0.21 (Figure 4 ADD FIGURE4).
 
-        Where \( \mu \) is the dynamic viscosity of the fluid, \( \delta \) is the half-distance between the plates, \(u, v, w\) are the velocity components along directions \( x, y, z \) (Figure~\ref{fig:sketch}), \( p_e \) is the excess pressure with respect to the hydrostatic component, and \( \tau_{yx} \) is the only nonzero shear stress. \cite{FL:01}
-
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Case_Sketch.png}
-                \centering
-                \caption{Sketch of the Case}
-                \label{fig:sketch}
-        \end{figure}
 
         The configuration of the problem is as follows:
         \begin{itemize}
-                \item Length \( L = 10 \: cm \),
-                \item Length \( L_p = 9 \: cm \),
-                \item Half-channel height \(\delta = 5 \: mm\),
+                \item Diameter \( D_c = 0.06 \: m \),
+                \item Free-stream velocity \( U_\infty = 0.4 \: m/s \),
                 \item Bulk velocity \( U_b = 5 \: mm/s \),
                 \item Fluid: Water at \( 20^{\circ}C \; ( \rho = 998.23 \: kg/m^3\), \\ Kinematic Viscosity \( \nu = 1.006E-6 \: m^2/s ) \).
         \end{itemize}
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Conditions.png}
-                \centering
-                \caption{Domain and boundary conditions}
-                \label{fig:conditions}
-        \end{figure}
 
         \paragraph{Outline}
-        The remainder of the report is organized as follows: Section~\ref{sec:developed_flow} provides some gross estimate of the required \( L_p \) to achieve a fully-developed flow in terms of channel height; Section~\ref{sec:independence} shows how a suitable configuration of the cartesian computational mesh was found; Section~\ref{sec:CFD_validation} compares the simulated solution with the analytical model both graphically and numerically; Finally, Section~\ref{sec:vorticity} provides some analysis regarding the vorticity profile on both the developing and fully-developed region. It is worth noting that all simulations had a relative convergence tolerance of $ 1E-3 $ for all variables taken into consideration.
+        The remainder of the report is organized as follows: Section~\ref{sec:Steady-state precursor} provides some suitable results concerning grid independence study performed on RANS solutions; Section~\ref{sec:Steady-state precursor} instead makes use of URANS in order to focus on the temporal evolution  of the process; Section~\ref{sec:Comparison with Literature} compares the results obtained with literature ones and finally  Section~\ref{sec:Comparison RANS vs URANS} compares RANS and URANS solutions, taking into account the inviscid flow potential solutions
+        
+      
+      
+\section{Steady-state precursor} \label{sec:Steady-state precursor}
 
-\section{Fully-developed flow conditions} \label{sec:developed_flow}
+The following Grid-Independence study is applied on RANS solution.   Despite in principle RANS solutions do not provide a trustful representation of the physical phenomenon under investigation, this choice can been consider a practical compromise to face the heavy URANS  computational cost. The variable under investigation are:  the distributions of wall pressure and wall shear stress, the drag coefficient and the position of the separation point, inferred from the wall pressure and the wall shear stresses.In particular the separation point was inferred by the wall pressure (BOH COME) and by the shear stress imposing null shear stress in s.
+The study was performed by fixing BOH QUANTE and then progressively increasing the number of slices in which our domain was cut.
+Figure~\ref{fig:drag_independence},Figure~\ref{fig:pression_ind},Figure~\ref{fig:wall_ind}show our results.
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{DragCoefficient_Independence.png}
+                \centering
+                \caption{}
+                \label{fig:drag_independence}
+        \end{figure}
 
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Pressure_Independence.png}
+                \centering
+                \caption{}
+                \label{fig:pression_ind}
+        \end{figure}
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{WallShearStress_Independence.png}
+                \centering
+                \caption{X-velocity Y-profile per delta-step}
+                \label{fig:wall_ind}
+        \end{figure}
+
+
+
+The following Grid-Independence study was perf the amount of cells on the other axis until both X-velocity profile and Pressure-gradient convergence was observed.
+        
         The following plot was generated from a half-domain simulation with a 40-by-40 mesh, in a $ 12 \: cm $ long domain with a $ 2 \: cm $ margin, as per the lab document's recommendation. The observed profile was taken in
 
         \begin{figure}[!ht]
