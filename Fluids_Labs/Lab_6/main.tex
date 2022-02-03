@@ -37,13 +37,13 @@ Finally, the dimensionless Strouhal number quantifies the characteristic frequen
 
 
         \paragraph{Outline}
-        The remainder of the report is organized as follows: Section~\ref{sec:Steady-state precursor} provides some suitable results concerning grid independence study performed on RANS solutions; Section~\ref{sec:Steady-state precursor} instead makes use of URANS in order to focus on the temporal evolution  of the process; Section~\ref{sec:Comparison with Literature} compares the results obtained with literature ones and finally  Section~\ref{sec:Comparison RANS vs URANS} compares RANS and URANS solutions, taking into account the inviscid flow potential solutions
+        The remainder of the report is organized as follows: Section~\ref{sec:Steady-state precursor} provides some suitable results concerning grid independence study performed on RANS solutions; Section~\ref{sec:URAN} instead makes use of URANS in order to focus on the temporal evolution  of the process; Section~\ref{sec:Comparison with Literature} compares the results obtained with literature ones and finally  Section~\ref{sec:Comparison RANS vs URANS} compares RANS and URANS solutions, taking into account the inviscid flow potential solutions
         
       
       
 \section{Steady-state precursor} \label{sec:Steady-state precursor}
 
-The following Grid-Independence study is applied on RANS solution.   Despite in principle RANS solutions do not provide a trustful representation of the physical phenomenon under investigation, this choice can been consider a practical compromise to face the heavy URANS  computational cost. The variable under investigation are:  the distributions of wall pressure and wall shear stress, the drag coefficient and the position of the separation point, inferred from the wall pressure and the wall shear stresses.In particular the separation point was inferred by the wall pressure (BOH COME) and by the shear stress imposing null shear stress in s.
+The following Grid-Independence study is applied on RANS solution.   Despite in principle RANS solutions do not provide a trustful representation of the physical phenomenon under investigation, this choice can been consider a practical compromise to face the heavy URANS  computational cost. The variables under investigation are:  the distributions of wall pressure and wall shear stress, the drag coefficient and the position of the separation point, inferred from the wall pressure and the wall shear stresses.In particular the separation point was inferred by the wall pressure approximating the wall pressure second derivative (through finite differences of order 8) and looking for its inflection point. The separation point was instead inferred by the shear stress imposing it as the shear stress zero.
 The study was performed by fixing BOH QUANTE and then progressively increasing the number of slices in which our domain was cut.
 Figure~\ref{fig:drag_independence},Figure~\ref{fig:pression_ind},Figure~\ref{fig:wall_ind}show our results.
         \begin{figure}[!ht]
@@ -66,6 +66,55 @@ Figure~\ref{fig:drag_independence},Figure~\ref{fig:pression_ind},Figure~\ref{fig
                 \caption{X-velocity Y-profile per delta-step}
                 \label{fig:wall_ind}
         \end{figure}
+
+
+According to experimental results separation point s should lie at $$ 82 ^\circ $$, and our plot quite respect this result.
+
+\section{Unsteady-state modelling} \label{sec:URAN}
+In this section we'll make use of our results from URANS simulations. To launch these simulations we re-started from the converged steady-state solutions exploiting the same grid settings.
+We defined as suitable total simulation time to observe periodicity in the macroscopic flow NON LO SO.
+Then we performed a sensibility analysis with respect to the time-step of time discretization, considering as target parameters NON LO SO.
+Then we decided to consider the vector of drag and lift forces measured each \textit{6ms}, i.e. we focused on a frequency of \mathcol{1\6 [s^{-1}]}, and their temporal evolution can be seen in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This results are well aligned with the process dynamic since we expect the turbolent wake to strongly affect lift oscillations mantaining its mean null over time, while not causing visibly drag force oscillations since it does not create any counter flow.
+As it can be seen in figure ADD the amplitude of drag force signal is of the order of \mathcol{1*10^{-4}}, and its frequency of \mathcol{1*10^{-1}}, while for the lift force signal both its amplitude is of order \mathcol{10^-3} while its frequency are of order \mathcol{1}. 
+To compare its frequences watch figure (ADD) where fluctuating Lift has been raised of \textit{<Cd>=0.993}, it is clear that drag signal has one order of magnitude less amplitude and frequencies. They seems to be in PHASE OR NOT BOH
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{DragForce.png}
+                \centering
+                \caption{}
+                \label{fig:drag}
+        \end{figure}
+
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{LiftForce.png}
+                \centering
+                \caption{}
+                \label{fig:lift}
+        \end{figure}
+        
+Then we calculated the time-averaged drag coefficient from the U-RANS simulation, reported in figure Figure~\ref{fig:coeff}. According to reference it should be 1.2 for us it is 0.6
+        \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Coefficients.png}
+                \centering
+                \caption{}
+                \label{fig:coeff}
+        \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
