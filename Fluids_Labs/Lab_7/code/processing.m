@@ -112,7 +112,7 @@ fprintf("Fluctuating Lift coefficient from RMS: %d.\n", CL_p_rms);
 
 %% 8) Water level error estimate
 
-dW = (D*L + 2*2E-3*180E-3) * 2E-3;
+dW = 2*(2E-3*180E-3)*2E-3;
 g = 9.80665;
 dFB = dW * rho * g;
 
@@ -122,7 +122,7 @@ dCL_p = (sqrt(2) * rms(FL_filt-dFB) - aL_rms)/(0.5*rho*A*U_inf^2);
 
 fprintf("Reynolds-averaged Drag coefficient variation: %d.\n", dCD);
 fprintf("Reynolds-averaged Lift coefficient variation: %d.\n", dCL);
-fprintf("Fluctuating Drag coefficient variation: %d.\n", dCL_p);
+fprintf("Fluctuating Lift coefficient variation: %d.\n", dCL_p);
 
 error_CD = abs(dCD/CD);
 error_CL = abs(dCL/CL);
@@ -130,4 +130,4 @@ error_CL_p = abs(dCL_p/CL_p_rms);
 
 fprintf("Reynolds-averaged Drag coefficient relative error: %d.\n", error_CD);
 fprintf("Reynolds-averaged Lift coefficient relative error: %d.\n", error_CL);
-fprintf("Fluctuating Drag coefficient relative error: %d.\n", error_CL_p);
+fprintf("Fluctuating Lift coefficient relative error: %d.\n", error_CL_p);
