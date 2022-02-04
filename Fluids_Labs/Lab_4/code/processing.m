@@ -159,20 +159,20 @@ rho = 1.189;
 U_inf = 30;
 nu = 1.5445e-5;
 mu = rho * nu;
-REx = (X_E(21:end) - 0.1) * U_inf / nu;
+REx = (X_E(21:end-1) - 0.1) * U_inf / nu;
 
 delta_sim = Y_C(1) * ones(NX, 1);
 for i=1:NX-1
     delta_sim(i) = Y_C(find(U1(i,:) >= (0.99 * U_inf), 1));
 end
-delta_sim = delta_sim(21:end) ./ (X_E(21:end)- 0.1)';
+delta_sim = delta_sim(21:end-1) ./ (X_E(21:end-1)- 0.1)';
 delta_calc = 0.370 ./ REx.^.2;
 
-delta_p_sim = trapz(Y_C, 1-U1(21:end,:)/U_inf, 2)./(X_E(21:end)- 0.1)';
+delta_p_sim = trapz(Y_C, 1-U1(21:end-1,:)/U_inf, 2)./(X_E(21:end-1)- 0.1)';
 delta_p_calc = 0.0463 ./ REx.^.2;
 
-theta_sim = trapz(Y_C, (U1(21:end,:)/U_inf).*(1-U1(21:end,:)/U_inf), 2)...
-    ./ (X_E(21:end)- 0.1)';
+theta_sim = trapz(Y_C, (U1(21:end-1,:)/U_inf).*(1-U1(21:end-1,:)/U_inf), 2)...
+    ./ (X_E(21:end-1)- 0.1)';
 theta_calc = 0.036 ./ REx.^.2; % Corrected exponent w.r.t. the PDF
 
 figure(9);
