@@ -99,126 +99,27 @@ Then we calculated the time-averaged drag coefficient from the U-RANS simulation
                 \caption{}
                 \label{fig:coeff}
         \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The following Grid-Independence study was perf the amount of cells on the other axis until both X-velocity profile and Pressure-gradient convergence was observed.
         
-        The following plot was generated from a half-domain simulation with a 40-by-40 mesh, in a $ 12 \: cm $ long domain with a $ 2 \: cm $ margin, as per the lab document's recommendation. The observed profile was taken in
+Finally the Strohal number, since we are in subcritical regime should be between 0.185 and 0.21
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Fully_Developed_Francesco.png}
-                \centering
-                \caption{X-velocity Y-profile per delta-step}
-                \label{fig:delta-steps}
-        \end{figure}
 
-        As we can see in Figure~\ref{fig:delta-steps}, the X-velocity Y-Profile stabilizes after roughly 4 deltas ($ 2 \: cm $), making our choice of an 18-delta channel with a 2-delta margin at the beginning ($ 10 \: cm $ total) more than enough for the case of study. From now on, unless said otherwise, all X-specific data was taken after 12 deltas into the actual channel ($ 7 \: cm $ from the origin of the X-axis), simulating the whole channel as opposed to just the lower half and using a \( 10 \: cm \) domain with a \( 1 \: cm \) margin in its stead.
 
-\section{Grid independence study} \label{sec:independence}
 
-        The following Grid-Independence study was performed by fixing 40 cells either along the X or Y axis, and then progressively increasing the amount of cells on the other axis until both X-velocity profile and Pressure-gradient convergence was observed.
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Grid_Ind_U_Profiles.png}
-                \centering
-                \caption{X-velocity derivative Y-profile per cell amount}
-                \label{fig:grid_ind_u}
-        \end{figure}
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Grid_Ind_P_Gradient.png}
-                \centering
-                \caption{P-gradient vs cell amount}
-                \label{fig:grid_ind_p}
-        \end{figure}
 
-        As we can observe in Figure~\ref{fig:grid_ind_u}, X-refinement is pretty much irrelevant for the X-velocity derivative profile; nevertheless, such is not the case for the Pressure-gradient which, as we can see in Figure~\ref{fig:grid_ind_p}, did not stabilize after at least 35 cells across the X-axis.
 
-        In the case of Y-refinement, 25 cells were enough to stabilize both the X-velocity derivative profile and average Pressure-gradient. Therefore, a 40-by-40 mesh kept being used for the remainder of the laboratory, since simulation times were low enough for a wide Y-refinement margin to not be a problem.
 
-\section{CFD solution validation} \label{sec:CFD_validation}
 
-        From Equation System~\ref{eq:system} and Equation~\ref{eq:bulk_speed} (which describes Bulk velocity as a function of the Pressure-gradient magnitude), we derive the expressions in Equation System~\ref{eq:analytical}.
 
-        \begin{equation} \label{eq:bulk_speed}
-                U_b = - \frac{1}{3 \mu} \frac{dp_e}{dx} \delta ^ 2 
-        \end{equation}
 
-        \begin{equation} \label{eq:analytical}
-                \begin{cases}
-                        \frac{dp_e}{dx} = - \frac{3 \mu}{\delta ^ 2} U_b \\
-                        u(y) = - \frac{\delta}{2 \mu} \frac{dp_e}{dx} y (2 - \frac{y}{\delta})
-                \end{cases}
-        \end{equation}
 
-        In order to objectively measure the simulation error with respect to the analytical solution, we use the expressions in Equation System~\ref{eq:errors}. It is worth noting that the velocities inside the $ L^2 $-norm and $ L^{\infty} $-norm were evaluated for a fixed value of x inside the fully-developed region.
 
-        \begin{equation} \label{eq:errors}
-                \begin{cases}
-                        \frac{dp}{dx}_{err} = \frac{\left| \frac{dp_e}{dx} - \frac{dp_e}{dx}_{sim} \right|}{\left| \frac{dp_e}{dx} \right|} \\
-                        u_{err, L^2} = \frac{\left| \left| \frac{u - u_{sim}}{u} \right| \right|_{L ^ 2}}{\sqrt{2 \delta}} = \sqrt{\frac{\int_{0}^{2 \delta} \left| \frac{u(y) - u_{sim}(y)}{u(y)} \right|^2 dy}{2 \delta}} \\
-                        u_{err, L^{\infty}} = \left| \left| \frac{u - u_{sim}}{u} \right| \right|_{L ^ \infty} = \sup_{y \in [0, 2 \delta]} \left| \frac{u(y) - u_{sim}(y)}{u(y)} \right|
-                \end{cases}
-        \end{equation}
 
-        The results were the following:
 
-        \begin{itemize}
-                \item Pressure-gradient relative error: \( 5.807746E-03 \).
-                \item X-velocity relative Root-Mean-Squared error: \( 5.288724e-03 \).
-                \item X-velocity relative Maximum error: \( 2.613112e-02 \).
-        \end{itemize}
 
-        Aditionally, as we can observe in Figure~\ref{fig:u_comparison} and Figure~\ref{fig:tau_comparison}, the profiles for both X-velocity and Shear-stress were coherent with the analytical model.
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{U_Profile_Comparison.png}
-                \centering
-                \caption{X-velocity profile comparison at \(x = 0.07 \: m \)}
-                \label{fig:u_comparison}
-        \end{figure}
 
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Tau_Profile_Comparison.png}
-                \centering
-                \caption{Shear-stress profile comparison at \(x = 0.07 \: m \)}
-                \label{fig:tau_comparison}
-        \end{figure}
-
-\section{Vorticity} \label{sec:vorticity}
-
-        Using data from the original simulation (for visualization purposes) and a 100-by-40 mesh, we plotted vorticity across all channel regions and obtained Figure~\ref{fig:vorticity} as a result.
-
-        \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{Vorticity_Profile_Francesco.png}
-                \centering
-                \caption{Vorticity surface-profile}
-                \label{fig:vorticity}
-        \end{figure}
-
-        The main two differences between the developing and fully-developed regions are:
-
-        \begin{itemize}
-                \item Peak vorticity magnitude is higher on the developing region.
-                \item The vorticity profile is completely linear on the fully-developed region, whereas it presents variable slope on the developing one.
-        \end{itemize}
 
 \bibliographystyle{abbrv}
 \bibliography{main}
