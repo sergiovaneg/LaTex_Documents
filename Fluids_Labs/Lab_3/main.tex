@@ -131,6 +131,21 @@
                 \caption{Axial velocity profile comparison}
                 \label{fig:axialV}
         \end{figure}
+        
+Moreover to provide a better reresentation of the wall stress distribution we decided to run the "two layers k-eps" model, that gives the user the possibility to use a more refined mesh next to the wall since it uses a Low-Reynolds approach. In this way we plotted the normalized wall shear stress as function of \(y\) in Figure~\ref{fig:s1} and as function of \( y^+ \) in Figure~\ref{fig:s2}, where \( y^+ =60 \), i.e.\( y =delta/5 \) is the upper bound of the graph. It's worth noticing that Figure~\ref{fig:s2} is independent from Reynolds number, so that it does not collapse for high Reynolds numbers. Finally in Figure~\ref{fig:s2} theorical bounds to separate viscous region, middle region and outer region are marked.
+
+        \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{stress1.png}
+                \caption{Axial velocity profile comparison}
+                \label{fig:s1}
+        \end{figure}
+        \begin{figure}
+                \centering
+                \includegraphics[width=0.9\textwidth]{stress2.png}
+                \caption{Axial velocity profile comparison}
+                \label{fig:s2}
+        \end{figure}
 
 \section{Comparison with literature models} \label{sec:literature}
 
