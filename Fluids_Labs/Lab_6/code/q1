@@ -1,0 +1,220 @@
+  <html><head><title>Q1</title>
+  <link rel="stylesheet" type="text/css"
+  href="/phoenics/d_polis/polstyle.css">
+  </head><body><pre><strong>
+ TALK=T;RUN( 1, 1)
+ 
+ ************************************************************
+   Q1 created by VDI menu, Version 2019, Date 02/08/19
+ CPVNAM=VDI; SPPNAM=Core
+ ************************************************************
+ IRUNN = 1 ;LIBREF = 0
+ ************************************************************
+  Group 1. Run Title
+ TEXT(Cilyndrical Obstacle                    )
+ ************************************************************
+  Group 2. Transience
+ STEADY=F
+    * Set overall time and no. of steps
+ RSET(U,0.,60.,3000)
+    * Modify regions
+ ************************************************************
+  Groups 3, 4, 5  Grid Information
+    * Overall number of cells, RSET(M,NX,NY,NZ,tolerance)
+ RSET(M,360,101,1)
+    * Cylindrical-polar grid
+ CARTES=F
+ ************************************************************
+  Group 6. Body-Fitted coordinates
+    * X-cyclic boundaries switched
+ XCYIZ( 1, T )
+ ************************************************************
+  Group 7. Variables: STOREd,SOLVEd,NAMEd
+    * Non-default variable names
+ NAME(133)=WDIS ;NAME(136)=DVDY
+ NAME(137)=DVDX ;NAME(138)=YPLS
+ NAME(139)=STRS ;NAME(140)=SHRY
+ NAME(141)=SHRX ;NAME(142)=DUDY
+ NAME(143)=DUDX ;NAME(144)=GEN1
+ NAME(145)=FBP ;NAME(146)=XWP
+ NAME(148)=DEN1 ;NAME(149)=EL1
+ NAME(150) =ENUT
+    * Solved variables list
+ SOLVE(P1,U1,V1)
+    * Stored variables list
+ STORE(ENUT,EL1,DEN1,XWP,FBP,GEN1,DUDX,DUDY)
+ STORE(SHRX,SHRY,STRS,YPLS,DVDX,DVDY,WDIS)
+    * Additional solver options
+ SOLUTN(P1,Y,Y,Y,N,N,Y)
+ TURMOD(KWSST-LOWRE)
+ 
+ ************************************************************
+  Group 8. Terms & Devices
+ ************************************************************
+  Group 9. Properties
+ PRESS0 =1.01325E+05 ;TEMP0 =273.149994
+    * Domain material index is  67 signifying:
+    * WATER at 20. deg C
+ SETPRPS(1, 67)
+ DVO1DT =1.18E-04
+ PRT(KE)=1.0E+10 ;PRT(OMEG)=1.0E+10
+ ************************************************************
+  Group 10.Inter-Phase Transfer Processes
+ ************************************************************
+  Group 11.Initialise Var/Porosity Fields
+ FIINIT(P1)=0. ;FIINIT(WDIS)=0.1
+ FIINIT(BF2)=1. ;FIINIT(BF1)=1.
+   No PATCHes used for this Group
+ 
+ 
+ INIADD = F
+ NAMFI   ='1998'
+ ************************************************************
+  Group 12. Convection and diffusion adjustments
+   No PATCHes used for this Group
+ ************************************************************
+  Group 13. Boundary & Special Sources
+ 
+ PATCH(KWSOURCE, PHASEM, 0, 0, 0, 0, 0, 0, 1, 3000)
+ COVAL(KWSOURCE, KE, GRND4, GRND4)
+ COVAL(KWSOURCE, OMEG, GRND4, GRND4)
+ 
+ PATCH(KWSOGD, PHASEM, 0, 0, 0, 0, 0, 0, 1, 3000)
+ COVAL(KWSOGD, OMEG, GRND4, GRND4)
+ 
+ XCYCLE = T
+ EGWF = T
+ ************************************************************
+  Group 14. Downstream Pressure For PARAB
+ ************************************************************
+  Group 15. Terminate Sweeps
+ LSWEEP = 2000
+ RESFAC =1.5E-05
+ ************************************************************
+  Group 16. Terminate Iterations
+ LITER(P1)=200 ;LITER(OMEG)=50
+ ************************************************************
+  Group 17. Relaxation
+ RELAX(P1 ,LINRLX,1. )
+ RELAX(U1 ,LINRLX,0.5 )
+ RELAX(V1 ,LINRLX,0.5 )
+ RELAX(KE ,LINRLX,0.5 )
+ RELAX(OMEG,LINRLX,0.5 )
+ ************************************************************
+  Group 18. Limits
+ VARMAX(OMEG)=1.0E+10 ;VARMIN(OMEG)=1.0E-10
+ ************************************************************
+  Group 19. EARTH Calls To GROUND Station
+ GENK = T
+ PARSOL = F
+ CONWIZ = T
+ CALFOR = T
+ IENUTA = 20
+ ISG62 = 1
+ SPEDAT(SET,OUTPUT,NOFIELD,L,T)
+ SPEDAT(SET,GXMONI,PLOTALL,L,T)
+ ************************************************************
+  Group 20. Preliminary Printout
+ ************************************************************
+  Group 21. Print-out of Variables
+ OUTPUT(KE  ,Y,N,N,Y,Y,Y)
+ OUTPUT(EP  ,Y,N,N,Y,Y,Y)
+ OUTPUT(WDIS,Y,N,N,N,N,N)
+ OUTPUT(BF2 ,Y,N,Y,Y,Y,Y)
+ OUTPUT(BF1 ,Y,N,Y,Y,Y,Y)
+ OUTPUT(STRS,Y,N,N,N,N,N)
+ OUTPUT(SHRY,Y,N,N,N,N,N)
+ OUTPUT(SHRX,Y,N,N,N,N,N)
+ OUTPUT(GEN1,Y,N,Y,Y,Y,Y)
+ OUTPUT(FBP ,Y,N,N,N,N,N)
+ OUTPUT(XWP ,Y,N,N,N,N,N)
+ OUTPUT(OMEG,Y,N,N,Y,Y,Y)
+ OUTPUT(DEN1,Y,N,N,N,N,N)
+ OUTPUT(EL1 ,Y,N,N,N,N,N)
+ OUTPUT(ENUT,Y,N,N,N,N,N)
+ ************************************************************
+  Group 22. Monitor Print-Out
+ IXMON = 180 ;IYMON = 2 ;IZMON = 1
+ NPRMON = 100000
+ NPRMNT = 1
+ TSTSWP = -1
+ ************************************************************
+  Group 23.Field Print-Out & Plot Control
+ NPRINT = 100000
+ NTPRIN = 100000 ;ISTPRF = 1 ;ISTPRL = 100000
+ ISWPRF = 1 ;ISWPRL = 100000
+   No PATCHes used for this Group
+ ************************************************************
+  Group 24. Dumps For Restarts
+ IDISPA = 10 ;IDISPB = 0 ;IDISPC = 0
+ 
+ GVIEW(P,-0.094464,0.028518,-0.99512)
+ GVIEW(UP,-0.984416,0.146268,0.097639)
+ GVIEW(WINDOW,MAX)
+ GVIEW(VDIS,4.482501)
+ GVIEW(CENTRE,-7.769156E-03,-0.015397,0.635879)
+ 
+> DOM,    SIZE,        6.283185E+00, 3.000000E+00, 1.000000E+00
+> DOM,    MONIT,       3.132868E+00, 3.005400E-02, 5.000000E-01
+> DOM,    SCALE,       1.000000E+00, 1.000000E+00, 1.000000E+00
+> GRID,   RSET_X_1,     90, 1.000000E+00
+> GRID,   RSET_X_2,    180, 1.000000E+00,G
+> GRID,   RSET_X_3,     90, 1.000000E+00,G
+> GRID,   RSET_Y_1,      1, 1.000000E+00
+> GRID,   RSET_Y_2,    100, 1.080000E+00,G
+  > GRID,   RSET_Z_1,      1, 1.000000E+00
+> DOM,    MOMCEN,      0.000000E+00, 0.000000E+00, 0.000000E+00
+> DOM,    INI_AMB,    YES
+> DOM,    INI_BUOY,   YES
+ 
+> OBJ,    NAME,        INLE1
+> OBJ,    POSITION,    0.000000E+00, AT_END,       0.000000E+00
+> OBJ,    SIZE,        1.570796E+00, 0.000000E+00, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    polcu5t
+> OBJ,    TYPE,        INLET
+> OBJ,    COLOR-MODE,  USER
+> OBJ,    COLOR-VAL,   8
+> OBJ,    PRESSURE,     P_AMBIENT
+> OBJ,    CART-VEL,    0. ,-0.4 ,0.
+> OBJ,    TIME_LIMITS, ALWAYS_ACTIVE
+> OBJ,    KE_IN,       0.000000E+00
+> OBJ,    OMEG_IN,     0.000000E+00
+ 
+> OBJ,    NAME,        INLE1_2
+> OBJ,    POSITION,    AT_END,       AT_END,       0.000000E+00
+> OBJ,    SIZE,        1.570796E+00, 0.000000E+00, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    polcu5t
+> OBJ,    TYPE,        INLET
+> OBJ,    COLOR-MODE,  USER
+> OBJ,    COLOR-VAL,   8
+> OBJ,    PRESSURE,     P_AMBIENT
+> OBJ,    CART-VEL,    0. ,-0.4 ,0.
+> OBJ,    TIME_LIMITS, ALWAYS_ACTIVE
+> OBJ,    KE_IN,       0.000000E+00
+> OBJ,    OMEG_IN,     0.000000E+00
+ 
+> OBJ,    NAME,        OUTL3
+> OBJ,    POSITION,    1.570796E+00, AT_END,       0.000000E+00
+> OBJ,    SIZE,        3.141593E+00, 0.000000E+00, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    polcubet
+> OBJ,    TYPE,        OUTLET
+> OBJ,    COLOR-MODE,  USER
+> OBJ,    COLOR-VAL,   15
+> OBJ,    PRESSURE,     P_AMBIENT
+> OBJ,    COEFFICIENT, 1.0E+04
+> OBJ,    TIME_LIMITS, ALWAYS_ACTIVE
+> OBJ,    TURBULENCE,  SAME , SAME
+ 
+> OBJ,    NAME,        BLOC4
+> OBJ,    POSITION,    0.000000E+00, 0.000000E+00, 0.000000E+00
+> OBJ,    SIZE,        TO_END,       3.000000E-02, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    polcu8
+> OBJ,    TYPE,        BLOCKAGE
+> OBJ,    MATERIAL,    198,Solid with smooth-wall friction
+> OBJ,    TIME_LIMITS, ALWAYS_ACTIVE
+STOP
+  </strong></pre></body></html>

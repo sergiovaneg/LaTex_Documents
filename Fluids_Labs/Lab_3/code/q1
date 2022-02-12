@@ -1,0 +1,167 @@
+  <html><head><title>Q1</title>
+  <link rel="stylesheet" type="text/css"
+  href="/phoenics/d_polis/polstyle.css">
+  </head><body><pre><strong>
+ TALK=T;RUN( 1, 1)
+ 
+ ************************************************************
+   Q1 created by VDI menu, Version 2019, Date 02/08/19
+ CPVNAM=VDI; SPPNAM=Core
+ ************************************************************
+ IRUNN = 1 ;LIBREF = 0
+ ************************************************************
+  Group 1. Run Title
+ TEXT(                                        )
+ ************************************************************
+  Group 2. Transience
+ STEADY = T
+ ************************************************************
+  Groups 3, 4, 5  Grid Information
+    * Overall number of cells, RSET(M,NX,NY,NZ,tolerance)
+ RSET(M,752,16,1)
+ ************************************************************
+  Group 6. Body-Fitted coordinates
+ ************************************************************
+  Group 7. Variables: STOREd,SOLVEd,NAMEd
+    * Non-default variable names
+ NAME(143)=VOR1 ;NAME(144)=YPLS
+ NAME(145)=DUDY ;NAME(146)=STRS
+ NAME(148)=DEN1 ;NAME(149)=EL1
+ NAME(150) =ENUT
+    * Solved variables list
+ SOLVE(P1,U1,V1)
+    * Stored variables list
+ STORE(ENUT,EL1,DEN1,STRS,DUDY,YPLS,VOR1)
+    * Additional solver options
+ SOLUTN(P1,Y,Y,Y,N,N,Y)
+ TURMOD(KEMODL)
+ 
+ ************************************************************
+  Group 8. Terms & Devices
+ ************************************************************
+  Group 9. Properties
+ PRESS0 =1.01325E+05 ;TEMP0 =273.149994
+    * Domain material index is  67 signifying:
+    * WATER at 20. deg C
+ SETPRPS(1, 67)
+ DVO1DT =1.18E-04
+ PRT(EP)=1.314
+ ************************************************************
+  Group 10.Inter-Phase Transfer Processes
+ ************************************************************
+  Group 11.Initialise Var/Porosity Fields
+ FIINIT(P1)=0.
+   No PATCHes used for this Group
+ 
+ 
+ INIADD = F
+ ************************************************************
+  Group 12. Convection and diffusion adjustments
+   No PATCHes used for this Group
+ ************************************************************
+  Group 13. Boundary & Special Sources
+   No PATCHes used for this Group
+ 
+ EGWF = T
+ ************************************************************
+  Group 14. Downstream Pressure For PARAB
+ ************************************************************
+  Group 15. Terminate Sweeps
+ LSWEEP = 100000
+ RESFAC =1.0E-06
+ ************************************************************
+  Group 16. Terminate Iterations
+ LITER(P1)=200
+ ************************************************************
+  Group 17. Relaxation
+ RELAX(P1 ,LINRLX,1. )
+ RELAX(KE ,LINRLX,0.5 )
+ RELAX(EP ,LINRLX,0.5 )
+ KELIN = 0
+ ************************************************************
+  Group 18. Limits
+ ************************************************************
+  Group 19. EARTH Calls To GROUND Station
+ GENK = T
+ PARSOL = F
+ CONWIZ = T
+ ISG21 = 5000
+ ISG62 = 1
+ SPEDAT(SET,OUTPUT,NOFIELD,L,T)
+ SPEDAT(SET,GXMONI,PLOTALL,L,T)
+ ************************************************************
+  Group 20. Preliminary Printout
+ ************************************************************
+  Group 21. Print-out of Variables
+ ************************************************************
+  Group 22. Monitor Print-Out
+ IXMON = 370 ;IYMON = 1 ;IZMON = 1
+ NPRMON = 100000
+ NPRMNT = 1
+ TSTSWP = -1
+ ************************************************************
+  Group 23.Field Print-Out & Plot Control
+ NPRINT = 100000
+ ISWPRF = 1 ;ISWPRL = 100000
+   No PATCHes used for this Group
+ ************************************************************
+  Group 24. Dumps For Restarts
+ 
+ GVIEW(P,0.225893,-0.061068,0.972236)
+ GVIEW(UP,-0.162383,0.981709,0.099392)
+ GVIEW(WINDOW,MAX)
+ GVIEW(VDIS,0.124096)
+ GVIEW(CENTRE,10.032013,0.022731,5.0E-03)
+ 
+> DOM,    SIZE,        1.010000E+01, 5.000000E-02, 1.000000E-02
+> DOM,    MONIT,       4.999993E+00, 2.499999E-03, 5.000000E-03
+> DOM,    SCALE,       1.000000E+00, 1.000000E+00, 1.000000E+00
+> DOM,    INCREMENT,   1.000000E-02, 1.000000E-02, 1.000000E-02
+> GRID,   RSET_X_1,      2, 1.000000E+00,G
+> GRID,   RSET_X_2,    750, 1.000000E+00,G
+> GRID,   RSET_Y_1,      1, 1.000000E+00,G
+> GRID,   RSET_Y_2,     15, 1.000000E+00
+  > GRID,   RSET_Z_1,      1, 1.000000E+00
+> DOM,    INI_AMB,    YES
+> DOM,    INI_BUOY,   YES
+ 
+> OBJ,    NAME,        INLE1
+> OBJ,    POSITION,    0.000000E+00, 0.000000E+00, 0.000000E+00
+> OBJ,    SIZE,        0.000000E+00, TO_END,       TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    cube3t
+> OBJ,    TYPE,        INLET
+> OBJ,    COLOR-MODE,  USER
+> OBJ,    COLOR-VAL,   15
+> OBJ,    PRESSURE,     P_AMBIENT
+> OBJ,    VELOCITY,    1. ,0. ,0.
+> OBJ,    KE_IN,       0.000000E+00
+> OBJ,    EP_IN,       0.000000E+00
+ 
+> OBJ,    NAME,        OUTL2
+> OBJ,    POSITION,    AT_END,       0.000000E+00, 0.000000E+00
+> OBJ,    SIZE,        0.000000E+00, TO_END,       TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    cube12t
+> OBJ,    TYPE,        OUTLET
+> OBJ,    COLOR-MODE,  USER
+> OBJ,    COLOR-VAL,   2
+> OBJ,    PRESSURE,    0.
+> OBJ,    COEFFICIENT, 1000.
+> OBJ,    TURBULENCE,  SAME , SAME
+ 
+> OBJ,    NAME,        PLAT3
+> OBJ,    POSITION,    AT_END,       0.000000E+00, 0.000000E+00
+> OBJ,    SIZE,        1.000000E+01, 0.000000E+00, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    cube11
+> OBJ,    TYPE,        PLATE
+ 
+> OBJ,    NAME,        NULL4
+> OBJ,    POSITION,    0.000000E+00, 0.000000E+00, 0.000000E+00
+> OBJ,    SIZE,        TO_END,       4.000000E-03, TO_END
+> OBJ,    DOMCLIP,     NO
+> OBJ,    GEOMETRY,    wirexyz
+> OBJ,    TYPE,        NULL
+STOP
+  </strong></pre></body></html>
