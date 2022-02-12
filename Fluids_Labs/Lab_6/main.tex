@@ -18,13 +18,48 @@
 
 \begin{abstract} 
  The fourth test case is the flow around a circular cylinder in the sub-critical regime. The cylinder is considered with infinite height to avoid side effects. The flow develops from the free-stream profile \mathcal {U} _ \infty in the form of a laminar boundary layer that, after separation at about 82° from the leading edge, generates a turbulent wake with some periodic behavior. The phenomenon is inherently unsteady even at the macro-scale and therefore it requires solving the U-RANS, which might be computationally demanding even for a 2D problem. As a consequence it is here performed the grid independence study for a steady state (RANS) model, and then use the same grid settings for the subsequent U-RANS simulation.\cite{FL:01}
+ 
+  \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Flow_Sketch.png}
+                \centering
+                \caption{}
+                \label{fig:flow_sketch}
+        \end{figure}
+ 
+ 
 \end{abstract}
 
 \section{Introduction}
 
-In the sub-critical regime, the laminar boundary layer developing over the walls of the cylinder separates at about 82° from the front stagnation point, and a large, turbulent wake generates downstream. The pressure distribution over the walls of the cylinder, shown in Figure 2 (ADD FIGURE), agrees with the potential flow solution only in the front part of the body. The separation point is just at the beginning of the region of adverse pressure gradient, and it can be easily recognized in the figure since the wall pressure in the wake region is broadly uniform. Additionally, the wall shear stress is zero at the point of separation.
-The drag coefficient of a circular cylinder with infinite length is defined as: ADD FORMULA and it is a function of 𝑅𝑒𝐷 and the relative roughness 𝑠/𝐷𝐶. In the sub-critical regime, 𝐶𝐷 is nearly constant with 𝑅𝑒𝐷, and it is not much affected by the roughness. Such constant value is around 1.2, as is it evident from the plot below (Figure 3 ADD FIGURE 3).
-Finally, the dimensionless Strouhal number quantifies the characteristic frequency of the turbulent wake, 𝑓,and it is defined as 𝑆𝑡 = 𝑓𝐷𝐶/𝑈∞. The paper by Fey et al. (1998) provides a correlation to estimate 𝑆𝑡 as a function of 𝑅𝑒𝐷, according to which, in the sub-critical regime, 𝑆𝑡 varies between 0.185 and 0.21 (Figure 4 ADD FIGURE4).
+In the sub-critical regime, the laminar boundary layer developing over the walls of the cylinder separates at about 82° from the front stagnation point, and a large, turbulent wake generates downstream. The pressure distribution over the walls of the cylinder, shown in Figure~\ref{fig:p_d}, agrees with the potential flow solution only in the front part of the body. The separation point is just at the beginning of the region of adverse pressure gradient, and it can be easily recognized in the figure since the wall pressure in the wake region is broadly uniform. Additionally, the wall shear stress is zero at the point of separation.
+
+
+ \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Pressure_Distribution.png}
+                \centering
+                \caption{}
+                \label{fig:p_d}
+        \end{figure}
+
+
+The drag coefficient of a circular cylinder with infinite length is defined as: ADD FORMULA and it is a function of \mathcal{Re_D} and the relative roughness \mathcal{S/DC}. In the sub-critical regime, \mathcal{CD} is nearly constant with \matchal{ReD}, and it is not much affected by the roughness. Such constant value is around 1.2, as is it evident from Figure~\ref{fig:dragtrend}.
+
+\begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{DragCoefficient_Trend.png}
+                \centering
+                \caption{}
+                \label{fig:dragtrend}
+        \end{figure}
+
+Finally, the dimensionless Strouhal number quantifies the characteristic frequency of the turbulent wake, \textit{f},and it is defined as \textit{St= f*DC/U_ \infty}. The paper by Fey et al. (1998) provides a correlation to estimate \textit{St} as a function of \matchal{ReD}, according to which, in the sub-critical regime, \textit{St} varies between 0.185 and 0.21 Figure~\ref{fig:strouhal}.
+
+
+ \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{Strouhal.png}
+                \centering
+                \caption{}
+                \label{fig:strouhal}
+        \end{figure}
 
 
         The configuration of the problem is as follows:
@@ -32,19 +67,19 @@ Finally, the dimensionless Strouhal number quantifies the characteristic frequen
                 \item Diameter \( D_c = 0.06 \: m \),
                 \item Free-stream velocity \( U_\infty = 0.4 \: m/s \),
                 \item Bulk velocity \( U_b = 5 \: mm/s \),
-                \item Fluid: Water at \( 20^{\circ}C \; ( \rho = 998.23 \: kg/m^3\), \\ Kinematic Viscosity \( \nu = 1.006E-6 \: m^2/s ) \).
+                \item Fluid: Water at \( 20^{\circ}C \; ( \rho = 998.23 \: kg/m^3\;( \mu=1.006*10^{-6} \:m^2/s\).
         \end{itemize}
 
 
         \paragraph{Outline}
-        The remainder of the report is organized as follows: Section~\ref{sec:Steady-state precursor} provides some suitable results concerning grid independence study performed on RANS solutions; Section~\ref{sec:URAN} instead makes use of URANS in order to focus on the temporal evolution  of the process; Section~\ref{sec:Comparison with Literature} compares the results obtained with literature ones and finally  Section~\ref{sec:Comparison RANS vs URANS} compares RANS and URANS solutions, taking into account the inviscid flow potential solutions
+        The remainder of the report is organized as follows: Section~\ref{sec:Steady-state precursor} provides some suitable results concerning grid independence study performed on RANS solutions; Section~\ref{sec:URAN} instead makes use of URANS in order to focus on the temporal evolution  of the process; Section~\ref{sec:Comparison with Literature} compares the results obtained with literature ones and finally  Section~\ref{sec:Comparison RANS vs URANS} compares RANS and URANS solutions, taking into account the inviscid flow potential solutions.
         
       
       
 \section{Steady-state precursor} \label{sec:Steady-state precursor}
 
 The following Grid-Independence study is applied on RANS solution.   Despite in principle RANS solutions do not provide a trustful representation of the physical phenomenon under investigation, this choice can been consider a practical compromise to face the heavy URANS  computational cost. The variables under investigation are:  the distributions of wall pressure and wall shear stress, the drag coefficient and the position of the separation point, inferred from the wall pressure and the wall shear stresses.In particular the separation point was inferred by the wall pressure approximating the wall pressure second derivative (through finite differences of order 8) and looking for its inflection point. The separation point was instead inferred by the shear stress imposing it as the shear stress zero.
-The study was performed by fixing BOH QUANTE and then progressively increasing the number of slices in which our domain was cut.
+The study was performed by fixing \mathcal{3} different meshes on $X$ coordinate: \mathcal{120,180, 360}, while mantaining $Y$ grid fixed to \mathcal{100}. 
 Figure~\ref{fig:drag_independence},Figure~\ref{fig:pression_ind},Figure~\ref{fig:wall_ind}show our results.
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragCoefficient_Independence.png}
@@ -71,12 +106,11 @@ Figure~\ref{fig:drag_independence},Figure~\ref{fig:pression_ind},Figure~\ref{fig
 According to experimental results separation point s should lie at $$ 82 ^\circ $$, and our plot quite respect this result.
 
 \section{Unsteady-state modelling} \label{sec:URAN}
-In this section we'll make use of our results from URANS simulations. To launch these simulations we re-started from the converged steady-state solutions exploiting the same grid settings.
-We defined as suitable total simulation time to observe periodicity in the macroscopic flow NON LO SO.
-Then we performed a sensibility analysis with respect to the time-step of time discretization, considering as target parameters NON LO SO.
-Then we decided to consider the vector of drag and lift forces measured each \textit{6ms}, i.e. we focused on a frequency of \mathcol{1\6 [s^{-1}]}, and their temporal evolution can be seen in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This results are well aligned with the process dynamic since we expect the turbolent wake to strongly affect lift oscillations mantaining its mean null over time, while not causing visibly drag force oscillations since it does not create any counter flow.
-As it can be seen in figure ADD the amplitude of drag force signal is of the order of \mathcol{1*10^{-4}}, and its frequency of \mathcol{1*10^{-1}}, while for the lift force signal both its amplitude is of order \mathcol{10^-3} while its frequency are of order \mathcol{1}. 
-To compare its frequences watch figure (ADD) where fluctuating Lift has been raised of \textit{<Cd>=0.993}, it is clear that drag signal has one order of magnitude less amplitude and frequencies. They seems to be in PHASE OR NOT BOH
+In this section we'll make use of our results from URANS simulations. To launch these simulations we re-started from the converged steady-state solutions exploiting the finer grid setting.
+We defined as suitable total simulation time to observe periodicity in the macroscopic flow \mathcal{60}\:s.
+Then we performed a sensibility analysis with respect to the time-step of time discretization. We considered three different timesteps, ensuring their value to be much smaller with respect to the total time-scal and bigger than microscopic turbolent time-scales. These are: \mathcal{0.06}\:s\:($0.1\%$ of \mathcal{60}\:s), \mathcal{0.1}\:s\:($0.17\%$ of \mathcal{60}\:s), \mathcal{0.2}\:s\:($0.33\%$ of \mathcal{60}\:s). At each time-step we considered as target parameter: forces on \textit{X} and \textit{Y} axis.
+The behaviour of drag and lift force with the \mathcal{3} different values imposed can be seen respectively in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This figures appear to well describe the phenomenon under investigation, nevertheless in the lift case, the coarser time-step seems not to perfectly catch the frequency of lift force oscillations, probably due to the bigger window of the moving average operator.
+Finally both their trend stabilize since from 45\:s, showing that the total simulation time chosen is correct.
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragForce.png}
@@ -91,16 +125,25 @@ To compare its frequences watch figure (ADD) where fluctuating Lift has been rai
                 \caption{}
                 \label{fig:lift}
         \end{figure}
-        
-Then we calculated the time-averaged drag coefficient from the U-RANS simulation, reported in figure Figure~\ref{fig:coeff}. According to reference it should be 1.2 for us it is 0.6
+
+Concerning the drag and lift coefficients evolution over time we used the  \mathcal{0.06}\:s timestep and the numerical results are plotted  in Figure~\ref{fig:coeff}. At a first sketch they seem consistent with the phisical phenomenon, since the lift coefficient oscillations are \mathcal{0} averaged, while drag coefficients oscillations are positively averaged. 
+
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Coefficients.png}
                 \centering
                 \caption{}
                 \label{fig:coeff}
         \end{figure}
-        
-Finally the Strohal number, since we are in subcritical regime should be between 0.185 and 0.21
+
+To compare the \mathcal{2} coefficients we made used of the plots of Figure::ADD. As it can be clearly seen the both the amplitude of the drag coefficient oscillations is of the order of \mathcal{10^{-6} while its frequency is near \mathcal{10}, while for the lift one, consistently with the phisical phenomenon the amplitude is \mathcall{1000} times bigger, being of the order of \mathcal{2*10^{-3}, while its frequency smaller, it is of order \mathcal{1}. 
+
+The averaged Drag Coefficients is \mathcal{0.6468}, while the averaged Lift Coefficient is \mathcal{1.89*10^{-4}}. The computed numerical value does not match well the reference one of Figure~\ref{fig:dragtrend}, that suggests \mathcal{1.5}.
+Concerning the Stroual number its computed value is \mathcal{0.1365}, slightly below with expectations of Figure~\ref{fig:strouhal}. 
+
+
+
+
+
 
 
 
