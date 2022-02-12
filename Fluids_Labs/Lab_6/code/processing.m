@@ -121,6 +121,33 @@ subplot(2,1,2);
 plot(F_06(:,1), Cl);
 xlabel("time [s]");
 ylabel("Lift Coefficient []");
+hold off
+
+figure(7);
+semilogy(F_06(:,1), Cd);
+axis([30 35 0.6554 0.655413]);
+xlabel("time[s]");
+ylabel("Drag Coefficient");
+hold off
+
+close all
+
+figure(8);
+plot(F_06(:,1), Cd);
+xlim([50 55])
+hold on
+plot(F_06(:,1),Cl+mean(Cd(3*end/4:end)));
+legend("Drag Coefficient","Lift Coefficient+0.655")
+xlabel("time [s]");
+hold off
+
+%figure(9);
+% plot(F_06(:,1), Cd);
+% axis([0 15 0.5 0.8])
+% hold on
+% plot(F_06(:,1),F_06(:,4)+0.646);
+% legend("Drag Coefficient","Lift Coefficient+0.655")
+% xlabel("time [s]");
 
 %% Time-Averaged results
 
