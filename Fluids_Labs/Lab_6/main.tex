@@ -42,7 +42,7 @@
                 \label{fig:p_d}
         \end{figure}
 
-        The drag coefficient of a circular cylinder with infinite length is defined as: ADD FORMULA and it is a function of $\text{Re}_D$ and the relative roughness $\frac{\mathcal{s}}{D_c}$. In the sub-critical regime, $C_D$ is nearly constant with $\text{Re}_D$, and it is not much affected by the roughness. Such constant value is around 1.2, as is it evident from Figure~\ref{fig:dragtrend}.
+        The drag coefficient of a circular cylinder with infinite length is defined as: $$C_D = \frac{\frac{F_D}{H}}{\frac{1}{2} \rho \left(\frac{A_D}{H}\right) U_\infty^2} = \frac{\frac{F_D}{H}}{\frac{1}{2} \rho \left(\frac{D_C H}{H}\right) U_\infty^2} = \frac{\frac{F_D}{H}}{\frac{1}{2} \rho D_C U_\infty^2}$$ and it is a function of $\text{Re}_D$ and the relative roughness $\frac{s}{D_C}$. In the sub-critical regime, $C_D$ is nearly constant with $\text{Re}_D$, and it is not much affected by the roughness. Such constant value is around 1.2, as is it evident from Figure~\ref{fig:dragtrend}.
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragCoefficient_Trend.png}
@@ -51,7 +51,7 @@
                 \label{fig:dragtrend}
         \end{figure}
 
-        Finally, the dimensionless Strouhal number quantifies the characteristic frequency of the turbulent wake, \textit{f},and it is defined as $St= \frac{f*D_C}{U_\infty}$. The paper by Fey et al. (1998) provides a correlation to estimate \textit{St} as a function of $\text{Re}_D$, according to which, in the sub-critical regime, \textit{St} varies between 0.185 and 0.21 Figure~\ref{fig:strouhal}.
+        Finally, the dimensionless Strouhal number quantifies the characteristic frequency of the turbulent wake, \textit{f},and it is defined as $St = \frac{f*D_C}{U_\infty}$. The paper by Fey et al. (1998) provides a correlation to estimate \textit{St} as a function of $\text{Re}_D$, according to which, in the sub-critical regime, \textit{St} varies between 0.185 and 0.21 Figure~\ref{fig:strouhal}.
 
 
  \begin{figure}[!ht]
@@ -67,7 +67,7 @@
                 \item Diameter \( D_c = 0.06 \: m \),
                 \item Free-stream velocity \( U_\infty = 0.4 \: m/s \),
                 \item Bulk velocity \( U_b = 5 \: mm/s \),
-                \item Fluid: Water at \( 20^{\circ}C \; ( \rho = 998.23 \: kg/m^3\;( \mu=1.006*10^{-6} \:m^2/s\).
+                \item Fluid: Water at \( 20^{\circ}C \; \rho = 998.23 \: kg/m^3\;( \mu=1.006*10^{-6} \:m^2/s\)).
         \end{itemize}
 
 
