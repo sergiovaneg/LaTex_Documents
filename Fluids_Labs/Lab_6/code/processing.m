@@ -79,34 +79,34 @@ hold off;
 
 %% Dynamic sensitivity analysis
 
-F_06 = readmatrix("forces_dynamic_06ms.csv");
 F_10 = readmatrix("forces_dynamic_10ms.csv");
 F_20 = readmatrix("forces_dynamic_20ms.csv");
+F_50 = readmatrix("forces_dynamic_50ms.csv");
 
 figure(4);
-plot(F_06(:,1),F_06(:,4));
-hold on;
 plot(F_10(:,1), F_10(:,4));
+hold on;
 plot(F_20(:,1), F_20(:,4));
-legend("dt=6 ms","dt=10 ms","dt=20 ms");
+plot(F_50(:,1), F_50(:,4));
+legend("dt=10 ms","dt=20 ms","dt=50 ms");
 xlabel("time [s]");
 ylabel("Lift Force [N]");
 hold off;
 
 figure(5);
-semilogy(F_06(:,1), abs(F_06(:,5)));
+plot(F_10(:,1), abs(F_10(:,5)), 'LineWidth', 2);
 hold on;
-semilogy(F_10(:,1), abs(F_10(:,5)));
-semilogy(F_20(:,1), abs(F_20(:,5)));
-legend("dt=6 ms","dt=10 ms","dt=20 ms");
+plot(F_20(:,1), abs(F_20(:,5)));
+plot(F_50(:,1), abs(F_50(:,5)));
+legend("dt=10 ms","dt=20 ms","dt=50 ms");
 xlabel("time [s]");
 ylabel("Drag Force [N]");
 hold off;
 
 %% Drag/Lift Coefficient Evolution
 
-Fx = F_06(:,4);
-Fy = -F_06(:,5);
+Fx = F_10(:,4);
+Fy = -F_10(:,5);
 
 H = 1;
 Cd = (Fy/H) / (0.5*rho*Dc*U_inf^2);
@@ -114,29 +114,26 @@ Cl = (Fx/H) / (0.5*rho*Dc*U_inf^2);
 
 figure(6);
 subplot(2,1,1);
-plot(F_06(:,1), Cd);
+plot(F_10(:,1), Cd);
 xlabel("time [s]");
 ylabel("Drag Coefficient []");
 subplot(2,1,2);
-plot(F_06(:,1), Cl);
+plot(F_10(:,1), Cl);
 xlabel("time [s]");
 ylabel("Lift Coefficient []");
 hold off
 
 figure(7);
-semilogy(F_06(:,1), Cd);
-axis([30 35 0.6554 0.655413]);
+semilogy(F_10(:,1), Cd);
 xlabel("time[s]");
 ylabel("Drag Coefficient");
 hold off
 
-close all
-
 figure(8);
-plot(F_06(:,1), Cd);
+plot(F_10(:,1), Cd);
 xlim([50 55])
 hold on
-plot(F_06(:,1),Cl+mean(Cd(3*end/4:end)));
+plot(F_10(:,1),Cl+mean(Cd(3*end/4:end)));
 legend("Drag Coefficient","Lift Coefficient+0.655")
 xlabel("time [s]");
 hold off
@@ -159,7 +156,7 @@ Cl_avg = (Fx_avg/H) / (0.5*rho*Dc*U_inf^2);
 
 %% Strouhal Number
 
-dt = F_06(2,1) - F_06(1,1);
+dt = F_10(2,1) - F_10(1,1);
 FX = fft(Fx(end/4:end)-Fx_avg);
 freq = 0:1/(dt*length(FX)):1/dt-1/(dt*length(FX));
 f_wake = freq(find(abs(FX)==max(abs(FX)),1));
