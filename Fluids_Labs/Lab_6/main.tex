@@ -157,7 +157,33 @@
 
         The averaged Drag Coefficients is $\num{0.6468}$, while the averaged Lift Coefficient is $\num{1.89E-4}$. The computed numerical value does not match well the reference one of Figure~\ref{fig:dragtrend}, that suggests $1.5$.
 
-        For the Strouhal number, its computed value was $0.1365$, (slightly below the expectations of Figure~\ref{fig:strouhal}, but well within the numerical error range). 
+        For the Strouhal number, its computed value was $0.1365$, below the expectations of Figure~\ref{fig:strouhal}. 
+        
+        To overcome this issues we had to mannipulate on timesteps and total time, leading to a final decision of 9000 timesteps and 45 seconds. Probabily previous numbers of timesteps were too big and made some charcteristic patterns disappear. In Figure~\ref{fig:drag_f},Figure~\ref{fig:drag_vsl1},Figure~\ref{fig:drag_vsl2} can be seen our results. 
+        
+               \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{drag_Federica.png}
+                \centering
+                \caption{}
+                \label{fig:drag_f}
+        \end{figure}
+     
+            \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{drag_vslift_Federica.png}
+                \centering
+                \caption{}
+                \label{fig:drag_vsl1}
+        \end{figure}
+     
+            \begin{figure}[!ht]
+                \includegraphics[width=\textwidth]{drag_vs_lift_2_Federica.png}
+                \centering
+                \caption{}
+                \label{fig:drag_vsl2}
+        \end{figure}
+        
+        With these results we can appreciate how drag and lift frequency is comparable, while their amplitude is of different order. Moreover it is well clear they're in phase, since subject to the same physical phenomenon. Finally 
+     
 
 \bibliographystyle{abbrv}
 \bibliography{main}
