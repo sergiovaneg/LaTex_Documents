@@ -119,9 +119,7 @@
         
         At each time-step we considered as target parameter: forces on the \textit{X} and \textit{Y} axis.
 
-        The behaviour of the Drag and Lift force with the 3 different values imposed can be seen respectively in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This figures appear to well describe the phenomenon under investigation, nevertheless in the lift case, the coarser time-step seems not to perfectly catch the frequency of lift force oscillations, probably due to the bigger window of the moving average operator.
-
-        Finally both their trend stabilize since from 45\:s, showing that the total simulation time chosen is correct.
+        The behaviour of the Drag and Lift force with the 3 different values imposed can be seen respectively in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This figures does not appear to describe correctlythe phenomenon under investigation since the forces under investigation never stabilize even after 100 seconds.
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragForce.png}
@@ -137,7 +135,7 @@
                 \label{fig:lift}
         \end{figure}
 
-        Regarding the Drag and Lift coefficients evolution over time, we used the $0.06 s$ timestep; the numerical results are shown in Figure~\ref{fig:drag_coeff} and  Figure~\ref{fig:lift_coeff}. At first glance they seem consistent with the phisical phenomenon, since the lift coefficient oscillations are 0-averaged, while drag coefficients oscillations are positively averaged. 
+        Regarding the Drag and Lift coefficients evolution over time the $0.06 s$ timestep fails; the numerical results are shown in Figure~\ref{fig:drag_coeff} and  Figure~\ref{fig:lift_coeff}. At first glance despite the lift coefficient oscillations are 0-averaged and drag coefficients oscillations are positively averaged the order of amplitude of the oscillations seems too small. 
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Drag_Coefficient.png}
@@ -153,13 +151,9 @@
         \end{figure}
 
 
-        in order to compare the coefficients, we made used of the plots of Figure(). As it can be clearly seen the both the amplitude of the drag coefficient oscillations is of the order of $\num{1E-6}$, while its frequency is nearly $10$, while for the lift one, consistently with the phisical phenomenon the amplitude is $\num{1E3}$ times bigger, being of the order of $\num{2E-3}$, while its frequency smaller, it is of order $1$. 
-
-        The averaged Drag Coefficients is $\num{0.6468}$, while the averaged Lift Coefficient is $\num{1.89E-4}$. The computed numerical value does not match well the reference one of Figure~\ref{fig:dragtrend}, that suggests $1.5$.
-
-        For the Strouhal number, its computed value was $0.1365$, below the expectations of Figure~\ref{fig:strouhal}. 
+        Finally both averaged Drag Coefficient and Strouhal number, respectively  $\num{0.6468}$ and $0.1365$ do not match well with expectations of Figure~\ref{fig:dragtrend}, that suggesting more than $1.0$ and Figure~\ref{fig:strouhal}.
         
-        To overcome this issues we had to mannipulate on timesteps and total time, leading to a final decision of 9000 timesteps and 45 seconds. Probabily previous numbers of timesteps were too big and made some charcteristic patterns disappear. In Figure~\ref{fig:drag_f},Figure~\ref{fig:drag_vsl1},Figure~\ref{fig:drag_vsl2} can be seen our results. 
+        To overcome this issues we had to manipulate on timesteps and total time, leading to a final decision of 9000 timesteps and 45 seconds. Probabily previous numbers of timesteps were too big and made some charcteristic patterns disappear. In Figure~\ref{fig:drag_f}, Figure~\ref{fig:drag_vsl1} and Figure~\ref{fig:drag_vsl2} our results can be seen. 
         
                \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{drag_Federica.png}
@@ -169,7 +163,7 @@
         \end{figure}
      
             \begin{figure}[!ht]
-                \includegraphics[width=\textwidth]{drag_vslift_Federica.png}
+                \includegraphics[width=\textwidth]{drag_vs_lift_Federica.png}
                 \centering
                 \caption{}
                 \label{fig:drag_vsl1}
@@ -182,7 +176,7 @@
                 \label{fig:drag_vsl2}
         \end{figure}
         
-        With these results we can appreciate how drag and lift frequency is comparable, while their amplitude is of different order. Moreover it is well clear they're in phase, since subject to the same physical phenomenon. Finally 
+        With these images we can appreciate how drag and lift frequency is comparable, while their amplitude is of different order. Moreover it is well clear that they're in phase, since subject to the same physical phenomenon. Finally the averaged Cd coefficient is 1.067 while Strouhal number 0.17, which respects better the expectations of Figure~\ref{fig:dragtrend} and of Figure~\ref{fig:strouhal}.
      
 
 \bibliographystyle{abbrv}
