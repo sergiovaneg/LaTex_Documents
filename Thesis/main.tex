@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+\usepackage{comment}
+
 \bibliographystyle{ieeetr}
 
 \begin{document}
@@ -14,12 +16,43 @@
     Koopman operators provide a convenient framework where traditional, more mature and optimized Linear System Identification and Control tools can be applied. In contrast with conventional linearization methods that depend on local gradients, the Koopman operator provides an exact description (at least in theory) of the System's Dynamics and, more importantly from the Applied Controls point of view, it is easily adaptable to a fully data-driven pipeline, provided we have access to the internal states of the System of interest (gray-box framework).
 
     We start by stating the abstract problem, borrowing the definition from
-    Mezić et Al.\cite{Koopman_Basics}. Consider a continuous-time dynamical system such as the one given in Equation~\ref{eq:CT_Dyn} on the state space $M$, where $\mathbf{x}$ is a coordinate vector of the state, and $\textbf{F}$ is (assumed to be) a non-linear vector-valued smooth function of the same dimension as its argument. Let $S_t(\mathbf{x}_0)$.
+    Mezić et Al.\cite{Koopman_Basics}. Consider a continuous-time dynamical system such as the one given in Equation~\ref{eq:CT_Dyn} on the state space $M$, where $\mathbf{x}$ is a coordinate vector of the state, and $\textbf{F}$ is (assumed to be) a non-linear vector-valued smooth function of the same dimension as its argument.
 
-    \begin{equation}\label{eq:CT_Dyn}
+    \begin{equation} \label{eq:CT_Dyn}
         \mathbf{\dot{x}} = \mathbf{F}\left( \mathbf{x} \right) , \mathbf{x} \in \mathbb{R}^n
     \end{equation}
     
+    Let $S^t(\mathbf{x}_0)$ denote the position the position at time $t$ of the trajectory of the system in Equation~\ref{eq:CT_Dyn} that starts at $t=0$ from the state $\mathbf{x}_0$, and let $\mathbf{g}:M \mapsto \mathbb{C}^k,k \in \mathbb{N}$ an \textit{arbitrary} (at least for now), vector-valued function. We call $\mathbf{g}$ an observable of the system in \ref{eq:CT_Dyn}, where the value of $f$ observed over a trajectory starting from $\mathbf{x}_0$ at $t=0$ changes with time according to the flow, as described in Equation~\ref{eq:obs_dyn}.
+
+    \begin{equation} \label{eq:obs_dyn}
+        \mathbf{f}\left(t,\mathbf{x}_0\right) = \mathbf{f} \left(\mathbf{S}^t\left(\mathbf{x}_0\right)\right)
+    \end{equation}
+    
+    The space of all observables such as $\mathbf{g}$ is a linear vector space, and so we can define a family of linear operators $U^t:\mathbb{C}^k \mapsto \mathbb{C}^k$ with $t \in \left[0,\infty\right)$ through Equation~\ref{eq:Koopman_CT}.
+
+    \begin{equation} \label{eq:Koopman_CT}
+        U^t \mathbf{f}\left(\mathbf{x}_0\right) = \mathbf{f} \left(S^t \left(\mathbf{x}_0\right)\right)
+    \end{equation}
+
+    Thus, for a fixed $t$, $U^t$ maps the vector-valued observable $\mathbf{f}(\mathbf{x}_0)$ into $\mathbf{f}\left(t,\mathbf{x}_0\right)$. We will call the family of all operators $U^t$, indexed by time $t$, the \textbf{Koopman Operator} of the continuous-time system~\ref{eq:CT_Dyn}.
+
+    In Discrete Time, the definition is even simpler. Let Equation~\ref{eq:DT_Dyn} describe a discrete-time dynamical system with $\mathbf{z} \in M$ and $\mathbf{T}:M \mapsto M$. Then, the associated Koopman operator $U$ is defined by Equation~\ref{eq:Koopman_DT}.
+
+    \begin{equation} \label{eq:DT_Dyn}
+        \textbf{z}' = \textbf{T}\left(\textbf{z}\right)
+    \end{equation}
+
+    \begin{equation} \label{eq:Koopman_DT}
+        U\mathbf{f}\left(\mathbf{z}\right) = \mathbf{f} \circ \mathbf{T} \left(\mathbf{z}\right)
+    \end{equation}
+
+\begin{comment}
+    At this point, it is worth noting that the discrete-time Koopman operator is also linear; i.e., $U\left(c_1 \mathbf{f}_1\left(\mathbf{z}\right) + c_2 \mathbf{f}_2\left(\mathbf{z}\right)\right) =
+    c_1 \mathbf{f}_1\left(\mathbf{T}\left(\mathbf{z}\right)\right) + c_2 \mathbf{f}_2\left(\mathbf{T}\left(\mathbf{z}\right)\right) =
+    c_1 U\mathbf{f}_1\left(\mathbf{z}\right) + c_2 U\mathbf{f}_2\left(\mathbf{z}\right)$.
+    
+    Taking advantage of this linearity, we denote as $\phi : M \mapsto \mathbb{C}$ an eigenfunction of the Koopman operator $U$, associated to an eigenvalue $\lambda \in \mathbb{C}$.
+\end{comment}
     
     \cite{Goncalves}. We consider the Real Dynamical System
 
