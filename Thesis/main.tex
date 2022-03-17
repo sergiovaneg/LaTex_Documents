@@ -1,7 +1,9 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 
+\bibliographystyle{ieeetr}
 
 \begin{document}
 
@@ -10,5 +12,27 @@
     Koopman operators consist on a dimension lifting technique that allows us to model a Finite-Dimension Nonlinear Dynamical System with an Infinite-Dimension Linear Dynamical System.
     
     Koopman operators provide a convenient framework where traditional, more mature and optimized Linear System Identification and Control tools can be applied. In contrast with conventional linearization methods that depend on local gradients, the Koopman operator provides an exact description (at least in theory) of the System's Dynamics and, more importantly from the Applied Controls point of view, it is easily adaptable to a fully data-driven pipeline, provided we have access to the internal states of the System of interest (gray-box framework).
+
+    We start by stating the abstract problem, borrowing the definition from
+    Mezić et Al.\cite{Koopman_Basics}. Consider a continuous-time dynamical system such as the one given in Equation~\ref{eq:CT_Dyn} on the state space $M$, where $\mathbf{x}$ is a coordinate vector of the state, and $\textbf{F}$ is (assumed to be) a non-linear vector-valued smooth function of the same dimension as its argument. Let $S_t(\mathbf{x}_0)$.
+
+    \begin{equation}\label{eq:CT_Dyn}
+        \mathbf{\dot{x}} = \mathbf{F}\left( \mathbf{x} \right) , \mathbf{x} \in \mathbb{R}^n
+    \end{equation}
+    
+    
+    \cite{Goncalves}. We consider the Real Dynamical System
+
+    where $n$ is the dimension of the system. The vector field $\mathbf{F}$ is in turn of the form
+
+    \begin{equation}
+        \mathbf{F}(\mathbf{x}) = \sum_{i = 1}^{k} \mathbf{w}_i h_i \left( \mathbf{x} \right)
+    \end{equation}
+
+    The $k$ vectors $\mathbf{w}_i = \left( w_i^1 \cdots w_i^n \right)^T \in \mathbb{C}^n$ are unknown coefficients to be identified, whereas the $k$ library functions $h_i : \mathbb{R}^n \mapsto \mathbb{C}$ are assumed to be known; note that some coefficients might be zero.
+
+
+
+    \bibliography{main.bib}
 
 \end{document}
