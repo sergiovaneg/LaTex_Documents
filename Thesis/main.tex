@@ -4,6 +4,7 @@
 \usepackage{amssymb}
 
 \usepackage{comment}
+\usepackage{dirtytalk}
 
 \usepackage{cleveref}
 
@@ -40,7 +41,7 @@
     In Discrete Time, the definition is even simpler. Let \cref{eq:DT_Dyn} describe a discrete-time dynamical system with $\mathbf{z} \in M$ and $\mathbf{F}:M \mapsto M$. Then, the associated Koopman operator $U$ is defined by \cref{eq:Koopman_DT}.
 
     \begin{equation} \label{eq:DT_Dyn}
-        \textbf{z}' = \textbf{F}\left(\textbf{z}\right)
+        \mathbf{z}_{k+1} = \mathbf{F}\left(\mathbf{z}\right) , \left\{\mathbf{z}_k,\mathbf{z}_{k+1}\right\} \subset M
     \end{equation}
 
     \begin{equation} \label{eq:Koopman_DT}
@@ -49,7 +50,7 @@
 
     At this point, it is worth noting that the discrete-time Koopman operator is also linear; i.e., $U\left(c_1 \mathbf{f}_1\left(\mathbf{z}\right) + c_2 \mathbf{f}_2\left(\mathbf{z}\right)\right) =
     c_1 \mathbf{f}_1\left(\mathbf{T}\left(\mathbf{z}\right)\right) + c_2 \mathbf{f}_2\left(\mathbf{T}\left(\mathbf{z}\right)\right) =
-    c_1 U\mathbf{f}_1\left(\mathbf{z}\right) + c_2 U\mathbf{f}_2\left(\mathbf{z}\right)$. This linearity allows us to derive \cref{eq:DT_Koopman_Concat}, which implies that the dynamics of the observables of a system over a trajectory $S^k\left(\mathbf{z}_0\right)$ can be entirely described by the consecutive application of the discrete-time Koopman operator without having to "observe" the system twice for a single trajectory.
+    c_1 U\mathbf{f}_1\left(\mathbf{z}\right) + c_2 U\mathbf{f}_2\left(\mathbf{z}\right)$. This linearity allows us to derive \cref{eq:DT_Koopman_Concat}, which implies that the dynamics of the observables of a system over a trajectory $S^k\left(\mathbf{z}_0\right)$ can be entirely described by the consecutive application of the discrete-time Koopman operator without having to \say{observe} the system twice for a single trajectory.
 
     \begin{equation} \label{eq:DT_Koopman_Concat}
         g \circ \mathbf{F}\left(\mathbf{F}\left(\mathbf{z}_0\right)\right) = U g\left(\mathbf{F}\left(\mathbf{z}_0\right)\right) = U g \circ \mathbf{F} \left(\mathbf{z}_0\right) = U^2 g\left(\mathbf{z}_0\right) , \mathbf{z}_0 \in M
@@ -59,7 +60,7 @@
     By taking advantage of this linearity, we can now make use of eigenfunction decomposition in order to obtain further information from the defined operator. We call $\phi : M \mapsto \mathbb{C}$ an eigenfunction of the Koopman operator $U$, associated to an eigenvalue $\lambda \in \mathbb{C}$.
 \end{comment}
 
-\section{The Koopman Operator for Real System\\Identification}
+\section{The Koopman Operator for Data-driven Real System Identification}
 
     After properly defining the abstract the Koopman operator, we now want to stablish a practical framework in order to make use of its properties for System Identification and Control applications. We start by redefining $M$ as a real vector-space, and we follow the numerical scheme proposed by Mauroy-Goncalves\cite{Goncalves} as a data-driven Identification method for dynamical systems.
     
@@ -72,10 +73,22 @@
     The vector field $\mathbf{F}$ is w.l.o.g. of the form described in \cref{eq:F_Decomp}, where the $k$ vectors $\mathbf{w}_i = \left( w_i^1 \cdots w_i^n \right)^T \in \mathbb{C}^n$ are unknown coefficients to be identified, whereas the $k$ library functions $h_i : \mathbb{R}^n \mapsto \mathbb{C}$ are assumed to be known; note that some coefficients might be zero.
 
     \begin{equation} \label{eq:F_Decomp}
-        \mathbf{F}(\mathbf{x}) = \sum_{i = 1}^{k} \mathbf{w}_i h_i \left( \mathbf{x} \right)
+        \mathbf{F}(\mathbf{x}) = \sum_{i = 1}^{N_F} \mathbf{w}_i h_i \left( \mathbf{x} \right)
     \end{equation}
 
-    At this point, a choice has to be made: so far, we have treated the collection of observables as an infinite collection with all possible functions mapping the original state space into a finite dimensional 
+    Our first goal is to identify the vector field F (i.e., the $N_F$ coefficient vectors $\mathbf{w}_i$) from snapshot measurements of the system trajectories. We consider $K$ snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ obtained from noisy measurements yielding \cref{eq:x_noisy} and \cref{eq:y_noisy}, where $\epsilon$ is the state-dependent measurement noise, and \cref{eq:snap}, which is associated to the dynamical system described in \cref{eq:DT_Dyn}.
+
+    \begin{align}
+        \mathbf{x}_k &= \bar{\mathbf{x}}_k + \epsilon\left(\mathbf{x}_k\right) \label{eq:x_noisy} \\
+        \mathbf{y}_k &= \bar{\mathbf{y}}_k + \epsilon\left(\mathbf{y}_k\right) \label{eq:y_noisy} \\
+        \mathbf{y}_k &= \mathbf{F}\left(\mathbf{x}_k\right) \label{eq:snap}
+    \end{align}
+
+    We assume that the measurement noise is Gaussian and proportional to the state value; i.e., $\epsilon\left(\mathbf{x}\right) = \mathbf{x} \cdot \mathbf{\eta} , \eta \sim \mathcal{N}\left(0,\sigma_\text{meas}\right)$. We also assume all snapshot pairs lie in a compact set $X \subset \mathbb{R}^n$ and are obtained with the same sampling time $T_S$, but we are not compelled to extracting all samples from the same trajectory (i.e., associated to the same starting point $\mathbf{z}_0$).
+
+\begin{comment}
+    At this point, a choice has to be made: so far, we have treated the library of observables as an infinite collection with all possible functions of the form $g:M \mapsto \mathbb{C}$; nevertheless, in practice such a collection is unfeasible, which is why we have to analyze the Koopman operator over a truncated realization of the theoretical functional space.
+\end{comment}
 
     \bibliography{main.bib}
 
