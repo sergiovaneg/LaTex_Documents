@@ -19,7 +19,7 @@
     Mezić et Al.\cite{Koopman_Basics}. Consider a continuous-time dynamical system such as the one given in Equation~\ref{eq:CT_Dyn} on the state space $M$, where $\mathbf{x}$ is a coordinate vector of the state, and $\textbf{F}$ is (assumed to be) a non-linear vector-valued smooth function of the same dimension as its argument.
 
     \begin{equation} \label{eq:CT_Dyn}
-        \mathbf{\dot{x}} = \mathbf{F}\left( \mathbf{x} \right) , \mathbf{x} \in \mathbb{R}^n
+        \mathbf{\dot{x}} = \mathbf{F}\left( \mathbf{x} \right) , \mathbf{x} \in M
     \end{equation}
     
     Let $S^t(\mathbf{x}_0)$ denote the position the position at time $t$ of the trajectory of the system in Equation~\ref{eq:CT_Dyn} that starts at $t=0$ from the state $\mathbf{x}_0$, and let $\mathbf{g}:M \mapsto \mathbb{C}^k,k \in \mathbb{N}$ an \textit{arbitrary} (at least for now), vector-valued function. We call $\mathbf{g}$ an observable of the system in \ref{eq:CT_Dyn}, where the value of $f$ observed over a trajectory starting from $\mathbf{x}_0$ at $t=0$ changes with time according to the flow, as described in Equation~\ref{eq:obs_dyn}.
@@ -53,6 +53,8 @@
     
     Taking advantage of this linearity, we denote as $\phi : M \mapsto \mathbb{C}$ an eigenfunction of the Koopman operator $U$, associated to an eigenvalue $\lambda \in \mathbb{C}$.
 \end{comment}
+
+    After properly defining the abstract the Koopman operator, we now want to stablish a practical framework in order to make use of its properties for System Identification and Control applications. We start by redefining $M$ as a real vector-space, so that $x \in \mathbb{R}^n$.
     
     \cite{Goncalves}. We consider the Real Dynamical System
 
