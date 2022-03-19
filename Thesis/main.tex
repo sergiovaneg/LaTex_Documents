@@ -12,7 +12,7 @@
 
 \begin{document}
 
-\section{The Abstract Koopman Operator}
+\section{The Abstract Koopman Operator} \label{sec:Abstract}
 
     Koopman operators consist on a dimension lifting technique that allows us to model a Finite Dimensional Nonlinear Dynamical System through an Infinite Dimensional Linear Dynamical System.
     
@@ -24,19 +24,19 @@
         \mathbf{\dot{x}} = \mathbf{F}\left( \mathbf{x} \right) , \mathbf{x} \in M
     \end{equation}
     
-    Let $S^t(\mathbf{x}_0)$ denote the position the position at time $t$ of the trajectory of the system in \cref{eq:CT_Dyn} that starts at $t=0$ from the state $\mathbf{x}_0$, and let $g:M \mapsto \mathbb{C}$ an \textit{arbitrary} (at least for now), complex-valued function. We call $g$ an observable of the system in \cref{eq:CT_Dyn}, whose value observed over a trajectory starting from $\mathbf{x}_0$ at $t=0$ changes with time according to the flow, as described in \cref{eq:obs_dyn}.
+    Let $S^t(\mathbf{x}_0)$ denote the position the position at time $t$ of the trajectory of the system in \cref{eq:CT_Dyn} that starts at $t=0$ from the state $\mathbf{x}_0$, and let $g:M \mapsto \mathbb{C}$ an \textit{arbitrary} (at least for now), complex-valued function. We call $g$ an observable of the system in \cref{eq:CT_Dyn}, whose value observed over a trajectory starting from $\mathbf{x}_0$ at $t=0$ changes with time according to the flow, as described in \cref{eq:obs_traj}.
 
-    \begin{equation} \label{eq:obs_dyn}
+    \begin{equation} \label{eq:obs_traj}
         g\left(t,\mathbf{x}_0\right) = g \left(\mathbf{S}^t\left(\mathbf{x}_0\right)\right)
     \end{equation}
     
-    The space of all observables such as $g$ is a linear functional space, and thus we can define a family of linear operators $U^t:\mathbb{C} \mapsto \mathbb{C}$ with $t \in \left[0,\infty\right)$ through \cref{eq:Koopman_CT}.
+    The space $\mathcal{G}$ of all observables such as $g$ is a linear functional space, and thus we can define a family of linear operators $U^t:\mathbb{C} \mapsto \mathbb{C}$ with $t \in \left[0,\infty\right)$ through \cref{eq:Koopman_CT}.
 
     \begin{equation} \label{eq:Koopman_CT}
         U^t g\left(\mathbf{x}_0\right) = g \left(S^t \left(\mathbf{x}_0\right)\right)
     \end{equation}
 
-    Thus, for a fixed $t$, $U^t$ maps the vector-valued observable $g(\mathbf{x}_0)$ into $g\left(t,\mathbf{x}_0\right)$. We will call the family of all operators $U^t$, indexed by time $t$, the \textbf{Koopman Semi-group} given by the generator $U$ of the continuous-time system in \cref{eq:CT_Dyn}.
+    Thus, for a fixed $t$, $U^t$ maps the vector-valued observable $g(\mathbf{x}_0)$ into $g\left(t,\mathbf{x}_0\right)$. We will call the family of all operators $U^t$, indexed by time $t$, the \textbf{Koopman Semigroup} given by the generator $U$ of the continuous-time system in \cref{eq:CT_Dyn}.
 
     In Discrete Time, the definition is even simpler. Let \cref{eq:DT_Dyn} describe a discrete-time dynamical system with $\mathbf{z} \in M$ and $\mathbf{F}:M \mapsto M$. Then, the associated Koopman operator $U$ is defined by \cref{eq:Koopman_DT}.
 
@@ -76,15 +76,23 @@
         \mathbf{F}(\mathbf{x}) = \sum_{i = 1}^{N_F} \mathbf{w}_i h_i \left( \mathbf{x} \right)
     \end{equation}
 
-    Our first goal is to identify the vector field F (i.e., the $N_F$ coefficient vectors $\mathbf{w}_i$) from snapshot measurements of the system trajectories. We consider $K$ snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ obtained from noisy measurements yielding \cref{eq:x_noisy} and \cref{eq:y_noisy}, where $\epsilon$ is the state-dependent measurement noise, and \cref{eq:snap}, which is associated to the dynamical system described in \cref{eq:DT_Dyn}.
+    Our first goal is to identify the vector field F (i.e., the $N_F$ coefficient vectors $\mathbf{w}_i$) from snapshot measurements of the system trajectories. We consider $K$ snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ obtained from noisy measurements yielding \cref{eq:x_noisy} and \cref{eq:y_noisy}, where $\epsilon$ is the state-dependent measurement noise, and \cref{eq:snap}, which is associated to the dynamical system described in \cref{eq:CT_Dyn}.
 
     \begin{align}
         \mathbf{x}_k &= \bar{\mathbf{x}}_k + \epsilon\left(\mathbf{x}_k\right) \label{eq:x_noisy} \\
         \mathbf{y}_k &= \bar{\mathbf{y}}_k + \epsilon\left(\mathbf{y}_k\right) \label{eq:y_noisy} \\
-        \mathbf{y}_k &= \mathbf{F}\left(\mathbf{x}_k\right) \label{eq:snap}
+        \mathbf{y}_k &= \mathbf{S}^{T_S}\left(\mathbf{x}_k\right) \label{eq:snap}
     \end{align}
 
     We assume that the measurement noise is Gaussian and proportional to the state value; i.e., $\epsilon\left(\mathbf{x}\right) = \mathbf{x} \cdot \mathbf{\eta} , \eta \sim \mathcal{N}\left(0,\sigma_\text{meas}\right)$. We also assume all snapshot pairs lie in a compact set $X \subset \mathbb{R}^n$ and are obtained with the same sampling time $T_S$, but we are not compelled to extracting all samples from the same trajectory (i.e., associated to the same starting point $\mathbf{z}_0$).
+
+    As we stated in \cref{sec:Abstract}, we can alternatively describe the behavior of the system  through a collection of \textit{observables} $g : \mathbb{R} \mapsto \mathbb{C}$ in a lifted space instead of using the original system states. Provided that the functions are continuously differentiable, their dynamics in the lifted space are given by \cref{eq:obs_dyn}, where $\dot{g}$ denotes $\frac{\partial \left(f \circ \mathbf{S}^t\right)}{\partial t}$ and $\nabla$ denotes the gradient.
+
+    \begin{equation} \label{eq:obs_dyn}
+        \dot{g} = \left(\mathbf{F} \cdot \nabla\right) g , g \in \mathcal{G}
+    \end{equation}
+
+    In contrast to \cref{eq:CT_Dyn_Real}, the dynamics in \cref{eq:obs_dyn} are now infinite dimensional, but linear. Not only that, but we can also recover the semigroup-driven dynamics described in \cref{eq:Koopman_CT}.
 
 \begin{comment}
     At this point, a choice has to be made: so far, we have treated the library of observables as an infinite collection with all possible functions of the form $g:M \mapsto \mathbb{C}$; nevertheless, in practice such a collection is unfeasible, which is why we have to analyze the Koopman operator over a truncated realization of the theoretical functional space.
