@@ -16,7 +16,7 @@
 
     Koopman operators consist on a dimension lifting technique that allows us to model a Finite Dimensional Nonlinear Dynamical System through an Infinite Dimensional Linear Dynamical System.
     
-    Koopman operators provide a convenient framework where traditional, more mature and optimized Linear System Identification and Control tools can be applied. In contrast with conventional linearization methods that depend on local gradients, the Koopman operator provides an exact description (at least in theory) of the System's Dynamics and, more importantly from the Applied Controls point of view, it is easily adaptable to a fully data-driven pipeline, provided we have access to the internal states of the System of interest (gray-box framework).
+    Koopman operators provide a convenient framework where traditional, more mature and optimized Linear System Identification and Control tools can be applied to a nonlinear system. In contrast with conventional linearization methods that depend on local derivatives, the Koopman operator provides an exact description (at least in theory) of the system's dynamics and, more importantly from the Applied Controls point of view, it is easily adaptable to a fully data-driven pipeline, provided we have some way of probing the internal states of the system (gray-box framework).
 
     We start by stating the abstract problem, partially borrowing the definition from Mezić et Al.\cite{Koopman_Basics}\cite{Applied_Koopmanism}. Consider a continuous-time dynamical system such as the one given in \cref{eq:CT_Dyn} on the state space $M$, where $\mathbf{x}$ is a coordinate vector of the state, and $\textbf{F}$ is (assumed to be) a non-linear vector-valued smooth function of the same dimension as its argument.
 
@@ -38,14 +38,14 @@
 
     Thus, for a fixed $t$, $U^t$ maps the vector-valued observable $g(\mathbf{x}_0)$ into $g\left(t,\mathbf{x}_0\right)$. We will call the family of all operators $U^t$, indexed by time $t$, the \textbf{Koopman Semigroup} given by the generator $U$ of the continuous-time system in \cref{eq:CT_Dyn}.
 
-    In Discrete Time, the definition is even simpler. Let \cref{eq:DT_Dyn} describe a discrete-time dynamical system with $\mathbf{z} \in M$ and $\mathbf{F}:M \mapsto M$. Then, the associated Koopman operator $U$ is defined by \cref{eq:Koopman_DT}.
+    In Discrete Time, the definition is even simpler. Let \cref{eq:DT_Dyn} describe a discrete-time dynamical system with $\mathbf{z} \in M$ and $\mathbf{T}:M \mapsto M$. Then, the associated Koopman operator $U$ is defined by \cref{eq:Koopman_DT}.
 
     \begin{equation} \label{eq:DT_Dyn}
-        \mathbf{z}_{k+1} = \mathbf{F}\left(\mathbf{z}\right) , \left\{\mathbf{z}_k,\mathbf{z}_{k+1}\right\} \subset M
+        \mathbf{z}_{k+1} = \mathbf{T}\left(\mathbf{z}\right) , \left\{\mathbf{z}_k,\mathbf{z}_{k+1}\right\} \subset M
     \end{equation}
 
     \begin{equation} \label{eq:Koopman_DT}
-        U g\left(\mathbf{z}\right) = g \circ \mathbf{F} \left(\mathbf{z}\right)
+        U g\left(\mathbf{z}\right) = g \circ \mathbf{T} \left(\mathbf{z}\right)
     \end{equation}
 
     At this point, it is worth noting that the discrete-time Koopman operator is also linear; i.e., $U\left(c_1 \mathbf{f}_1\left(\mathbf{z}\right) + c_2 \mathbf{f}_2\left(\mathbf{z}\right)\right) =
@@ -53,7 +53,7 @@
     c_1 U\mathbf{f}_1\left(\mathbf{z}\right) + c_2 U\mathbf{f}_2\left(\mathbf{z}\right)$. This linearity allows us to derive \cref{eq:DT_Koopman_Concat}, which implies that the dynamics of the observables of a system over a trajectory $S^k\left(\mathbf{z}_0\right)$ can be entirely described by the consecutive application of the discrete-time Koopman operator without having to \say{observe} the system twice for a single trajectory.
 
     \begin{equation} \label{eq:DT_Koopman_Concat}
-        g \circ \mathbf{F}\left(\mathbf{F}\left(\mathbf{z}_0\right)\right) = U g\left(\mathbf{F}\left(\mathbf{z}_0\right)\right) = U g \circ \mathbf{F} \left(\mathbf{z}_0\right) = U^2 g\left(\mathbf{z}_0\right) , \mathbf{z}_0 \in M
+        g \circ \mathbf{T}\left(\mathbf{T}\left(\mathbf{z}_0\right)\right) = U g\left(\mathbf{T}\left(\mathbf{z}_0\right)\right) = U g \circ \mathbf{T} \left(\mathbf{z}_0\right) = U^2 g\left(\mathbf{z}_0\right) , \mathbf{z}_0 \in M
     \end{equation}
     
 \begin{comment}
