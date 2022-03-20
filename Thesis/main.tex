@@ -83,10 +83,10 @@
         \begin{align}
             \mathbf{x}_k &= \bar{\mathbf{x}}_k + \epsilon\left(\mathbf{x}_k\right) \label{eq:x_noisy} \\
             \mathbf{y}_k &= \bar{\mathbf{y}}_k + \epsilon\left(\mathbf{y}_k\right) \label{eq:y_noisy} \\
-            \mathbf{y}_k &= \mathbf{S}^{T_S}\left(\mathbf{x}_k\right) \label{eq:snap}
+            \mathbf{y}_k &= \mathbf{S}^{T_s}\left(\mathbf{x}_k\right) \label{eq:snap}
         \end{align}
 
-        We assume that the measurement noise is Gaussian and proportional to the state value; i.e., $\epsilon\left(\mathbf{x}\right) = \mathbf{x} \cdot \mathbf{\eta} , \eta \sim \mathcal{N}\left(0,\sigma_\text{meas}\right)$. We also assume all snapshot pairs lie in a compact set $X \subset \mathbb{R}^n$ and are obtained with the same sampling time $T_S$, but we are not compelled to extracting all samples from the same trajectory (i.e., associated to the same starting point $\mathbf{z}_0$).
+        We assume that the measurement noise is Gaussian and proportional to the state value; i.e., $\epsilon\left(\mathbf{x}\right) = \mathbf{x} \cdot \mathbf{\eta} , \eta \sim \mathcal{N}\left(0,\sigma_\text{meas}\right)$. We also assume all snapshot pairs lie in a compact set $X \subset \mathbb{R}^n$ and are obtained with the same sampling time $T_s$, but we are not compelled to extracting all samples from the same trajectory (i.e., associated to the same starting point $\mathbf{z}_0$).
     
     \subsection{Applied Koopman operator}
 
@@ -111,7 +111,15 @@
         The semigroup of Koopman operators $U^t$ that describes the flow $S^t$ is unique for each system. It is by exploiting this equivalence relation that we can set ourselves to recover the system dynamics entirely from the Lifted Space. We divide the identification into three main steps:
 
         \begin{itemize}
-            \item \textit{Lifting of the Data}: the snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ described in \cref{eq:snap} are lifted to the space of observables by constructing new pairs of the form $\left(\mathbf{g}\left(\mathbf{x}_k\right),\mathbf{g}\left(\mathbf{y}_k\right)\right)$ for some $\mathbf{g} = \left\{g_j\right\}_{j=1}^{N} \subset \mathcal{G}$; each \textit{basis function} $g_j$ is assumed to be continuously differentiable. It follows from \cref{eq:x_noisy,eq:y_noisy,eq:snap} that .
+            \item \textit{Lifting of the Data}: the snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ described in \cref{eq:snap} are lifted to the space of observables by constructing new pairs of the form $\left(\mathbf{g}\left(\mathbf{x}_k\right),\mathbf{g}\left(\mathbf{y}_k\right)\right)$ for some $\mathbf{g} = \left\{g_j\right\}_{j=1}^{N} \subset \mathcal{G}$; each \textit{basis function} $g_j$ is assumed to be continuously differentiable. \cref{eq:Koopman_snap} follows from \cref{eq:x_noisy,eq:y_noisy,eq:snap}.
+            
+            \begin{align} \label{eq:Koopman_snap}
+                \mathbf{g} \left(\mathbf{y}_k\right) &= \mathbf{g} \left(S^{T_s} \left(\mathbf{x}_k - \epsilon\left(\mathbf{x}_k\right)\right) + \epsilon\left(\mathbf{y}_k\right)\right)
+                \\
+                & \approx U^{T_s} \mathbf{b}\left(\mathbf{x}_k\right) + \mathcal{O} \left(\left|\left|\epsilon\right|\right|\right)
+            \end{align}
+
+            \item 
         \end{itemize}
 
 \begin{comment}
