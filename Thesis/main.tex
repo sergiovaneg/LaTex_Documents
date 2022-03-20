@@ -78,7 +78,7 @@
             \mathbf{F}(\mathbf{x}) = \sum_{i = 1}^{N_F} \mathbf{w}_i h_i \left( \mathbf{x} \right)
         \end{equation}
 
-        Our first goal is to identify the vector field F (i.e., the $N_F$ coefficient vectors $\mathbf{w}_i$) from snapshot measurements of the system trajectories. We consider $K$ snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ obtained from noisy measurements yielding \cref{eq:x_noisy} and \cref{eq:y_noisy}, where $\epsilon$ is the state-dependent measurement noise, and \cref{eq:snap}, which is associated to the dynamical system described in \cref{eq:CT_Dyn}.
+        Our first goal is to identify the vector field F (i.e., the $N_F$ coefficient vectors $\mathbf{w}_i$) from snapshot measurements of the system trajectories. We consider $K$ snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ obtained from noisy measurements yielding \cref{eq:x_noisy,eq:y_noisy}, where $\epsilon$ is the state-dependent measurement noise, and \cref{eq:snap}, which is associated to the dynamical system described in \cref{eq:CT_Dyn}.
 
         \begin{align}
             \mathbf{x}_k &= \bar{\mathbf{x}}_k + \epsilon\left(\mathbf{x}_k\right) \label{eq:x_noisy} \\
@@ -111,7 +111,7 @@
         The semigroup of Koopman operators $U^t$ that describes the flow $S^t$ is unique for each system. It is by exploiting this equivalence relation that we can set ourselves to recover the system dynamics entirely from the Lifted Space. We divide the identification into three main steps:
 
         \begin{itemize}
-            \item \textit{Lifting of the Data}: the snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ described in \cref{eq:snap} are lifted to the space of observables by constructing new pairs of the form $\left(\mathbf{g}\left(\mathbf{x}_k\right),\mathbf{g}\left(\mathbf{y}_k\right)\right)$
+            \item \textit{Lifting of the Data}: the snapshot pairs $\left(\mathbf{x}_k,\mathbf{y}_k\right)$ described in \cref{eq:snap} are lifted to the space of observables by constructing new pairs of the form $\left(\mathbf{g}\left(\mathbf{x}_k\right),\mathbf{g}\left(\mathbf{y}_k\right)\right)$ for some $\mathbf{g} = \left\{g_j\right\}_{j=1}^{N} \subset \mathcal{G}$; each \textit{basis function} $g_j$ is assumed to be continuously differentiable. It follows from \cref{eq:x_noisy,eq:y_noisy,eq:snap} that .
         \end{itemize}
 
 \begin{comment}
