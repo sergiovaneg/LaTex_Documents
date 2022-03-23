@@ -144,14 +144,14 @@
             \begin{pmatrix}
                 \mathbf{p}\left(\mathbf{x}_1\right)^T \\
                 \vdots \\
-                \mathbf{p}\left(\mathbf{x}_N\right)^T
+                \mathbf{p}\left(\mathbf{x}_K\right)^T
             \end{pmatrix}
             \qquad
             \mathbf{P_y} =
             \begin{pmatrix}
                 \mathbf{p}\left(\mathbf{y}_1\right)^T \\
                 \vdots \\
-                \mathbf{p}\left(\mathbf{y}_N\right)^T
+                \mathbf{p}\left(\mathbf{y}_K\right)^T
             \end{pmatrix}
         \end{equation}
 
@@ -206,7 +206,7 @@
                     \vdots \\
                     U^{T_s} p_j\left(\mathbf{x}_K\right)
                 \end{pmatrix}
-            \approx
+            \approx \mathbf{p}^T \mathbf{P_x}^\dagger
                 \begin{pmatrix}
                     p_j\left(\mathbf{y}_1\right) \\
                     \vdots \\
