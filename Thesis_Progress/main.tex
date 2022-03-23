@@ -377,9 +377,9 @@ title("Trajectory Prediction");
 
 \begin{frame}{Conclusions}
     \begin{itemize}
-        \item Even if the results are unsatisfactory, Figure~\ref{fig:eigen} shows how a randomized input makes the eigenvalue associated to the input tend to 0, which is what we want for the final model.
-        \item There must be an error in the process of prediction, since the magnitude of the eigenvalues clearly shows how the system should remain steady (or, at the very least, perpetually oscillating). As a consequence, I will resort to the base optimization process in order to recover the appropriate coefficients.
-        \item Observing the simulated trajectories, we can see that the arbitrary input has been correctly integrated; this ensures that the prediction error comes from the later steps.
+        \item Even if the results are unsatisfactory, Figure~\ref{fig:eigen} shows how a randomized input makes the eigenvalue associated to the input tend to 0, which is what we want for the final model (input uncorrelated to the operator).
+        \item There must be an error in the process of prediction, since the magnitude of the eigenvalues clearly shows how the system should remain steady (or, at the very least, perpetually oscillating). As a consequence, I will resort to the original optimization problem in order to recover the operator coefficients.
+        \item Observing the simulated trajectories, we can see that the arbitrary input has been correctly integrated. This makes it clear that the prediction error comes from later steps.
     \end{itemize}
 \end{frame}
 
