@@ -201,8 +201,10 @@ end
 
 \begin{frame}{Matrix calculation - I}
 
+    We denote the associated Koopman operator with sampling time $T_s$ by $\mathcal{K}^{T_s}$, derived from the solution to the following minimization problem:
+
     \begin{align}
-        P_N g &= \text{arg min}_{\tilde{g} \in \text{span}\left\{p_1 , \dots , p_N , u_1 , \dots , u_m\right\}} \sum_{k=1}^K \left|\tilde{g}\left(\mathbf{x}_k\right) - g\left(\mathbf{x}_k\right)\right|^2 \\
+        P_N & g = \text{arg min}_{\tilde{g} \in \text{span}\left\{p_1 , \dots , p_N , u_1 , \dots , u_m\right\}} \sum_{k=1}^K \left|\tilde{g}\left(\mathbf{x}_k\right) - g\left(\mathbf{x}_k\right)\right|^2 \\
         &\implies P_N g =
         \begin{pmatrix}
             g\left(\mathbf{x}_1\right) &
@@ -217,33 +219,54 @@ end
             \mathbf{p} \\
             \mathbf{u}
         \end{pmatrix}\\
-        & \implies P_N \left(U^{T_s} p_j\right) = \mathbf{p}^T \mathbf{P_x}^\dagger
+        & \implies P_N \left(\mathcal{K}^{T_s} p_j\right) = \mathbf{p}^T \mathbf{P_x}^\dagger
         \begin{pmatrix}
-            U^{T_s} p_j\left(\mathbf{x}_1\right) \\
+            \mathcal{K}^{T_s} p_j\left(\mathbf{x}_1\right) \\
             \vdots \\
-            U^{T_s} p_j\left(\mathbf{x}_K\right)
+            \mathcal{K}^{T_s} p_j\left(\mathbf{x}_K\right)
         \end{pmatrix}
-        \approx \mathbf{p}^T \mathbf{P_x}^\dagger
+        \approx
         \begin{pmatrix}
             p_j\left(\mathbf{y}_1\right) \\
             \vdots \\
             p_j\left(\mathbf{y}_K\right)
         \end{pmatrix}
+        \begin{pmatrix}
+            \mathbf{P}_x \\
+            \mathbf{U}
+        \end{pmatrix}^\dagger
+        \begin{pmatrix}
+            \mathbf{p} \\
+            \mathbf{u}
+        \end{pmatrix}
     \end{align}
 \end{frame}
 
 \begin{frame}[fragile]{Matrix calculation - II}
-    We get each row of the truncation (and, by consequence, the whole matrix) as follows:
+    We get each row of the truncation (and, by consequence, the whole matrix) as below, where $A$ and $B$ follow the notation from a classical State Space representation:
 
     \begin{equation} \label{eq:Matrix_Operator}
-        \overline{\mathbf{U}}_{N,j} \approx \mathbf{P}_x^\dagger \mathbf{P}_{y,j} \implies \overline{\mathbf{U}}_N \approx \mathbf{P}_x^\dagger \mathbf{P}_y
+        \overline{\mathcal{K}}_{N,j} \approx \mathbf{P}_{y,j} \begin{pmatrix}
+            \mathbf{P}_x \\
+            \mathbf{U}
+        \end{pmatrix}^\dagger \implies \overline{\mathcal{K}}_N = 
+        \begin{bmatrix}
+            A & B
+        \end{bmatrix}
+        \approx \mathbf{P}_y
+        \begin{pmatrix}
+            \mathbf{P}_x \\
+            \mathbf{U}
+        \end{pmatrix}^\dagger
     \end{equation}
     
     We implement Equation~\ref{eq:Matrix_Operator} as follows:
 
     \begin{lstlisting}
 [A,B] = Koopman(Px,Py,U);
+% Generic way to recover original states
 C = Unobserver(Px,Z);
+% Recovery of original states independent from input
 D = zeros(size(Z,1),size(U,1));
 save(sprintf(Data_Source+'Operator_P_%i.mat',P), ...
     "A","B","C","D","ts");
@@ -423,9 +446,9 @@ hold off;
 
 \begin{frame}{Conclusions}
     \begin{itemize}
-        \item Even if the results are unsatisfactory, Figure~\ref{fig:eigen} shows how a randomized input makes the eigenvalue associated to the input tend to 0, which is what we want for the final model (input uncorrelated to the operator).
-        \item There must be an error in the process of prediction, since the magnitude of the eigenvalues clearly shows how the system should remain steady (or, at the very least, perpetually oscillating). As a consequence, I will resort to the original optimization problem in order to recover the operator coefficients.
-        \item Observing the simulated trajectories, we can see that the arbitrary input has been correctly integrated. This makes it clear that the prediction error comes from later steps.
+        \item Lower sampling periods have shown to yield a better prediction horizon, since in practice it is bounded by the variations in shape between different trajectories getting wider throughout physical time.
+        \item A classical optimization approach was implemented as part of the development process; nevertheless, it did not produce different results from the pseudo-inverse approach and instead was not able to keep up with the increase in dimension of the observable space. As a consequence, it was removed.
+        \item Finally, higher-degree polynomials yielded better approximations of the original system, but required a higher than theoretical data library in order to converge when applying the pseudo-inverse.
     \end{itemize}
 \end{frame}
 
