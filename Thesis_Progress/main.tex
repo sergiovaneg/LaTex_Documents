@@ -169,38 +169,54 @@ end
 \begin{frame}{Matrix calculation - Notation}
     \begin{itemize}
         \item $\mathbf{u}\left[k\right]$: input vector at sample $k \in \left\{1,\dots,K+1\right\}$.
-        \item $\left(\mathbf{x}_k,\mathbf{y}_k\right)$: state pairs such that, for a generic causal DT system $\mathbf{x}_{k+1} = \mathbf{T}(\mathbf{x}_k , \mathbf{u}_k)$, $\mathbf{y}_k = \mathbf{T}(\mathbf{x}_k, \mathbf{u}_k)$. States are of dimension $N_x$, and the input is of dimension $N_u$.
+        \item $\left(\mathbf{x}\left[k\right],\mathbf{y}\left[k\right]\right)$: state pairs such that, for a generic causal DT system $\mathbf{x}\left[k+1\right] = \mathbf{T}(\mathbf{x}\left[k\right] , \mathbf{u}\left[k\right])$, $\mathbf{y}\left[k\right] = \mathbf{T}(\mathbf{x}\left[k\right], \mathbf{u}\left[k\right])$. States are of dimension $N_x$, and the input is of dimension $N_u$.
         \item $P_N$: Projection over the N-Dimensional truncated space of observables, where $\tilde{N} = \frac{\left(N_x + P\right)!}{N_x! P!}$ and $N = \tilde{N} + N_u$.
         \item $p_j$: Monomial observing the original states, with $j \in {1,\dots,\tilde{N}}$.
-        \item $\mathbf{P_x},\mathbf{P_y}$: Data collections of the form
-            \begin{equation}
-                \mathbf{P_x} = 
+        \item $\mathbf{P_x},\mathbf{P_y},\mathbf{Z}$: State data collections of the form
+            \begin{align*}
+                \mathbf{P_x} &= 
                 \begin{pmatrix}
-                    \mathbf{p}\left(\mathbf{x}_1\right)^T   &   \mathbf{u}\left[1\right]^T  \\
-                    \vdots  &   \vdots  \\
-                    \mathbf{p}\left(\mathbf{x}_K\right)^T   &   \mathbf{u}\left[K\right]^T
+                    \mathbf{p}\left(\mathbf{x}\left[1\right]\right)   &
+                    \cdots  &
+                    \mathbf{p}\left(\mathbf{x}\left[K\right]\right)
                 \end{pmatrix}
-                \quad
-                \mathbf{P_y} = 
+                \\
+                \mathbf{P_y} &= 
                 \begin{pmatrix}
-                    \mathbf{p}\left(\mathbf{y}_1\right)^T   &   \mathbf{u}\left[2\right]^T  \\
-                    \vdots  &   \vdots  \\
-                    \mathbf{p}\left(\mathbf{y}_K\right)^T   &   \mathbf{u}\left[K+1\right]^T
+                    \mathbf{p}\left(\mathbf{y}\left[1\right]\right)   &
+                    \cdots  &
+                    \mathbf{p}\left(\mathbf{y}\left[K\right]\right)
                 \end{pmatrix}
-            \end{equation}
+                \\
+                \mathbf{Z} &= 
+                \begin{pmatrix}
+                    \mathbf{x}\left[1\right]    &
+                    \cdots  &
+                    \mathbf{x}\left[K\right]
+                \end{pmatrix}
+            \end{align*}
+        \item $\mathbf{U}$: Input data collection of the form $\begin{pmatrix} \mathbf{u}\left[1\right] & \cdots & \mathbf{x}\left[K\right] \end{pmatrix}$.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Matrix calculation - I}
 
     \begin{align}
-        P_N g &= \text{arg min}_{\tilde{g} \in \text{span}\left\{p_1 , \dots , p_N\right\}} \sum_{k=1}^K \left|\tilde{g}\left(\mathbf{x}_k\right) - g\left(\mathbf{x}_k\right)\right|^2 \\
-        &\implies P_N g = \mathbf{p}^T \mathbf{P_x}^\dagger
+        P_N g &= \text{arg min}_{\tilde{g} \in \text{span}\left\{p_1 , \dots , p_N , u_1 , \dots , u_m\right\}} \sum_{k=1}^K \left|\tilde{g}\left(\mathbf{x}_k\right) - g\left(\mathbf{x}_k\right)\right|^2 \\
+        &\implies P_N g =
         \begin{pmatrix}
-            g\left(\mathbf{x}_1\right) \\
-            \vdots \\
+            g\left(\mathbf{x}_1\right) &
+            \cdots &
             g\left(\mathbf{x}_K\right)
-        \end{pmatrix} \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            \mathbf{P}_x \\
+            \mathbf{U}
+        \end{pmatrix}^\dagger
+        \begin{pmatrix}
+            \mathbf{p} \\
+            \mathbf{u}
+        \end{pmatrix}\\
         & \implies P_N \left(U^{T_s} p_j\right) = \mathbf{p}^T \mathbf{P_x}^\dagger
         \begin{pmatrix}
             U^{T_s} p_j\left(\mathbf{x}_1\right) \\
@@ -217,6 +233,8 @@ end
 \end{frame}
 
 \begin{frame}[fragile]{Matrix calculation - II}
+    We get each row of the truncation (and, by consequence, the whole matrix) as follows:
+
     \begin{equation} \label{eq:Matrix_Operator}
         \overline{\mathbf{U}}_{N,j} \approx \mathbf{P}_x^\dagger \mathbf{P}_{y,j} \implies \overline{\mathbf{U}}_N \approx \mathbf{P}_x^\dagger \mathbf{P}_y
     \end{equation}
