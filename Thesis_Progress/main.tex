@@ -131,17 +131,23 @@ end
 \begin{frame}[fragile]{Data reading \& Polynomial degree selection}
     Up to fourth order polynomials used for the presentation (lower order more stable but just as inaccurate).
 
-    \begin{lstlisting}[language=Matlab]
+    \begin{lstlisting}[language=Matlab, basicstyle=\tiny]
 data = dir(Data_Source+"Data_*.mat");
 load(Data_Source+data(1).name);
 
-P = 15;
+K = 0;
+for f=1:length(data)
+    load(Data_Source+data(f).name,"L");
+    K = K+L;
+end
+
+P = 12;
 [g_t,n] = Poly_Obs(z,P);
 
-Px = zeros(n,length(data)*L);
+Px = zeros(n,K);
 Py = Px;
-Z = zeros(size(z,1),length(data)*L);
-U = zeros(size(u,1),length(data)*L);
+Z = zeros(size(z,1),K);
+U = zeros(size(u,1),K);
     \end{lstlisting}
 \end{frame}
 
@@ -149,16 +155,20 @@ U = zeros(size(u,1),length(data)*L);
     \begin{lstlisting}[language=Matlab]
 Px(:,1:L) = g_t(:,1:end-1);
 Py(:,1:L) = g_t(:,2:end);
-Z(:,1:L) = z(:,1:end-1);
+Z(:,1:L) = z(:,2:end);
 U(:,1:L) = u(:,1:end-1);
 
+idx = L;
 for f=2:length(data)
     load(Data_Source+data(f).name);
     [g_t,~] = Poly_Obs(z,P);
-    Px(:,L*(f-1)+1:L*f) = g_t(:,1:end-1);
-    Py(:,L*(f-1)+1:L*f) = g_t(:,2:end);
-    Z(:,L*(f-1)+1:L*f) = z(:,1:end-1);
-    U(:,L*(f-1)+1:L*f) = u(:,1:end-1);
+
+    Px(:,idx+1:idx+L) = g_t(:,1:end-1);
+    Py(:,idx+1:idx+L) = g_t(:,2:end);
+    Z(:,idx+1:idx+L) = z(:,2:end);
+    U(:,idx+1:idx+L) = u(:,1:end-1);
+
+    idx = idx+L;
 end
     \end{lstlisting}
 \end{frame}
