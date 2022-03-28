@@ -320,27 +320,6 @@ hold off;
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Spectral analysis - Results}
-    \begin{figure}
-        \centering
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Steady_Eigen.png}
-            \caption{Steady input eigenvalues}
-            \label{fig:steady_eigen}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Unsteady_Eigen.png}
-            \caption{Unsteady input eigenvalues}
-            \label{fig:unsteady_eigen}
-        \end{subfigure}
-        \caption{Eigenvalues w.r.t. the Real-Imaginary unit circle}
-        \label{fig:eigen}
-    \end{figure}
-\end{frame}
-
 
 \section{Trajectory prediction}
 
@@ -371,26 +350,6 @@ scatter(z_p(1,:),z_p(2,:),36*exp(-markerDecay*(0:L-1)));
 legend("Original Data","Trajectory Prediction");
 hold off;
     \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Training data - Results}
-    \begin{figure}
-        \centering
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Steady_Verification.png}
-            \caption{Steady input operator verification}
-            \label{fig:steady_verify}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Unsteady_Verification.png}
-            \caption{Unsteady input operator verification}
-            \label{fig:unsteady_verify}
-        \end{subfigure}
-        \caption{Comparison between training trajectory and predicted trajectory}
-    \end{figure}
 \end{frame}
 
 \begin{frame}[fragile]{New signal - Data generation}
@@ -430,23 +389,66 @@ hold off;
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{New signal - Results}
+
+\section{Results}
+
+\begin{frame}{Spectral analysis - Results}
     \begin{figure}
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{Steady_NewData.png}
-            \caption{Steady input-trained new trajectory prediction}
-            \label{fig:steady_new}
+            \includegraphics[width=\textwidth]{Eigen_Poly.png}
+            \caption{Polynomial observables (P=13) - Operator eigenvalues}
+            \label{fig:eigen_poly}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{Unsteady_NewData.png}
-            \caption{Unsteady input-trained new trajectory prediction}
-            \label{fig:unsteady_new}
+            \includegraphics[width=\textwidth]{Eigen_Radial.png}
+            \caption{Radial observables (M=100) - Operator eigenvalues}
+            \label{fig:eigen_radial}
         \end{subfigure}
-        \caption{Deterministic trajectory prediction test}
+        \caption{Operator eigenvalues (highest calculated order) - Observable to observable}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Noisy input prediction - Results}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Training_Poly.png}
+            \caption{Polynomial observables (P=13) - Predicted trajectory}
+            \label{fig:training_poly}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Training_Radial.png}
+            \caption{Radial observables (M=100) - Predicted trajectory}
+            \label{fig:training_radial}
+        \end{subfigure}
+        \caption{Reference and predicted trajectories (highest calculated order) - Training data}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Deterministic - Results}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Verification_Poly.png}
+            \caption{Polynomial observables - Predicted trajectories}
+            \label{fig:verification_poly}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Verification_Radial.png}
+            \caption{Radial observables}
+            \label{fig:verification_radial}
+        \end{subfigure}
+        \caption{Reference and predicted trajectories - Predicted trajectories}
     \end{figure}
 \end{frame}
 
