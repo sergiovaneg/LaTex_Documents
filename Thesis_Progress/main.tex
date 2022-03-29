@@ -512,7 +512,8 @@ save(sprintf(Data_Source+'Operator_M_%i.mat',M), ...
     \begin{itemize}
         \item Lower sampling periods have shown to yield a better prediction horizon, since in practice it is bounded by the variations in shape between different trajectories getting wider throughout physical time.
         \item A classical optimization approach was implemented as part of the development process; nevertheless, it did not produce different results from the pseudo-inverse approach and instead was not able to keep up with the increase in dimension of the observable space. As a consequence, it was removed.
-        \item Finally, higher-degree polynomials yielded better approximations of the original system, but required a higher than theoretical data library in order to converge when applying the pseudo-inverse.
+        \item Spline-radial functions yielded an overall better prediction horizon than the polynomial observables, which opens the question of wether or not better observable structures should be researched.
+        \item Finally, higher-degree observables yielded better approximations of the original system, but required a higher than theoretical data library in order to converge when applying the pseudo-inverse.
     \end{itemize}
 \end{frame}
 
