@@ -1,0 +1,61 @@
+\documentclass{beamer}
+\usetheme{CambridgeUS}
+\title[Process]{The Koopman operator identification algorithm}
+\subtitle{So far}
+\institute[Polimi]{Politecnico di Milano}
+\author{Sergio Vanegas}
+\date{\today}
+
+\usepackage{listings}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode/mcode}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+    \maketitle
+\end{frame}
+
+\begin{frame}{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+
+\section{Robust Koopman}
+
+\begin{frame}{Proposed regularization}
+    We start by following the proposed reformulation of the minimization problem proposed in \textit{Robust tube-based model predictive control with Koopman operators} as follows:
+
+    \begin{equation*}
+        \overline{\mathcal{K}}_N =
+        \min_{\mathcal{K} \in \mathbb{R}^{\tilde{N} \times N}}
+        \sum_{k=1}^K \left[
+            \left|\left|
+                \mathbf{g}\left(\mathbf{y}\left[k\right]\right) - 
+                \mathcal{K}
+                \begin{pmatrix}
+                \mathbf{g}\left(\mathbf{x}\left[k\right]\right)
+                \\
+                \mathbf{u}\left[k\right]
+                \end{pmatrix}
+            \right|\right|^2
+            {
+                \color{red}
+                + \alpha\left|\left|\mathcal{K}\right|\right|_F^2
+            }
+        \right],
+    \end{equation*}
+
+    where
+
+    \begin{itemize}
+        \item $\mathbf{g}$ is the observable vector,
+        \item $K$ is the total number of snapshots,
+        \item $\left(\mathbf{x},\mathbf{y}\right)$ are the snapshot pairs,
+        \item $\mathbf{u}$ is the input vector,
+        \item $\left|\left|\cdot\right|\right|_F$ is the element-wise 2-norm (Frobenius norm).
+    \end{itemize}
+\end{frame}
+
+\end{document}
