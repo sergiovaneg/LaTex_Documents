@@ -24,7 +24,7 @@
 
 \section{Robust Koopman}
 
-\begin{frame}{Proposed regularization}
+\begin{frame}{Frobenius regularization - Formulation}
     We start by following the proposed reformulation of the minimization problem proposed in \textit{Robust tube-based model predictive control with Koopman operators} as follows:
 
     \begin{equation*}
@@ -56,6 +56,50 @@
         \item $\mathbf{u}$ is the input vector,
         \item $\left|\left|\cdot\right|\right|_F$ is the element-wise 2-norm (Frobenius norm).
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Frobenius regularization - MATLAB implementation}
+    \begin{lstlisting}[language=Matlab,basicstyle=\tiny]
+function [A,B] = Koopman(X,Y,U,alpha)
+    options = optimoptions(@fminunc, ...
+                        'Display', 'final', ...
+                        'UseParallel', true, ...
+                        'OptimalityTolerance', 1e-3, ... % Default is 1e-6
+                        'StepTolerance', 1e-3, ...
+                        'MaxIterations', 250); % Default is 400
+    for i=1:size(Y,1)
+        m0 = V(i,:)/G;
+
+        if alpha>0.0
+            fun = @(m) sum((Y(i,:)-m*[X;U]).^2) ...
+                    + alpha*sum(m.^2);
+
+            % No longer LSqr, since the Frobenius norm is considered separately
+            m = fminunc(fun,m0,options);
+        elseif alpha==0.0
+            m = m0;
+        end
+
+        A(i,:) = m(1:size(X,1));
+        B(i,:) = m(size(X,1)+1:end);
+    end
+end
+    \end{lstlisting}
+\end{frame}
+
+
+\section{From prototyping to implementation}
+
+\begin{frame}{Proposed alternatives}
+    Considering the performance limitations of a high-level interpreted languages, some alternatives had to be considered. The evaluated candidates were:
+
+    \begin{itemize}
+        \item Python: still high-level, but further optimized because of its open-source nature. Development complexity equivalent to that of MATLAB.
+        \item C++: compiled language, and a classical choice for scientific programming. Even if complex, the development process is facilitated by the broad library collection available.
+        \item Rust: memory-safe compiled language that pretends to replace C/C++ in the following years. High development complexity given it's in its early stages.
+    \end{itemize}
+
+    A simple benchmark based on the speed of data generation (which evaluates both matrix and nonlinear implementations) was set up.
 \end{frame}
 
 \end{document}
