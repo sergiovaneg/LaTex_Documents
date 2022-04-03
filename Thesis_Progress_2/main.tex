@@ -11,6 +11,8 @@
 
 \usepackage{xcolor}
 
+\usepackage{siunitx}
+
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
@@ -90,7 +92,7 @@ end
 
 \section{From prototyping to implementation}
 
-\begin{frame}{Proposed alternatives}
+\begin{frame}{Language alternatives - Benchmark formulation}
     Considering the performance limitations of a high-level interpreted languages, some alternatives had to be considered. The evaluated candidates were:
 
     \begin{itemize}
@@ -99,7 +101,45 @@ end
         \item Rust: memory-safe compiled language that pretends to replace C/C++ in the following years. High development complexity given it's in its early stages.
     \end{itemize}
 
-    A simple benchmark based on the speed of data generation (which evaluates both matrix and nonlinear implementations) was set up.
+    A simple benchmark based on the performance of ODE data generation (which evaluates both matrix and nonlinear implementations) was set up.
+\end{frame}
+
+\begin{frame}{Language alternatives - Benchmark results}
+
+    \begin{itemize}
+        \item MATLAB
+
+        \begin{itemize}
+            \item User time: $\SI{26.05}{\second}$
+            \item Wall clock time: $\SI{28.62}{\second}$
+            \item Maximum resident set size: $782348$ kb
+        \end{itemize}
+
+        \item Python
+
+        \begin{itemize}
+            \item User time: $\SI{25.44}{\second}$
+            \item Wall clock time: $\SI{26.21}{\second}$
+            \item Maximum resident set size: $59880$ kb
+        \end{itemize}
+
+        \item C++
+        
+        \begin{itemize}
+            \item User time: $\SI{0.7}{\second}$
+            \item Wall clock time: $\SI{1.37}{\second}$
+            \item Maximum resident set size: $4284$ kb
+        \end{itemize}
+
+        \item Rust
+        
+        \begin{itemize}
+            \item User time: $\SI{0.54}{\second}$
+            \item Wall clock time: $\SI{6.44}{\second}$
+            \item Maximum resident set size: $2736$ kb
+        \end{itemize}
+    \end{itemize}
+    
 \end{frame}
 
 \end{document}
