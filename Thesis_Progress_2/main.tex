@@ -13,6 +13,9 @@
 
 \usepackage{siunitx}
 
+\usepackage{caption}
+\usepackage{subcaption}
+
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
@@ -126,9 +129,9 @@ end
         \item C++
         
         \begin{itemize}
-            \item User time: $\SI{0.7}{\second}$
-            \item Wall clock time: $\SI{1.37}{\second}$
-            \item Maximum resident set size: $4284$ kb
+            \item User time: $\SI{0.70}{\second}$
+            \item Wall clock time: $\SI{1.76}{\second}$
+            \item Maximum resident set size: $4320$ kb
         \end{itemize}
 
         \item Rust
@@ -140,6 +143,34 @@ end
         \end{itemize}
     \end{itemize}
     
+\end{frame}
+
+\begin{frame}{Language alternatives - Accuracy verification}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Python_Sim.png}
+            \caption{Python - Simulated trajectory}
+            \label{fig:sim_python}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Cpp_Sim.png}
+            \caption{C++ - Simulated trajectory}
+            \label{fig:sim_cpp}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Rust_Sim.png}
+            \caption{Rust - Simulated trajectory}
+            \label{fig:sim_rust}
+        \end{subfigure}
+        \caption{Simulated trajectories (MATLAB simulation as reference)}
+        \label{fig:implementations}
+    \end{figure}
 \end{frame}
 
 \end{document}
