@@ -87,26 +87,47 @@ end
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Frobenius regularization - Results}
+\begin{frame}{Frobenius regularization - Results I}
     The regularization technique was put to the test with both a \textit{clean} and a \textit{noisy} dataset, using a clean simulation as reference during the benchmarks.
 
     \begin{figure}
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{Cpp_Sim.png}
+            \includegraphics[width=\textwidth]{Clean_Training.png}
             \caption{Clean training dataset}
             \label{fig:Koopman_clean}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{Cpp_Sim.png}
+            \includegraphics[width=\textwidth]{Noisy_Training.png}
             \caption{Noisy training dataset}
             \label{fig:Koopman_noisy}
         \end{subfigure}
         \caption{Frobenius regularized Koopman operator}
         \label{fig:Koopman_Frobenius}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Frobenius regularization - Results II}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Clean_Training.png}
+            \caption{Clean training dataset}
+            \label{fig:Eigen_clean}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Noisy_Training.png}
+            \caption{Noisy training dataset}
+            \label{fig:Eigen_noisy}
+        \end{subfigure}
+        \caption{Frobenius regularized eigenvalues}
+        \label{fig:Eigen_Frobenius}
     \end{figure}
 \end{frame}
 
@@ -117,7 +138,7 @@ end
     Considering the performance limitations of a high-level interpreted languages, some alternatives had to be considered. The evaluated candidates were:
 
     \begin{itemize}
-        \item Python: still high-level, but further optimized because of its open-source nature. An open-source clone of CVX (cvxpy) is available inside the scipy official package.
+        \item Python: still high-level, but further optimized because of its open-source nature. Both an open-source clone of CVX (cvxpy) and a mat file utility are included in the scipy official package.
         \item C++: compiled language, and a classical choice for scientific programming. Even if complex, the development process is facilitated by the availability of the CPLEX API.
         \item Rust: memory-safe compiled language that pretends to replace C/C++ in the following years. High development complexity given it's in its early stages.
     \end{itemize}
@@ -302,7 +323,7 @@ z_eig = C*g_eig;
 
 \begin{frame}[allowframebreaks]{Conclusions}
     \begin{itemize}
-        \item The Frobenius regularization 
+        \item The Frobenius regularization does not visibly blind the identification algorithm from relatively low measurement noise; nevertheless, it does make it more resistant to inestabilit
         \item For larger datasets/higher dimension systems, MATLAB is no longer a viable framework to calculate the matrix approximation of the Koopman operator. C++ stands as the preferred language given its standardization and low memory consumption; Python, however, already improves significantly the memory efficiency on its own (even though the execution time does not change to a measurable degree).
         \item Nevertheless, both MPC and eigenvalue decomposition can be applied to the operator in MATLAB once the projection has been calculated through a lower-level implementation. The data management method now has to be switched from a proprietary \textit{mat file} approach to a cross-compatible \textit{csv} approach.
         \item Eigenvalues 
