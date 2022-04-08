@@ -258,12 +258,43 @@ end
         \Phi\left(\mathbf{y}\right) = M \Phi\left(\mathbf{x}\right) + \Xi^T B \mathbf{u}
     \end{equation*}
 
+    where $M$ is a diagonal matrix containing the eigenvalues ordered w.r.t. the horizontal concatenation of the vertical vectors $\xi_j$ in $\Xi$.
+
     At this point, it is easy to see that the original observables are recoverable at any point through the expression
 
     \begin{align*}
         \Phi\left(\mathbf{x}\right)^T &= \mathbf{g}\left(\mathbf{x}\right)^T \Xi \\
         \implies \left[\Xi^T\right]^{-1} \Phi\left(\mathbf{x}\right) &= \mathbf{g}\left(\mathbf{x}\right)
     \end{align*}
+\end{frame}
+
+\begin{frame}[fragile]{Implementation - Eigenpair extraction and discrimination}
+    We start by extracting the eigenpairs with the following line: \mcode{[~,Mu,Xi] = eig(A);}. For numerical reasons, we request the left eigenvectors of the original matrix instead of the right eigenvectors of the transposed matrix.
+
+    Then, we discriminate irrelevant eigenvectors by setting a magnitude threshold as follows:
+
+    \begin{lstlisting}[language=Matlab]
+thr = 0.1;
+idx_r = abs(diag(Mu))>thr;
+Xi_r = Xi(:,idx_r);
+Mu_r = Mu(idx_r,idx_r);
+    \end{lstlisting}    
+\end{frame}
+
+\begin{frame}[fragile]{Implementation - Projection tracking and observable reconstruction}
+    Finally, we track the trajectory exclusively in the eigenspace with the filtered pairs, and then reconstruct the original observables (and from those, the states) as follows:
+
+    \begin{lstlisting}[language=Matlab]
+Phi = zeros(length(idx_r),L);
+Phi(:,1) = Xi_r'*g_p(:,1);
+
+for i=1:L-1
+    Phi(:,i+1) = Mu_r*Phi(:,i) + Xi_r'*B*u(:,i);
+end
+
+g_eig = Xi_r'\Phi;
+z_eig = C*g_eig;
+    \end{lstlisting}
 \end{frame}
 
 
