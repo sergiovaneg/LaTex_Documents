@@ -194,11 +194,11 @@ end
 
 \section{Extended Dynamic Mode Decomposition}
 
-\begin{frame}{Theory I}
+\begin{frame}{EDMD - Theory I}
     We derive the procedure from Williams et Al.: having calculated the Koopman matrix projection, we find the Koopman eigenvalue/eigenvector pairs for the $A$ matrix s.t.
 
     \begin{equation*}
-        A^T \mathbf{\xi}_j = \lambda_j \mathbf{\xi}_j \quad , \quad j \in \left\{1,\dots,\tilde{N}\right\}
+        A^T \mathbf{\xi}_j = \mu_j \mathbf{\xi}_j \quad , \quad j \in \left\{1,\dots,\tilde{N}\right\}
     \end{equation*}
 
     The reason why we find the eigenvectors of the transposed is because each row of the $A$ matrix is associated to a single observable, but in the Eigen procedure we need the opposite.
@@ -208,6 +208,62 @@ end
     \begin{equation*}
         \phi_j\left(\mathbf{x}\right) = \mathbf{g}\left(\mathbf{x}\right)^T \mathbf{\xi}_j
     \end{equation*}
+\end{frame}
+
+\begin{frame}{EDMD - Theory II}
+    Exploiting the linearity of the operator and the Eigenvalue theory, we express the Koopman operator as follows:
+    
+    \begin{align*}
+        \mathbf(\phi_j)\left(\mathbf{y}\right)
+        &=
+        \mathbf{g}\left(\mathbf{y}\right)^T \mathbf{\xi}_j \\
+        &=
+        \left(\overline{\mathcal{K}}_N
+        \begin{pmatrix}
+            \mathbf{g}\left(\mathbf{x}\right)
+            \\
+            \mathbf{u}
+        \end{pmatrix}\right)^T \mathbf{\xi}_j \\
+        &=
+        \begin{pmatrix}
+            \mathbf{g}\left(\mathbf{x}\right)^T
+            &
+            \mathbf{u}^T
+        \end{pmatrix}
+        \left(
+            \begin{pmatrix}
+                A^T
+                \\
+                B^T
+            \end{pmatrix}
+            \mathbf{\xi}_j
+        \right) \\
+        &=
+        \mu_j \phi_j\left(\mathbf{x}\right)
+        +
+        \mathbf{u}^T B^T \mathbf{\xi}_j \\
+        &=
+        \mu_j \phi_j\left(\mathbf{x}\right)
+        +
+        \mathbf{\xi}_j^T B \mathbf{u}
+    \end{align*}
+
+    The last equivalence is possible because, at that point, we are dealing with a scalar value. 
+\end{frame}
+
+\begin{frame}{EDMD - Theory III}
+    From this form, we can derive the full eigenspace decomposition by concatenating the $\phi$-projections vertically as follows
+
+    \begin{equation*}
+        \Phi\left(\mathbf{y}\right) = M \Phi\left(\mathbf{x}\right) + \Xi^T B \mathbf{u}
+    \end{equation*}
+
+    At this point, it is easy to see that the original observables are recoverable at any point through the expression
+
+    \begin{align*}
+        \Phi\left(\mathbf{x}\right)^T &= \mathbf{g}\left(\mathbf{x}\right)^T \Xi \\
+        \implies \left[\Xi^T\right]^{-1} \Phi\left(\mathbf{x}\right) &= \mathbf{g}\left(\mathbf{x}\right)
+    \end{align*}
 \end{frame}
 
 
