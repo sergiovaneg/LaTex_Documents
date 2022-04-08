@@ -195,7 +195,19 @@ end
 \section{Extended Dynamic Mode Decomposition}
 
 \begin{frame}{Theory I}
+    We derive the procedure from Williams et Al.: having calculated the Koopman matrix projection, we find the Koopman eigenvalue/eigenvector pairs for the $A$ matrix s.t.
+
+    \begin{equation*}
+        A^T \mathbf{\xi}_j = \lambda_j \mathbf{\xi}_j \quad , \quad j \in \left\{1,\dots,\tilde{N}\right\}
+    \end{equation*}
+
+    The reason why we find the eigenvectors of the transposed is because each row of the $A$ matrix is associated to a single observable, but in the Eigen procedure we need the opposite.
     
+    Having obtained all the aforementioned pairs, we define an eigenfunction as the projection of an observable vector over each eigenvector, just as follows
+
+    \begin{equation*}
+        \phi_j\left(\mathbf{x}\right) = \mathbf{g}\left(\mathbf{x}\right)^T \mathbf{\xi}_j
+    \end{equation*}
 \end{frame}
 
 
