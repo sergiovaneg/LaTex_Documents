@@ -7,6 +7,7 @@
 \date{\today}
 
 \usepackage{siunitx}
+\usepackage{csvsimple}
 
 \begin{document}
 
@@ -34,7 +35,7 @@
     
     The result tables are classified by input signal, prediction horizon, and presence of noise in the training data. Each table is organized in columns by regularization coefficient and in rows by observable order. 
     
-    All error values are presented as a percentage, and correspond to the normalized trajectory prediction error averaged over a hundred different trajectories for each parameter combination.
+    All error values are presented as a percentage, and correspond to the normalized trajectory prediction error averaged over a thousand different trajectories for each parameter combination.
 
     Following the result tables, a set of conclusions is included.
 \end{frame}
@@ -46,31 +47,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 16.23 & 17.03 & 15.88 & 16.08 & 18.02 & 15.86 \\ \hline
-            10 & 14.21 & 17.12 & 13.61 & 14.98 & 14.65 & 13.42 \\ \hline
-            15 & 14.6 & 18.01 & 13.55 & 13.3 & 12.43 & 11.91 \\ \hline
-            20 & 7.59 & 6.47 & 7.58 & 6.1 & 5.82 & 6.97 \\ \hline
-            25 & 5.96 & 6.94 & 6.65 & 6.89 & 6.02 & 5.63 \\ \hline
-            30 & 6.1 & 6.06 & 5.63 & 5.67 & 5.64 & 4.48 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_steady_T_0.25.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 16.59 & 16.96 & 16.13 & 17.65 & 16.94 & 18.46 \\ \hline
-            10 & 12.58 & 13.13 & 14.61 & 14.73 & 13.33 & 15.7 \\ \hline
-            15 & 10.86 & 16.99 & 11.56 & 13.74 & 10.16 & 15.01 \\ \hline
-            20 & 6.99 & 6.98 & 8.25 & 5.93 & 5.92 & 12.69 \\ \hline
-            25 & 6.92 & 7.74 & 5.19 & 5.78 & 5.43 & 8.19 \\ \hline
-            30 & 6.28 & 6.78 & 6.28 & 5.1 & 5.02 & 7.43 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_steady_T_0.25.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -79,31 +62,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 29.2 & 26.17 & 24.71 & 27.26 & 27.46 & 29.59 \\ \hline
-            10 & 19.52 & 17.69 & 18.48 & 20.54 & 23.37 & 24.16 \\ \hline
-            15 & 18.47 & 17.02 & 21.53 & 15.6 & 19.49 & 21.74 \\ \hline
-            20 & 15.53 & 13.88 & 13.95 & 14.64 & 9.99 & 15.55 \\ \hline
-            25 & 9.85 & 13.76 & 10.32 & 12.68 & 9.84 & 11.53 \\ \hline
-            30 & 11.54 & 11.72 & 9.16 & 10.73 & 9.57 & 10.97 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_steady_T_0.50.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 36.99 & 24.36 & 27.21 & 24.83 & 28.84 & 25.56 \\ \hline
-            10 & 22.11 & 20.21 & 19.74 & 20.11 & 22.66 & 25.42 \\ \hline
-            15 & 19.79 & 18.87 & 17.43 & 21.76 & 19.99 & 24.45 \\ \hline
-            20 & 14.66 & 13.8 & 14.17 & 9.76 & 13.19 & 21.94 \\ \hline
-            25 & 11.84 & 9.94 & 11.24 & 8.23 & 11.55 & 18.18 \\ \hline
-            30 & 11.48 & 10.19 & 10.81 & 10.77 & 9.97 & 17.03 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_steady_T_0.50.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -112,31 +77,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 39.67 & 40.39 & 43.41 & 40.21 & 41.48 & 41.92 \\ \hline
-            10 & 31.73 & 32.5 & 30.28 & 31.73 & 34.14 & 37.93 \\ \hline
-            15 & 35.97 & 31.64 & 36.41 & 30.45 & 28.3 & 34.43 \\ \hline
-            20 & 27.77 & 39.13 & 34.98 & 25.29 & 23.83 & 32.5 \\ \hline
-            25 & 30.03 & 23.9 & 28.89 & 22.29 & 23.98 & 25.01 \\ \hline
-            30 & 26.95 & 17.24 & 20.29 & 21.71 & 19.88 & 23.25 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_steady_T_1.00.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 37.16 & 39.92 & 39.93 & 37.35 & 37.45 & 39.5 \\ \hline
-            10 & 30.68 & 31.47 & 30.79 & 31.05 & 35.93 & 38.37 \\ \hline
-            15 & 33.24 & 31.9 & 32.81 & 26.37 & 31.41 & 35.56 \\ \hline
-            20 & 31.12 & 23.13 & 31.38 & 25.98 & 23.33 & 34.19 \\ \hline
-            25 & 27.88 & 22.95 & 20.39 & 19.84 & 21.42 & 33.16 \\ \hline
-            30 & 23.05 & 21.04 & 19.54 & 21.83 & 22.78 & 27.17 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_steady_T_1.00.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -148,31 +95,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 16.78 & 17.58 & 18.79 & 16.76 & 17 & 17.43 \\ \hline
-            10 & 17.39 & 18.46 & 18.46 & 16.4 & 17.4 & 18.06 \\ \hline
-            15 & 18.6 & 16.64 & 16.95 & 19.58 & 17.53 & 19.08 \\ \hline
-            20 & 9.6 & 9.75 & 9.82 & 11.46 & 10.45 & 13.36 \\ \hline
-            25 & 9.59 & 10.4 & 10.87 & 11.12 & 11.38 & 13.24 \\ \hline
-            30 & 9.22 & 10.58 & 11.55 & 10.94 & 9.67 & 13.7 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_sine_T_0.25.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 15.65 & 16.83 & 16.66 & 18.35 & 16.87 & 17.26 \\ \hline
-            10 & 16.81 & 16.67 & 18.17 & 19.01 & 17.39 & 19.01 \\ \hline
-            15 & 19.92 & 24.39 & 19.25 & 19.33 & 16.3 & 16.58 \\ \hline
-            20 & 11.62 & 9.35 & 10.51 & 12.06 & 10.37 & 11.07 \\ \hline
-            25 & 10.68 & 10.8 & 10.13 & 10.33 & 15.3 & 12.34 \\ \hline
-            30 & 13.25 & 13.57 & 10.76 & 10.32 & 13.11 & 10.9 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_sine_T_0.25.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -181,31 +110,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 26.04 & 24.97 & 27.99 & 26.8 & 24.61 & 29.37 \\ \hline
-            10 & 25.21 & 25.44 & 26.04 & 27.66 & 25.78 & 26.15 \\ \hline
-            15 & 27.14 & 24.84 & 20.89 & 27.18 & 23.57 & 25.53 \\ \hline
-            20 & 17.5 & 15.61 & 18 & 15 & 13.83 & 19.35 \\ \hline
-            25 & 15.38 & 19.33 & 14.56 & 16.22 & 17.58 & 17.63 \\ \hline
-            30 & 19.48 & 19 & 15.72 & 17.66 & 13.87 & 16.55 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_sine_T_0.50.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 25.55 & 25.9 & 27.63 & 27.02 & 26.52 & 28.74 \\ \hline
-            10 & 24.78 & 24.59 & 26.31 & 27.28 & 26.97 & 27.84 \\ \hline
-            15 & 33.62 & 30.19 & 26.13 & 24.64 & 23.27 & 25.8 \\ \hline
-            20 & 17.09 & 13.86 & 15.39 & 16.38 & 18.25 & 19.43 \\ \hline
-            25 & 16.26 & 14.12 & 15.25 & 18.77 & 17.54 & 19.29 \\ \hline
-            30 & 13.55 & 14.26 & 17.06 & 14.65 & 15.78 & 18.34 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_sine_T_0.50.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -214,31 +125,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 38.77 & 39.75 & 41.38 & 39.27 & 41.39 & 40.56 \\ \hline
-            10 & 34.02 & 34.95 & 38.22 & 34.11 & 35.98 & 40.8 \\ \hline
-            15 & 32.11 & 34.48 & 32.49 & 31.17 & 30.09 & 36.91 \\ \hline
-            20 & 33.41 & 31.7 & 29.82 & 30.2 & 26.53 & 31.24 \\ \hline
-            25 & 27.48 & 34.89 & 34.03 & 30.24 & 23.67 & 29.7 \\ \hline
-            30 & 26.89 & 26.25 & 27.1 & 24.23 & 22.69 & 28.95 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_sine_T_1.00.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 39.54 & 41.41 & 38.82 & 39.82 & 39.38 & 39.24 \\ \hline
-            10 & 38.06 & 35.71 & 30.81 & 32.6 & 37.95 & 35.98 \\ \hline
-            15 & 41.36 & 33.47 & 34.56 & 32.81 & 34.05 & 37.88 \\ \hline
-            20 & 28.5 & 30.11 & 27.25 & 26.36 & 29.99 & 34.03 \\ \hline
-            25 & 28.6 & 27.3 & 28.55 & 26.97 & 24.96 & 31.94 \\ \hline
-            30 & 23.89 & 26.51 & 23.06 & 24.11 & 23.56 & 31.44 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_sine_T_1.00.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -250,31 +143,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 19.85 & 19.09 & 18.38 & 18.56 & 19.29 & 20.42 \\ \hline
-            10 & 20.55 & 21.09 & 21.09 & 21.49 & 19.62 & 20.16 \\ \hline
-            15 & 24.68 & 27.04 & 19.69 & 21.89 & 20.55 & 21.29 \\ \hline
-            20 & 16.05 & 16.21 & 13.73 & 15.82 & 15.52 & 14.38 \\ \hline
-            25 & 14.54 & 15.85 & 14.65 & 16.75 & 14.63 & 14.87 \\ \hline
-            30 & 14.8 & 12 & 12.03 & 11.91 & 12.49 & 15.68 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_square_T_0.25.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 21.46 & 19.5 & 20 & 18.32 & 19.18 & 20.02 \\ \hline
-            10 & 20.31 & 21.74 & 19.64 & 18.87 & 21.08 & 19.99 \\ \hline
-            15 & 20.37 & 20.5 & 21.71 & 21.67 & 19.38 & 18.99 \\ \hline
-            20 & 15.15 & 14.48 & 11.9 & 11.92 & 15.33 & 15.6 \\ \hline
-            25 & 14.81 & 13.17 & 14.66 & 14.28 & 18.54 & 15.33 \\ \hline
-            30 & 16.6 & 12.77 & 15.09 & 15.47 & 12.68 & 14.6 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_square_T_0.25.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -283,31 +158,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 28.14 & 29.01 & 28.07 & 28.56 & 29.62 & 29.34 \\ \hline
-            10 & 27.13 & 27.35 & 26.28 & 28.57 & 32.26 & 30.21 \\ \hline
-            15 & 35.17 & 28.92 & 29.94 & 27.35 & 26.13 & 26.33 \\ \hline
-            20 & 20.97 & 20.85 & 19.19 & 19.27 & 19.96 & 21.76 \\ \hline
-            25 & 21.4 & 22.07 & 20.31 & 21.29 & 21.19 & 21.99 \\ \hline
-            30 & 19.17 & 18.42 & 22.06 & 21.93 & 18.32 & 18.64 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_square_T_0.50.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 28.36 & 31.64 & 26.94 & 29.87 & 30.05 & 29.36 \\ \hline
-            10 & 30.06 & 30.9 & 25.01 & 25.79 & 26.51 & 26.81 \\ \hline
-            15 & 23.48 & 28.29 & 24.14 & 26.92 & 32.31 & 28.82 \\ \hline
-            20 & 19.54 & 20.89 & 17.22 & 23.94 & 19.19 & 22.29 \\ \hline
-            25 & 17.73 & 16.26 & 20.95 & 17.2 & 25.17 & 25.64 \\ \hline
-            30 & 21.34 & 18.07 & 22.84 & 18.21 & 26 & 22.39 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_square_T_0.50.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
@@ -316,31 +173,13 @@
     \scriptsize
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 37.32 & 38.21 & 40.77 & 43.55 & 43.35 & 42.1 \\ \hline
-            10 & 34.18 & 34.88 & 33.13 & 39.5 & 38.32 & 40.23 \\ \hline
-            15 & 38.28 & 37.29 & 37.71 & 38.43 & 34.01 & 40 \\ \hline
-            20 & 37.64 & 36.13 & 34.33 & 37.57 & 33.31 & 37.18 \\ \hline
-            25 & 38 & 35.86 & 33.47 & 37.2 & 29.19 & 30.55 \\ \hline
-            30 & 26.39 & 30.01 & 28.78 & 31.31 & 26.67 & 29.55 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Clean/table_square_T_1.00.csv}
         \caption{Clean Training Data}
     \end{table}
 
     \begin{table}[!ht]
         \centering
-        \begin{tabular}{|l|l|l|l|l|l|l|}
-        \hline
-            M & 0 & 0.0001 & 0.001 & 0.01 & 0.1 & 1 \\ \hline
-            5 & 37.7 & 42.2 & 40.26 & 41.51 & 38.59 & 37.59 \\ \hline
-            10 & 37.73 & 33.36 & 37.41 & 30.41 & 38.18 & 40.43 \\ \hline
-            15 & 34.7 & 35.91 & 38.1 & 40.38 & 36.08 & 40.57 \\ \hline
-            20 & 33.36 & 31.11 & 37.2 & 31.68 & 28.08 & 34.02 \\ \hline
-            25 & 35.95 & 28.62 & 27.26 & 23.59 & 27.43 & 33.25 \\ \hline
-            30 & 29.28 & 24.01 & 31.63 & 26.58 & 30.09 & 33.16 \\ \hline
-        \end{tabular}
+        \csvautotabular{Tables_Noisy/table_square_T_1.00.csv}
         \caption{Noisy Training Data}
     \end{table}
 \end{frame}
