@@ -23,7 +23,7 @@
 \section{Introduction}
 
 \begin{frame}{Introduction}
-    In this document, a numerical evaluation of the accuracy of the Koopman operator in its current implementation is presented. No changes were made to the Koopman matrix calculation or full-state recovery algorithms.
+    In this document, a numerical evaluation of the accuracy of the Koopman operator in its current implementation is presented. No changes were made to the full-state recovery algorithm, but the Koopman matrix projection algorithm was modified so that the optimization problems would minimize over the average instead of the total squared error, avoiding numerical overflow for larger datasets.
 
     The signals used for the input were the following:
 
