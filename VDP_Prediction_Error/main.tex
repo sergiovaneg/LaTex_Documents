@@ -9,6 +9,9 @@
 \usepackage{siunitx}
 \usepackage{csvsimple}
 
+\usepackage{caption}
+\usepackage{subcaption}
+
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
@@ -23,7 +26,8 @@
 \section{Introduction}
 
 \begin{frame}{Introduction}
-    In this document, a numerical evaluation of the accuracy of the Koopman operator in its current implementation is presented. No changes were made to the full-state recovery algorithm, but the Koopman matrix projection algorithm was modified so that the optimization problems would minimize over the average instead of the total squared error, avoiding numerical overflow for larger datasets.
+    \footnotesize
+    In this document, a numerical evaluation of the accuracy of the Koopman operator in its current implementation is presented. The centers are now taken from random snapshots in the dataset\footnote{Some centers had to be restored to fully random because of noticeably higher error results}, but the Koopman matrix projection algorithm was modified so that the optimization problems would minimize over the average instead of the total squared error, avoiding numerical overflow for larger datasets.
 
     The signals used for the input were the following:
 
@@ -88,6 +92,54 @@
     \end{table}
 \end{frame}
 
+\begin{frame}{Steady input - Figures}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_steady_T_0.25.png}
+            \caption{Clean - 0.25 s}
+            \label{fig:clean_steady_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_steady_T_0.50.png}
+            \caption{Clean - 0.50 s}
+            \label{fig:clean_steady_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_steady_T_1.00.png}
+            \caption{Clean - 1.00 s}
+            \label{fig:clean_steady_100}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_steady_T_0.25.png}
+            \caption{Noisy - 0.25 s}
+            \label{fig:noisy_steady_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_steady_T_0.50.png}
+            \caption{Noisy - 0.50 s}
+            \label{fig:noisy_steady_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_steady_T_1.00.png}
+            \caption{Noisy - 1.00 s}
+            \label{fig:noisy_steady_100}
+        \end{subfigure}
+        \label{fig:clean_steady}
+    \end{figure}
+\end{frame}
+
 
 \section{Prediction error - Sine input}
 
@@ -134,6 +186,54 @@
         \csvautotabular{Tables_Noisy/table_sine_T_1.00.csv}
         \caption{Noisy Training Data}
     \end{table}
+\end{frame}
+
+\begin{frame}{Sine input - Figures}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_sine_T_0.25.png}
+            \caption{Clean - 0.25 s}
+            \label{fig:clean_sine_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_sine_T_0.50.png}
+            \caption{Clean - 0.50 s}
+            \label{fig:clean_sine_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_sine_T_1.00.png}
+            \caption{Clean - 1.00 s}
+            \label{fig:clean_sine_100}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_sine_T_0.25.png}
+            \caption{Noisy - 0.25 s}
+            \label{fig:noisy_sine_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_sine_T_0.50.png}
+            \caption{Noisy - 0.50 s}
+            \label{fig:noisy_sine_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_sine_T_1.00.png}
+            \caption{Noisy - 1.00 s}
+            \label{fig:noisy_sine_100}
+        \end{subfigure}
+        \label{fig:clean_sine}
+    \end{figure}
 \end{frame}
 
 
@@ -184,6 +284,54 @@
     \end{table}
 \end{frame}
 
+\begin{frame}{Square input - Figures}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_square_T_0.25.png}
+            \caption{Clean - 0.25 s}
+            \label{fig:clean_square_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_square_T_0.50.png}
+            \caption{Clean - 0.50 s}
+            \label{fig:clean_square_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Clean/figure_square_T_1.00.png}
+            \caption{Clean - 1.00 s}
+            \label{fig:clean_square_100}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_square_T_0.25.png}
+            \caption{Noisy - 0.25 s}
+            \label{fig:noisy_square_025}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_square_T_0.50.png}
+            \caption{Noisy - 0.50 s}
+            \label{fig:noisy_square_050}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Figures_Noisy/figure_square_T_1.00.png}
+            \caption{Noisy - 1.00 s}
+            \label{fig:noisy_square_100}
+        \end{subfigure}
+        \label{fig:clean_square}
+    \end{figure}
+\end{frame}
+
 
 \section{Conclusions}
 
@@ -192,6 +340,7 @@
         \item Prediction error can be visibly reduced by increasing the amount of observable functions; nevertheless, this trend becomes quite inconsistent over a certain dictionary size, specially when it comes to the regularized problem.
         \item Interestingly enough, the optimal regularization coefficient's order of magnitude changes depending on wether or not the training data presents measurement noise, with $\num{1e-3}$ for clean data and $\num{1e-2}$ for noisy data. Furthermore, noisy training data consistently yields better results for longer time-spans with the highest dictionary sizes evaluated and forced input. More data or different methodologies are required in order to give an explanation to this phenomenon.
         \item Despite the error trend being consistent with the operator parameters (both in regularization and dictionary size), the article results have not been achieved yet. Considering that the biggest accuracy jump so far was obtained by changing the basis function structure, further tests with different observable functions are proposed.
+        \item Even though variating the observable centers does affect performance, it's better to have an even spacing over the random square than to select points from the dataset trajectories, as evidenced by the new errors and the necessity of manual intervention to get stability.
     \end{itemize}
 \end{frame}
 
