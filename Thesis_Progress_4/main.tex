@@ -36,9 +36,9 @@
 
     Then, we introduce the memory-reliant Koopman controller, basing the amount of stored samples on the Control Horizon parameter of the reference MPC. In this section we also compare its performance to the (polished) memoryless implementation discussed last meeting.
 
-    After that, we introduce the Kalman-informed framework from which we will repeat the Koopman identification process, including the memoryless vs memory-reliant comparison.
+    After that, we discuss the Kalman-informed framework from which we will repeat the Koopman identification process, including the memoryless vs memory-reliant comparison.
 
-    Finally, we will present the conclusions based on the overall results and determine the best implementation for each scenario.
+    Finally, we draw some conclusions based on the overall results and determine the best implementation for each scenario.
 \end{frame}
 
 
@@ -297,6 +297,57 @@
             \caption{50 functions}
         \end{subfigure}
     \end{figure}
+\end{frame}
+
+\begin{frame}{Kalman-Koopman controller - Split operator}
+    An additional setup consisting on 2 different Koopman operators (one for the Kalman filter and one for the MPC) was tested; compared to the combined controller, the results were noticeably better (although the impulse response diverged in the same way). Both a memoryless and a memory-reliant version, paired with the memoryless nonlinear Koopman controller, were put to the test.
+
+    \begin{itemize}
+        \item Number of observables: $50$
+        \item Input type: direct (noisy measured first state + koopman control signal)
+        \item Regularization coefficient: $0.001$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Simulink model - Split benchmark}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{Simulink_Split.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Split K-K controller - Numerical results}
+    \begin{itemize}
+        \item Impulse error (single sample, second-state reference equal to 0)
+            \begin{itemize}
+                \item MPC $\rightarrow \left(0.114,0.269\right)$
+                \item Memoryless Koopman $\rightarrow \left(2.674,1.800\right)$
+                \item Memory-reliant Koopman $\rightarrow \left(2.628,1.992\right)$
+            \end{itemize}
+        \item Step error ($@t=0.0$, second-state reference equal to 0)
+            \begin{itemize}
+                \item MPC $\rightarrow \left(0.496,0.694\right)$
+                \item Memoryless Koopman $\rightarrow \left(0.583,0.652\right)$
+                \item Memory-reliant Koopman $\rightarrow \left(0.555,0.666\right)$
+            \end{itemize}
+        \item Trajectory error (non-convergent reference)
+            \begin{itemize}
+                \item MPC $\rightarrow \left(0.333,0.534\right)$
+                \item Memoryless Koopman $\rightarrow \left(1.400,1.249\right)$
+                \item Memory-reliant Koopman $\rightarrow \left(2.165,1.713\right)$
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\section{Conclusions}
+
+\begin{frame}[allowframebreaks]{Conclusions}
+    \begin{itemize}
+        \item It comes as no surprise that the more measured data there is available, the better. Even by tricking the controllers with delayed data, no tangible improvement was achieved. As it stands now, the most accurate results are consistently produced by a memoryless implementation, even in a full-state observation scenario.
+        \item Even though the Koopman framework has proven to be a powerful tool to approximate nonlinear dynamical systems, concatenating multiple processes and expecting a clear observation proved to be quite inaccurate. Splitting the nonlinear systems, however, proved to be a better solution (granted, not as good as the full-observable), which can be interpreted as the Koopman operator benefiting from the additional data coming from the Kalman-filtered states.
+        \item Regardless of the above, using the Koopman operator to approximate the MPC controller using a full-state observation (or alternatively, a Kalman filter as a full-state provider) not only yielded satisfactory results, but it also beat the nonlinear MPC both in stability and steady-state error.
+    \end{itemize}
 \end{frame}
 
 \end{document}
