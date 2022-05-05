@@ -64,7 +64,7 @@
 
     \subsection{Applied problem definition}
 
-        After properly defining the abstract the Koopman operator, we now want to stablish a practical framework in order to make use of its properties for System Identification and Control applications. We start by redefining $M$ as a real vector-space, and we follow the numerical scheme proposed by Mauroy-Goncalves\cite{Goncalves} as a data-driven Identification method for dynamical systems.
+        After properly defining the abstract the Koopman operator, we now want to establish a practical framework in order to make use of its properties for System Identification and Control applications. We start by redefining $M$ as a real vector-space, and we follow the numerical scheme proposed by Mauroy-Goncalves\cite{Goncalves} as a data-driven Identification method for dynamical systems.
         
         We consider the Real Dynamical System described in \cref{eq:CT_Dyn_Real}, where $n$ is the dimension of the system. 
 
@@ -116,7 +116,7 @@
             \begin{align} \label{eq:Koopman_snap}
                 \mathbf{g} \left(\mathbf{y}_k\right) &= \mathbf{g} \left(S^{T_s} \left(\mathbf{x}_k - \epsilon\left(\mathbf{x}_k\right)\right) + \epsilon\left(\mathbf{y}_k\right)\right)
                 \\
-                & \approx U^{T_s} \mathbf{b}\left(\mathbf{x}_k\right) + \mathcal{O} \left(\left|\left|\epsilon\right|\right|\right)
+                & \approx U^{T_s} \mathbf{g}\left(\mathbf{x}_k\right) + \mathcal{O} \left(\left|\left|\epsilon\right|\right|\right)
             \end{align}
 
             \item \textit{Identification of the Koopman operator:} A truncated finite-dimensional projection of the Koopman operator is obtained through a classical linear identification method, similar to a component of the Extended DMD algorithm\cite{EDMD}, which in turn yields an approximation of the infinitesimal generator from \ref{eq:infinitesimal_gen}.
