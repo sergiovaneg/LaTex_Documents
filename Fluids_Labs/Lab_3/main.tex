@@ -106,14 +106,14 @@
 
 \section{Qualitative assessment of the physical consistency of the CFD solution} \label{sec:qualitative}
 
-        We then proceeded to study the Y-distributions of the stresses; these profiles, as well as the \( \tau_{\text{wall}} \) coefficient, were extracted at \(x \approx 160 \delta\). The viscous shear stress was calculated as in Equation~\ref{eq:visc}, whereas the total shear stress was extracted from the distribution law in Equation~\ref{eq:stress}. The turbulent shear stress was then approximated from the difference between the other two profiles. The resulting plots can be observed in Figure~\ref{fig:stress}
+        We then proceeded to study the Y-distributions of the stresses; these profiles, as well as the \( \tau_{\text{wall}} \) coefficient, were extracted at \(x \approx 160 \delta\). The viscous shear stress was calculated as in Equation~\ref{eq:visc}, whereas the Reynolds shear stress was calculated as in Equation~\ref{eq:reyn}. The total shear stress was then established as the sum of the two aforementioned profiles. The resulting plots can be observed in Figure~\ref{fig:stress}, where we can see how the obtained profiles differ heavily from the linear profile close to the wall due to the wall function approach, but become coherent with the model as we approach the center of the channel.
 
         \begin{equation} \label{eq:visc}
                 \tau_{\text{visc}} = \rho \nu \frac{dU}{dy}
         \end{equation}
 
-        \begin{equation} \label{eq:stress}
-                \tau = (1 - \frac{y}{\delta}) \tau_{\text{wall}}
+        \begin{equation} \label{eq:reyn}
+                \tau_{\text{Re}} = \rho \nu_\text{Turb} \frac{dU}{dy}
         \end{equation}
 
         \begin{figure}[ht!]
@@ -132,7 +132,7 @@
                 \label{fig:axialV}
         \end{figure}
         
-Moreover to provide a better reresentation of the wall stress distribution we decided to run the "two layers k-eps" model, that gives the user the possibility to use a more refined mesh next to the wall since it uses a Low-Reynolds approach. In this way we plotted the normalized wall shear stress as function of \(y\) in Figure~\ref{fig:s1} and as function of \( y^+ \) in Figure~\ref{fig:s2}, where \( y^+ =60 \), i.e.\( y =delta/5 \) is the upper bound of the graph. It's worth noticing that Figure~\ref{fig:s2} is independent from Reynolds number, so that it does not collapse for high Reynolds numbers. Finally in Figure~\ref{fig:s2} theorical bounds to separate viscous region, middle region and outer region are marked.
+        Moreover to provide a better reresentation of the wall stress distribution we decided to run the "two layers k-eps" model, that gives the user the possibility to use a more refined mesh next to the wall since it uses a Low-Reynolds approach. In this way we plotted the normalized wall shear stress as function of \(y\) in Figure~\ref{fig:s1} and as function of \( y^+ \) in Figure~\ref{fig:s2}, where \( y^+ =60 \), i.e.\( y =delta/5 \) is the upper bound of the graph. It's worth noticing that Figure~\ref{fig:s2} is independent from Reynolds number, so that it does not collapse for high Reynolds numbers. Finally in Figure~\ref{fig:s2} theorical bounds to separate viscous region, middle region and outer region are marked.
 
         \begin{figure}
                 \centering
