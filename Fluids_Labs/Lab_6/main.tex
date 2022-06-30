@@ -23,7 +23,7 @@
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Flow_Sketch.png}
                 \centering
-                \caption{}
+                \caption{Sketch of the study case}
                 \label{fig:flow_sketch}
         \end{figure}
  
@@ -38,7 +38,7 @@
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Pressure_Distribution.png}
                 \centering
-                \caption{}
+                \caption{Pressure coefficient distribution vs angle w.r.t flow direction}
                 \label{fig:p_d}
         \end{figure}
 
@@ -47,7 +47,7 @@
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragCoefficient_Trend.png}
                 \centering
-                \caption{}
+                \caption{Drag coefficient trend for smooth objects (relative roughness approximately 0)}
                 \label{fig:dragtrend}
         \end{figure}
 
@@ -57,7 +57,7 @@
  \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Strouhal.png}
                 \centering
-                \caption{}
+                \caption{Strouhal's number chart}
                 \label{fig:strouhal}
         \end{figure}
 
@@ -78,21 +78,21 @@
 
         The following Grid-Independence study is applied on RANS solution.   Despite in principle RANS solutions do not provide a trustful representation of the physical phenomenon under investigation, this choice can been consider a practical compromise to face the heavy URANS  computational cost. The variables under investigation are:  the distributions of wall pressure and wall shear stress, the drag coefficient and the position of the separation point, inferred from the wall pressure and the wall shear stresses.In particular the separation point was inferred by the wall pressure approximating the wall pressure second derivative (through finite differences of order 8) and looking for its inflection point. The separation point was instead inferred by the shear stress imposing it as the shear stress zero.
         
-        The study was performed by setting \textit{3} different meshes along the $\Theta$ coordinate: 120, 180 and 360 equally spaced cells, while mantaining the $\rho$ grid fixed to 100 cells distributed through a Geometric law with a coefficient of...
+        The study was performed by setting \textit{3} different meshes along the $\Theta$ coordinate: 120, 180 and 360 equally spaced cells, while mantaining the $\rho$ grid fixed to 100 cells distributed through a Geometric law with a coefficient of $1.080$.
 
         Figure~\ref{fig:drag_independence}, Figure~\ref{fig:pression_ind}, and Figure~\ref{fig:wall_ind} show our results.
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragCoefficient_Independence.png}
                 \centering
-                \caption{}
+                \caption{Drag coefficient independence study}
                 \label{fig:drag_independence}
         \end{figure}
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Pressure_Independence.png}
                 \centering
-                \caption{}
+                \caption{Pressure independence study}
                 \label{fig:pression_ind}
         \end{figure}
 
@@ -103,10 +103,10 @@
                 \label{fig:wall_ind}
         \end{figure}
 
-
-        According to experimental results separation point s should lie at $$ 82 ^\circ $$, and our plot quite respects this result.
+        According to experimental results separation point s should lie at $$ 82 ^\circ, $$ and our plot quite respects this result.
 
 \section{Unsteady-state modelling} \label{sec:URAN}
+
         In this section we'll make use of our results from URANS simulations. To launch these simulations we re-started from the converged steady-state solutions exploiting the finer grid setting.
 
         We defined as suitable total simulation time to observe periodicity in the macroscopic flow: 60 s. Then, we performed a sensibility analysis with respect to the time-step of time discretization; we considered three different timesteps, ensuring their value to be much smaller with respect to the total time-scal and bigger than microscopic turbolent time-scales. These were:
@@ -119,19 +119,19 @@
         
         At each time-step we considered as target parameter: forces on the \textit{X} and \textit{Y} axis.
 
-        The behaviour of the Drag and Lift force with the 3 different values imposed can be seen respectively in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This figures does not appear to describe correctlythe phenomenon under investigation since the forces under investigation never stabilize even after 100 seconds.
+        The behaviour of the Drag and Lift force with the 3 different values imposed can be seen respectively in Figure~\ref{fig:drag} and Figure~\ref{fig:lift}. This figures does not appear to describe correctly the phenomenon under investigation since the relevant forces never stabilize even after 100 seconds.
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{DragForce.png}
                 \centering
-                \caption{}
+                \caption{Drag force over time}
                 \label{fig:drag}
         \end{figure}
 
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{LiftForce.png}
                 \centering
-                \caption{}
+                \caption{Lift force over time}
                 \label{fig:lift}
         \end{figure}
 
@@ -140,44 +140,43 @@
         \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Drag_Coefficient.png}
                 \centering
-                \caption{}
+                \caption{Drag coefficient over time}
                 \label{fig:drag_coeff}
         \end{figure}
                 \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{Lift_Coefficient.png}
                 \centering
-                \caption{}
+                \caption{Lift coefficient over time}
                 \label{fig:lift_coeff}
         \end{figure}
 
 
         Finally both averaged Drag Coefficient and Strouhal number, respectively  $\num{0.6468}$ and $0.1365$ do not match well with expectations of Figure~\ref{fig:dragtrend}, that suggesting more than $1.0$ and Figure~\ref{fig:strouhal}.
         
-        To overcome this issues we had to manipulate on timesteps and total time, leading to a final decision of 9000 timesteps and 45 seconds. Probabily previous numbers of timesteps were too big and made some charcteristic patterns disappear. In Figure~\ref{fig:drag_f}, Figure~\ref{fig:drag_vsl1} and Figure~\ref{fig:drag_vsl2} our results can be seen. 
+        To overcome these issues we had to manipulate the time-steps and total simulation time, leading to a final decision of 9000 time-steps and 45 seconds. Probably, previous numbers of time-steps were too big and made some characteristic patterns disappear. In Figure~\ref{fig:drag_f}, Figure~\ref{fig:drag_vsl1} and Figure~\ref{fig:drag_vsl2} our results can be seen. 
         
                \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{drag_Federica.png}
                 \centering
-                \caption{}
+                \caption{Drag force with final configuration}
                 \label{fig:drag_f}
         \end{figure}
      
             \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{drag_vs_lift_Federica.png}
                 \centering
-                \caption{}
+                \caption{Drag force vs Lift force with final configuration (joint view)}
                 \label{fig:drag_vsl1}
         \end{figure}
      
             \begin{figure}[!ht]
                 \includegraphics[width=\textwidth]{drag_vs_lift_2_Federica.png}
                 \centering
-                \caption{}
+                \caption{Drag force vs Lift force with final configuration (split view)}
                 \label{fig:drag_vsl2}
         \end{figure}
         
-        With these images we can appreciate how drag and lift frequency is comparable, while their amplitude is of different order. Moreover it is well clear that they're in phase, since subject to the same physical phenomenon. Finally the averaged Cd coefficient is 1.067 while Strouhal number 0.17, which respects better the expectations of Figure~\ref{fig:dragtrend} and of Figure~\ref{fig:strouhal}.
-     
+        With these images we can appreciate how drag and lift frequency is comparable, while their amplitude is of different order. Moreover it is well clear that they're in phase, since subject to the same physical phenomenon. Finally, the averaged Cd coefficient is $1.067$, while Strouhal's number was $0.17$, which better respects the expectations of Figure~\ref{fig:dragtrend}~and~\ref{fig:strouhal}.
 
 \bibliographystyle{abbrv}
 \bibliography{main}
