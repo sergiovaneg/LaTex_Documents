@@ -30,13 +30,13 @@
         \item La failure/anomaly detection dei cuscinetti risulta importante per:
         \begin{itemize}
             \item Rilevamento di situazioni pericolose.
-            \item implementazione della manutenzione programata e preventiva.
+            \item Implementazione della manutenzione programata e preventiva.
         \end{itemize}
-        \item Goal: fornire a SKF un tool software che rilevi automaticamente la presenza di failure od anomalie sul cuscinetto.
+        \item Goal: fornire a SKF un tool software che rilevi automaticamente la presenza di failure o anomalie sul cuscinetto.
     \end{itemize}
 \end{frame}
 
-\section{Analisi dell'assemblaggio}
+\section{Pre-analisi}
 
 \begin{frame}[allowframebreaks]{Analisi ad Elementi Finiti}
     Forti stress multiassiali sui contatti delle piste interne ed esterne governati dalla teoria di Hertz.
@@ -52,10 +52,12 @@
 
     \begin{itemize}
         \item Modellazione FE (simmetrica) con imposizione di duty cycle\cite{raju2018bearing}.
-        \item I cuscinetti si guastano tipicamente a causa della Rolling Contact Fatigue (sooto la superficie).
+        \item I cuscinetti si guastano tipicamente a causa della Rolling Contact Fatigue (sotto la superficie).
         \item Buona correlazione tra ``FE contact stress'' e la vita utile dei cuscinetti.
+        \item Modello adattato modificando:
         \begin{itemize}
-            \item Modello adattato modificando la distribuzione del duty cycle, e i fattori di rugosità superficiale e microgeometria.
+            \item La distribuzione del duty cycle.
+            \item I fattori di rugosità superficiale/microgeometria.
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -84,7 +86,7 @@
 
 \section{Monitoraggio}
 
-\begin{frame}[allowframebreaks]{Frequenza delle vibrazioni}
+\begin{frame}[allowframebreaks]{Frequenze delle vibrazioni}
     \begin{itemize}
         \item Descomposizione del segnale\cite{tang2019fault}:
         \begin{itemize}
@@ -104,7 +106,7 @@
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{Figures/STFT.png}
-        \caption{STFT delle vibrazioni (cuscinetto buono vs danneggiato)}
+        \caption{STFT delle vibrazioni (cuscinetto buono/danneggiato)}
         \label{fig:STFT}
     \end{figure}
 \end{frame}
@@ -133,7 +135,7 @@
         \label{fig:acoustic}
     \end{figure}
 
-    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizazione delle frequenze del cuscinetto e dei guasti può essere usata per calibrare un filtro band-pass.
+    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizazione delle frequenze del cuscinetto e dei difetti può essere usata per calibrare un filtro band-pass.
 
 \end{frame}
 
