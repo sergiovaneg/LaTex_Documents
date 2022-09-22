@@ -4,6 +4,7 @@
 \bibliography{bibliography}
 \AtBeginBibliography{\small}
 \usepackage{hyperref}
+\usepackage{siunitx}
 
 \usetheme{Antibes}
 \usecolortheme{beaver}
@@ -96,7 +97,10 @@
         \end{itemize}
         \item Analisi statistica dello spettro\cite{xue2022fault}:
         \begin{itemize}
-            \item Descomposizione tramite resonance-based signal sparse de-composition (RSSD).
+            \item Descomposizione tramite \textit{Resonance-based Signal Sparse Decomposition} (RSSD).
+            \begin{itemize}
+                \item Risonanza trovata utilizzando \textit{Tunable Q-factor Wavelet Transform} (TQWT).
+            \end{itemize}
             \item Metodo di estrazione della frequenza di difetto basato su Ration of Smoothness and Kurtosis (RSK).
         \end{itemize}
         \framebreak
@@ -126,16 +130,16 @@
 \end{frame}
 
 \begin{frame}{Rumore acustico}
-    Analisi del segnale basata su autocorrelazione in tempo discreto.
+    Analisi del segnale basata sull'autocorrelazione in tempo discreto.
 
     \begin{figure}
         \centering
         \includegraphics[width=0.6\textwidth]{Figures/Acoustic.png}
-        \caption{Autocorrelazione del rumore acustico}
+        \caption{Autocorrelazione del rumore acustico ($f_s = \SI{20}{\kilo \hertz}$)}
         \label{fig:acoustic}
     \end{figure}
 
-    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizazione delle frequenze del cuscinetto e dei difetti può essere usata per calibrare un filtro band-pass.
+    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizazione delle frequenze del cuscinetto e dei difetti può essere usata per calibrare un filtro Band-Pass.
 
 \end{frame}
 
