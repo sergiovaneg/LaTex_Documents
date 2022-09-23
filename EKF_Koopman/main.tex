@@ -61,23 +61,30 @@
         \begin{tabular}{|llll|}
         \hline
         \textbf{Observer} & \textbf{Size} & \textbf{NRMSE X\_1} & \textbf{NRMSE X\_2} \\    \hline
-        EKF         &   0   &   6.0499  &   0.9370  \\  \hline
-        Radial      &   10  &   5.0718   &   0.9171  \\
-        Radial      &   20  &   4.8033  &   0.9187  \\
-        Radial      &   50  &   5.6129  &   0.9331  \\
-        Radial      &   100 &   6.0245  &   0.9379  \\  \hline
-        Cov-Radial  &   10  &   5.0854  &   0.9171  \\
-        Cov-Radial  &   20  &   4.8117  &   0.9187  \\
-        Cov-Radial  &   50  &   5.7038  &   0.9342  \\
-        Cov-Radial  &   100 &   5.8595  &   0.9364  \\ \hline
+        EKF         &   0   &   0.0217  &   0.0429  \\  \hline
+        Radial      &   10  &   0.0218  &   0.1210  \\
+        Radial      &   20  &   0.0217  &   0.0726  \\
+        Radial      &   50  &   0.0217  &   0.0534  \\
+        Radial      &   100 &   0.0217  &   0.0477  \\  \hline
+        Cov-Radial  &   10  &   0.0218  &   0.1245  \\
+        Cov-Radial  &   20  &   0.0217  &   0.0786  \\
+        Cov-Radial  &   50  &   0.0217  &   0.0537  \\
+        Cov-Radial  &   100 &   0.0217  &   0.0511  \\ \hline
         \end{tabular}
         \end{table}
 \end{frame}
 
-\begin{frame}{Risultati grafici - Riferimento di passo}
+\begin{frame}[allowframebreaks]{Risultati grafici - Riferimento di passo}
     \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{Figures/step_reference.eps}
+        \includegraphics[width=0.9\textwidth]{Figures/step_reference_kalman.eps}
+        \caption{Stima degli stati - EKF}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Figures/step_reference_koopman.eps}
+        \caption{Stima degli stati - Koopman}
     \end{figure}
 \end{frame}
 
@@ -86,23 +93,30 @@
         \begin{tabular}{|llll|}
         \hline
         \textbf{Observer} & \textbf{Size} & \textbf{NRMSE X\_1} & \textbf{NRMSE X\_2} \\    \hline
-        EKF         &   0   &   0.3428  &   0.6172  \\  \hline
-        Radial      &   10  &   0.3346  &   0.5683  \\
-        Radial      &   20  &   0.3318  &   0.5905  \\
-        Radial      &   50  &   0.3392  &   0.6048  \\
-        Radial      &   100 &   0.3417  &   0.6125  \\  \hline
-        Cov-Radial  &   10  &   0.3320  &   0.5645  \\
-        Cov-Radial  &   20  &   0.3301  &   0.5872  \\
-        Cov-Radial  &   50  &   0.3385  &   0.6051  \\
-        Cov-Radial  &   100 &   0.3389  &   0.6078  \\ \hline
+        EKF         &   0   &   0.0217  &   0.0441  \\  \hline
+        Radial      &   10  &   0.0218  &   0.1275  \\
+        Radial      &   20  &   0.0217  &   0.0894  \\
+        Radial      &   50  &   0.0217  &   0.0592  \\
+        Radial      &   100 &   0.0217  &   0.0519  \\  \hline
+        Cov-Radial  &   10  &   0.0218  &   0.1265  \\
+        Cov-Radial  &   20  &   0.0217  &   0.0914  \\
+        Cov-Radial  &   50  &   0.0217  &   0.0595  \\
+        Cov-Radial  &   100 &   0.0217  &   0.0578  \\ \hline
         \end{tabular}
         \end{table}
 \end{frame}
 
-\begin{frame}{Risultati grafici - Riferimento oscillante}
+\begin{frame}[allowframebreaks]{Risultati grafici - Riferimento oscillante}
     \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{Figures/osc_reference.eps}
+        \includegraphics[width=0.9\textwidth]{Figures/osc_reference_kalman.eps}
+        \caption{Stima degli stati - EKF}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Figures/osc_reference_koopman.eps}
+        \caption{Stima degli stati - Koopman}
     \end{figure}
 \end{frame}
 
