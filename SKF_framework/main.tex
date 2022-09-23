@@ -101,9 +101,16 @@
             \begin{itemize}
                 \item Risonanza trovata utilizzando \textit{Tunable Q-factor Wavelet Transform} (TQWT).
             \end{itemize}
-            \item Metodo di estrazione della frequenza di difetto basato su Ration of Smoothness and Kurtosis (RSK).
+            \item Metodo di estrazione della frequenza di difetto basato su Ration of Smoothness and Kurtosis (RSK): $$\mathit{RSK} = \exp^{x_1/N} \cdot \sigma^4 \left( \mathbb{E}\left\{ (x_2 - \mu)^4 \right\} \cdot x_1 / N \right)^{-1}$$
         \end{itemize}
-        \framebreak
+
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{Figures/RSK_RSSD.png}
+            \caption{Algoritmo dell'analisi statistica delle frequenze}
+            \label{fig:RSK_RSSD}
+        \end{figure}
+
         \item Analisi diretto dello spettro basata su STFT\cite{rubio2012experimental}.
     \end{itemize}
     
