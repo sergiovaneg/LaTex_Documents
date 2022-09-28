@@ -31,10 +31,15 @@
         \item La failure/anomaly detection dei cuscinetti risulta importante per:
         \begin{itemize}
             \item Rilevamento di situazioni pericolose.
-            \item Implementazione della manutenzione programata e preventiva.
+            \item Implementazione della manutenzione programmata e preventiva.
         \end{itemize}
         \item Goal: fornire a SKF un tool software che rilevi automaticamente la presenza di failure o anomalie sul cuscinetto.
     \end{itemize}
+
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.3\textheight]{Figures/diagram.jpg}
+    \end{figure}
 \end{frame}
 
 \section{Pre-analisi}
@@ -88,8 +93,28 @@
 \section{Monitoraggio}
 
 \begin{frame}[allowframebreaks]{Frequenze delle vibrazioni}
+    Parametri del cuscinetto:
     \begin{itemize}
-        \item Descomposizione del segnale\cite{tang2019fault}:
+        \item $d$: diametro delle palline
+        \item $D$: diametro del cuscinetto
+        \item $f_r$: frequenza di giro del fusto
+        \item $n$: numero di palline
+        \item $\phi$: angolo di contatto del cuscinetto
+    \end{itemize}
+
+    Relevant frequencies:
+    \begin{itemize}
+        \item Ballpass frequency - Canale esterno (BPFO): $$ BPFO = \frac{n f_r}{2} \left( 1 - \frac{d}{D} \cos \phi \right) $$ (A lot harder to detect; requires Kurtosis-informed BP filtering)
+        \item Ballpass frequency - Canale interno (BPFI): $$ BPFI = \frac{n f_r}{2} \left( 1 + \frac{d}{D} \cos \phi \right) $$
+        \item Fundamental train frequency (FTF), o velocità della gabbia: $$ FTF = \frac{f_r}{2} \left( 1 - \frac{d}{D} \cos \phi \right) $$
+        \item Ball spin frequency (BSF): $$ BSF = \frac{D}{2 d} \left[ 1 - \left( \frac{d}{D} \cos \phi \right)^2 \right] $$
+    \end{itemize}
+
+    \framebreak
+    
+    Tecniche d'analisi:
+    \begin{itemize}
+        \item Decomposizione del(l'inviluppo del) segnale\cite{tang2019fault}:
         \begin{itemize}
             \item Frequenze del cuscinetto.
             \item Frequenze dei difetti.
@@ -97,11 +122,11 @@
         \end{itemize}
         \item Analisi statistica dello spettro\cite{xue2022fault}:
         \begin{itemize}
-            \item Descomposizione tramite \textit{Resonance-based Signal Sparse Decomposition} (RSSD).
+            \item Decomposizione tramite \textit{Resonance-based Signal Sparse Decomposition} (RSSD).
             \begin{itemize}
                 \item Risonanza trovata utilizzando \textit{Tunable Q-factor Wavelet Transform} (TQWT).
             \end{itemize}
-            \item Metodo di estrazione della frequenza di difetto basato su Ration of Smoothness and Kurtosis (RSK): $$\mathit{RSK} = \exp^{x_1/N} \cdot \sigma^4 \left( \mathbb{E}\left\{ (x_2 - \mu)^4 \right\} \cdot x_1 / N \right)^{-1}$$
+            \item Metodo di estrazione della frequenza di difetto basato su \textit{Ratio of Smoothness and Kurtosis} (RSK): $$RSK = \exp^{x_1/N} \cdot \sigma^4 \left( \mathbb{E}\left\{ (x_2 - \mu)^4 \right\} \cdot x_1 / N \right)^{-1}$$
         \end{itemize}
 
         \begin{figure}
@@ -146,8 +171,22 @@
         \label{fig:acoustic}
     \end{figure}
 
-    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizazione delle frequenze del cuscinetto e dei difetti può essere usata per calibrare un filtro Band-Pass.
+    Anche se l'ambiente non è ideale per l'analisi del rumore acustico, la caratterizzazione delle frequenze del cuscinetto e dei difetti può essere usata per calibrare un filtro Band-Pass.
 
+\end{frame}
+
+\section{Conclusioni}
+
+\begin{frame}{Conclusioni}
+    \begin{itemize}
+        \item Tra tutte le tecniche presentate, le più promettenti sono:
+        \begin{itemize}
+            \item L'analisi della grandezza delle frequenze caratteristiche dall'inviluppo del segnale;
+            \item L'analisi statistica dello spettro del segnale.
+        \end{itemize}
+        \item Sebbene non è possibile implementare l'analisi agli elementi finiti in tempo reale, è possibile utilizzare le informazioni fornite da questa tecnica per mettere a punto il modello di previsione per un disegno specifico di WHB.
+        \item Nel caso in cui sia possibile aggiungere altri sensori al sistema di monitoraggio, utilizzare un microfono potrebbe essere un complemento non invasivo alle informazioni fornite dall'accelerometro.
+    \end{itemize}
 \end{frame}
 
 \section*{Bibliografia}
